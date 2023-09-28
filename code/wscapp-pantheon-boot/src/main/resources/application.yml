@@ -1,0 +1,23 @@
+# Configuración para PostgreSQL
+spring:
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/management
+    username: postgres
+    password: postgres
+    initialization-mode: never
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create
+        default-schema: applications, enterprise, users, public
+
+  logging:
+    level:
+      org:
+        springframework:
+          validation: DEBUG
+        hibernate:
+          validator: DEBUG

@@ -1,0 +1,30 @@
+version: '3'
+networks:
+  mynetwork:
+services:
+  postgres:
+    image: postgres
+    container_name: pantheon-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ../bbdd/scheme.sql:/docker-entrypoint-initdb.d/scheme.sql
+      #- ./data:/var/lib/postgresql/dataç
+    networks:
+      - mynetwork
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "80:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=onsystem@proton.me
+      - PGADMIN_DEFAULT_PASSWORD=onsystem
+    #volumes:
+      #- ./archivos_pgadmin:/home/onsystem/Documentos/containers/pgadmin
+    networks:
+      - mynetwork
+
