@@ -3,7 +3,6 @@ package com.onsystem.wscapp.pantheon.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onsystem.wscapp.pantheon.GenericView;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IPermissionService;
 import com.onsystem.wscapp.pantheon.api.request.permission.CreatePermissionRequest;
 import com.onsystem.wscapp.pantheon.api.request.permission.UpdatePermissionRequest;
 import com.onsystem.wscapp.pantheon.api.response.language.PermissionResponse;

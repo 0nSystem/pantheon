@@ -3,7 +3,6 @@ package com.onsystem.wscapp.pantheon.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onsystem.wscapp.pantheon.GenericView;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IApplicationService;
 import com.onsystem.wscapp.pantheon.api.request.application.CreateApplicationRequest;
 import com.onsystem.wscapp.pantheon.api.request.application.UpdateApplicationRequest;
 import com.onsystem.wscapp.pantheon.api.response.language.ApplicationResponse;

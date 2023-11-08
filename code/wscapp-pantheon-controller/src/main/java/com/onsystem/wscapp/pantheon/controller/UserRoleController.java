@@ -2,7 +2,6 @@ package com.onsystem.wscapp.pantheon.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onsystem.wscapp.pantheon.GenericView;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IUserRoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

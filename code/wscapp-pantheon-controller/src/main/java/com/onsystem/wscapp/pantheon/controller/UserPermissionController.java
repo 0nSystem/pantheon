@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.controller;
 
 import com.onsystem.wscapp.pantheon.GenericView;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IUserPermissionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

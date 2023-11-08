@@ -3,7 +3,6 @@ package com.onsystem.wscapp.pantheon.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onsystem.wscapp.pantheon.GenericView;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IRoleService;
 import com.onsystem.wscapp.pantheon.api.request.role.CreateRoleRequest;
 import com.onsystem.wscapp.pantheon.api.request.role.UpdateRoleRequest;
 import com.onsystem.wscapp.pantheon.api.response.language.RoleResponse;

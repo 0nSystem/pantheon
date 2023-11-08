@@ -4,7 +4,6 @@ package com.onsystem.wscapp.pantheon.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onsystem.wscapp.pantheon.GenericView;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IAttributeService;
 import com.onsystem.wscapp.pantheon.api.request.attribute.CreateAttributeRequest;
 import com.onsystem.wscapp.pantheon.api.request.attribute.UpdateAttributeRequest;
 import com.onsystem.wscapp.pantheon.api.response.language.AttributeResponse;
