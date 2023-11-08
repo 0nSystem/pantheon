@@ -5,17 +5,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_PUBLIC;
 
 @Entity
 @Table(schema = SCHEME_PUBLIC, name = "language")
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class LanguageEntity {

@@ -1,15 +1,14 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserApplicationId {
+public class UserApplicationKeyEntity {
 
     private Integer idUser;
     private Integer idApplication;

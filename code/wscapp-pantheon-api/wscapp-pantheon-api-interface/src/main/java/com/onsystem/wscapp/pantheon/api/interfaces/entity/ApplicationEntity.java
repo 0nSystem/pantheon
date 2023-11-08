@@ -7,10 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -19,7 +16,9 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @Entity
 @Table(schema = SCHEME_APPLICATION, name = "application")
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationEntity implements AuditFieldsEntity {

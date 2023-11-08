@@ -5,20 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_PUBLIC;
 
 @Entity
 @Table(schema = SCHEME_PUBLIC, name = "user_application")
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@IdClass(UserApplicationId.class)
+@IdClass(UserApplicationKeyEntity.class)
 public class UserApplicationEntity {
 
     @Id

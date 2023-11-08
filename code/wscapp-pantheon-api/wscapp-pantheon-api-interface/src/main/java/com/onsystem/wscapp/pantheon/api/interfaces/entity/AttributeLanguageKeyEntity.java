@@ -11,9 +11,10 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationLanguageKeyEntity {
+public class AttributeLanguageKeyEntity {
+
     @NotNull
-    private Integer idApplication;
+    private Integer idAttribute;
     @NotNull
     private Integer idLanguage;
 }

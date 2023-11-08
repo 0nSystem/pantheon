@@ -6,14 +6,16 @@ import lombok.*;
 
 @Embeddable
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-public class ApplicationLanguageKeyEntity {
+public class PermissionLanguageKeyEntity {
+
     @NotNull
-    private Integer idApplication;
+    private Integer idPermission;
+
     @NotNull
     private Integer idLanguage;
 }
