@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.request.role;
 
 import com.onsystem.wscapp.pantheon.api.request.Constants;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -10,26 +9,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
-public class UpdateRoleRequest {
+public class CreateRoleLanguageDTO {
 
-    @Positive
-    @Min(value = 1, message = Constants.ErrorValidationMessages.MIN)
-    private int idRole;
     //TODO
     @Positive
-    @Min(value = 1, message = Constants.ErrorValidationMessages.MIN)
-    private int idApplication;
+    private Integer idLanguage;
 
     @NotEmpty(message = Constants.ErrorValidationMessages.NOT_EMPTY)
-    @Size(max = 100, message = Constants.ErrorValidationMessages.SIZE)
+    @Size(max = 100, message = Constants.ErrorValidationMessages.MAX)
     private String name;
-
     @NotEmpty(message = Constants.ErrorValidationMessages.NOT_EMPTY)
-    @Size(max = 255, message = Constants.ErrorValidationMessages.SIZE)
+    @Size(max = 255, message = Constants.ErrorValidationMessages.MAX)
     private String description;
-
 }

@@ -25,7 +25,6 @@
         <module>wscapp-pantheon-boot</module>
         <module>wscapp-pantheon-api</module>
         <module>wscapp-pantheon-api/wscapp-pantheon-api-request</module>
-        <module>wscapp-pantheon-api/wscapp-pantheon-api-response</module>
         <module>wscapp-pantheon-api/wscapp-pantheon-api-interface</module>
         <module>wscapp-pantheon-model</module>
         <module>wscapp-pantheon-controller</module>
