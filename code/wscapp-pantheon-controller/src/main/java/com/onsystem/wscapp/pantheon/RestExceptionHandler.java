@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon;
 
+import com.onsystem.wscapp.pantheon.api.dto.ErrorValidationObject;
 import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
-import com.onsystem.wscapp.pantheon.api.response.language.ErrorValidationObject;
 import com.onsystem.wscapp.pantheon.model.TranslatorUtils;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
