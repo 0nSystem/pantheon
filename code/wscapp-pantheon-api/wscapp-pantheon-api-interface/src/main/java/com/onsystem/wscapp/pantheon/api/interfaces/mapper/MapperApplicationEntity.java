@@ -9,14 +9,14 @@ import java.util.function.Function;
 
 public class MapperApplicationEntity {
 
-    public static Function<CreateApplicationDTO, ApplicationEntity> mapperApplicationEntityFromCreateApplication() {
+    public static Function<CreateApplicationDTO, ApplicationEntity> fnToEntity() {
         return createApplication -> ApplicationEntity.builder()
                 .name(createApplication.getName())
                 .description(createApplication.getDescription())
                 .highIdUser(createApplication.getHighIdUser()).build();
     }
 
-    public static Function<ApplicationEntity, ApplicationDTO> mapperApplicationDTOFromApplicationEntity() {
+    public static Function<ApplicationEntity, ApplicationDTO> fnToDto() {
         return appEntity -> ApplicationDTO.builder()
                 .idApplication(appEntity.getIdApplication())
                 .name(appEntity.getName())

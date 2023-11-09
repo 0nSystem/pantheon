@@ -82,12 +82,12 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
     @Override
     public @NotNull ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
-        final ApplicationEntity applicationEntityMapped = MapperApplicationEntity.mapperApplicationEntityFromCreateApplication()
+        final ApplicationEntity applicationEntityMapped = MapperApplicationEntity.fnToEntity()
                 .apply(createApplication);
 
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
-        return MapperApplicationEntity.mapperApplicationDTOFromApplicationEntity()
+        return MapperApplicationEntity.fnToDto()
                 .apply(applicationInserted);
     }
 
@@ -96,14 +96,14 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
         final Collection<ApplicationLanguageEntity> applicationLanguageEntitiesMapped = createApplicationLanguage
                 .stream()
-                .map(MapperApplicationLanguageEntity.mapperApplicationLanguageFromCreateApplicationLanguage(applicationId))
+                .map(MapperApplicationLanguageEntity.toEntity(applicationId))
                 .collect(Collectors.toList());
 
 
         final List<ApplicationLanguageEntity> applicationLanguageEntitiesInserted = applicationLanguageRepository.saveAll(applicationLanguageEntitiesMapped);
 
         return applicationLanguageEntitiesInserted.stream()
-                .map(MapperApplicationLanguageEntity.mapperApplicationLanguageDTOFromApplicationEntity())
+                .map(MapperApplicationLanguageEntity.toDto())
                 .collect(Collectors.toSet());
     }
 
@@ -113,11 +113,11 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
                                                                          final Collection<CreatePermissionWithLanguagesDTO> createPermissionWithLanguages) {
         final Set<PermissionWithLanguagesDTO> permissionEntitiesMapped = createPermissionWithLanguages.stream()
                 .map(cpl -> {
-                    final PermissionEntity permissionEntityMapped = MapperPermissionEntity.mapperPermissionEntityFromCreatePermissionDTO(applicationId).apply(cpl.getPermission());
+                    final PermissionEntity permissionEntityMapped = MapperPermissionEntity.toEntity(applicationId).apply(cpl.getPermission());
                     final PermissionEntity permissionInserted = permissionRepository.save(permissionEntityMapped);
 
                     return PermissionWithLanguagesDTO.builder()
-                            .permission(MapperPermissionEntity.mapperPermissionDTOFromPermissionEntity().apply(permissionInserted))
+                            .permission(MapperPermissionEntity.toDto().apply(permissionInserted))
                             .permissionLanguages(createPermissionLanguages(permissionInserted.getIdPermission(), cpl.getPermissionLanguages()))
                             .build();
                 })
@@ -150,13 +150,13 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     public @Nullable Set<PermissionLanguageDTO> createPermissionLanguages(final @Positive int permissionId, final Collection<CreatePermissionLanguageDTO> createPermissionLanguages) {
         final Set<PermissionLanguageEntity> permissionLanguagesEntitiesMapped = createPermissionLanguages
                 .stream()
-                .map(MapperPermissionLanguageEntity.mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(permissionId))
+                .map(MapperPermissionLanguageEntity.toEntity(permissionId))
                 .collect(Collectors.toSet());
 
         final List<PermissionLanguageEntity> permissionLanguageEntitiesInserted = permissionLanguageRepository.saveAll(permissionLanguagesEntitiesMapped);
 
         return permissionLanguageEntitiesInserted.stream()
-                .map(MapperPermissionLanguageEntity.mapperPermissionLanguageDTOFromLanguageEntity())
+                .map(MapperPermissionLanguageEntity.toDto())
                 .collect(Collectors.toSet());
     }
 
@@ -167,9 +167,9 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
         final Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> roleWithLanguagesAndPermissionWithLanguages = applicationRoles.stream()
                 .map(role -> {
-                    final RoleEntity roleEntityMapped = MapperRoleEntity.mapperRoleEntityFromCreateRoleDTO(idApplication).apply(role.getRole());
+                    final RoleEntity roleEntityMapped = MapperRoleEntity.toEntity(idApplication).apply(role.getRole());
                     final RoleEntity roleEntityInserted = roleRepository.save(roleEntityMapped);
-                    final RoleDTO roleDTO = MapperRoleEntity.mapperRoleDTOFromRoleEntity().apply(roleEntityInserted);
+                    final RoleDTO roleDTO = MapperRoleEntity.toDto().apply(roleEntityInserted);
 
                     final var roleLanguages = CollectionUtils.isNotEmpty(role.getRoleLanguage())
                             ? createRoleLanguages(roleEntityInserted.getIdRole(), role.getRoleLanguage())
@@ -194,13 +194,13 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     public Set<RoleLanguageDTO> createRoleLanguages(final @Positive int idRole, final Collection<CreateRoleLanguageDTO> createRoleLanguages) {
 
         final Set<RoleLanguageEntity> roleLanguageEntitiesMapped = createRoleLanguages.stream()
-                .map(MapperRoleLanguageEntity.mapperRoleLanguageEntityFromCreateRoleLanguage(idRole))
+                .map(MapperRoleLanguageEntity.toEntity(idRole))
                 .collect(Collectors.toSet());
 
         final List<RoleLanguageEntity> roleLanguageEntitiesInserted = roleLanguageRepository.saveAll(roleLanguageEntitiesMapped);
 
         return roleLanguageEntitiesInserted.stream()
-                .map(MapperRoleLanguageEntity.mapperRoleLanguageDTOFromRoleLanguageEntity())
+                .map(MapperRoleLanguageEntity.toDto())
                 .collect(Collectors.toSet());
     }
 
@@ -209,10 +209,10 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
         final Set<AttributeWithLanguagesDTO> attributeWithLanguages = createAttribute.stream()
                 .map(attribute -> {
-                    final AttributeEntity attributeEntityMapped = MapperAttributeEntity.mapperAttributeEntityFromCreateAttributeDTO(applicationId)
+                    final AttributeEntity attributeEntityMapped = MapperAttributeEntity.toEntity(applicationId)
                             .apply(attribute);
                     final AttributeEntity attributeInsert = attributeRepository.save(attributeEntityMapped);
-                    final AttributeDTO attributeDTO = MapperAttributeEntity.mapperAttributeDTOFromAttribute()
+                    final AttributeDTO attributeDTO = MapperAttributeEntity.toDto()
                             .apply(attributeInsert);
 
                     return AttributeWithLanguagesDTO.builder()
@@ -229,13 +229,13 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     public Set<AttributeLanguageDTO> createAttributesLanguages(final @Positive int attributeId, final Collection<CreateAttributeLanguageDTO> createAttribute) {
 
         final Set<AttributeLanguageEntity> attributeLanguageEntitiesMapped = createAttribute.stream()
-                .map(MapperAttributeLanguageEntity.mapperAttributeLanguageEntityFromCreateAttributeLanguageDTO(attributeId))
+                .map(MapperAttributeLanguageEntity.toEntity(attributeId))
                 .collect(Collectors.toSet());
 
         final List<AttributeLanguageEntity> attributeLanguageEntitiesInsert = attributeLanguageRepository.saveAll(attributeLanguageEntitiesMapped);
 
         return attributeLanguageEntitiesInsert.stream()
-                .map(MapperAttributeLanguageEntity.mapperAttributeLanguageDTOFromAttributeEntity())
+                .map(MapperAttributeLanguageEntity.toDto())
                 .collect(Collectors.toSet());
     }
 

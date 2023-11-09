@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class MapperPermissionLanguageEntity {
 
 
-    public static Function<CreatePermissionLanguageDTO, PermissionLanguageEntity> mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(final int permissionId) {
+    public static Function<CreatePermissionLanguageDTO, PermissionLanguageEntity> toEntity(final int permissionId) {
         return createPermissionLanguageDTO -> PermissionLanguageEntity.builder()
                 .permissionLanguageKeyEntity(PermissionLanguageKeyEntity.builder().idPermission(permissionId).idLanguage(createPermissionLanguageDTO.getIdLanguage()).build())
                 .name(createPermissionLanguageDTO.getName())
@@ -18,7 +18,7 @@ public class MapperPermissionLanguageEntity {
                 .build();
     }
 
-    public static Function<PermissionLanguageEntity, PermissionLanguageDTO> mapperPermissionLanguageDTOFromLanguageEntity() {
+    public static Function<PermissionLanguageEntity, PermissionLanguageDTO> toDto() {
         return permissionLanguageEntity -> PermissionLanguageDTO.builder()
                 .idPermission(permissionLanguageEntity.getPermissionLanguageKeyEntity().getIdPermission())
                 .idLanguage(permissionLanguageEntity.getPermissionLanguageKeyEntity().getIdLanguage())

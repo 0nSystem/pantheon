@@ -1,6 +1,5 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
-import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageKeyEntity;
@@ -11,7 +10,7 @@ import java.util.function.Function;
 
 public class MapperApplicationLanguageEntity {
 
-    public static Function<CreateApplicationLanguageDTO, ApplicationLanguageEntity> mapperApplicationLanguageFromCreateApplicationLanguage(final @Nullable Integer applicationId) {
+    public static Function<CreateApplicationLanguageDTO, ApplicationLanguageEntity> toEntity(final @Nullable Integer applicationId) {
         return createApplicationLanguage -> ApplicationLanguageEntity.builder()
                 .name(createApplicationLanguage.getName())
                 .description(createApplicationLanguage.getDescription())
@@ -23,7 +22,7 @@ public class MapperApplicationLanguageEntity {
     }
 
 
-    public static Function<ApplicationLanguageEntity, ApplicationLanguageDTO> mapperApplicationLanguageDTOFromApplicationEntity() {
+    public static Function<ApplicationLanguageEntity, ApplicationLanguageDTO> toDto() {
         return entity -> ApplicationLanguageDTO.builder()
                 .idApplication(entity.getApplicationLanguageKeyEntity().getIdApplication())
                 .idLanguage(entity.getApplicationLanguageKeyEntity().getIdLanguage())

@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class MapperAttributeEntity {
 
 
-    public static Function<CreateAttributeDTO, AttributeEntity> mapperAttributeEntityFromCreateAttributeDTO(final int applicationId) {
+    public static Function<CreateAttributeDTO, AttributeEntity> toEntity(final int applicationId) {
         return createAttributeDTO -> AttributeEntity.builder()
                 .idApplication(applicationId)
                 .name(createAttributeDTO.getName())
@@ -17,7 +17,7 @@ public class MapperAttributeEntity {
                 .build();
     }
 
-    public static Function<AttributeEntity, AttributeDTO> mapperAttributeDTOFromAttribute() {
+    public static Function<AttributeEntity, AttributeDTO> toDto() {
         return attributeEntity -> AttributeDTO.builder()
                 .idAttribute(attributeEntity.getIdAttribute())
                 .idApplication(attributeEntity.getIdApplication())

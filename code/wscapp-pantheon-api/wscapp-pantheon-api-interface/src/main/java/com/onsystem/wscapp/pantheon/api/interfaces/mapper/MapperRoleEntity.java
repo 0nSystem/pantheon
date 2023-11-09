@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class MapperRoleEntity {
 
-    public static Function<CreateRoleDTO, RoleEntity> mapperRoleEntityFromCreateRoleDTO(final int applicationId) {
+    public static Function<CreateRoleDTO, RoleEntity> toEntity(final int applicationId) {
         return createRoleDTO -> RoleEntity.builder()
                 .idApplication(applicationId)
                 .name(createRoleDTO.getName())
@@ -16,7 +16,7 @@ public class MapperRoleEntity {
                 .build();
     }
 
-    public static Function<RoleEntity, RoleDTO> mapperRoleDTOFromRoleEntity() {
+    public static Function<RoleEntity, RoleDTO> toDto() {
         return roleEntity -> RoleDTO.builder()
                 .idApplication(roleEntity.getIdApplication())
                 .name(roleEntity.getName())
