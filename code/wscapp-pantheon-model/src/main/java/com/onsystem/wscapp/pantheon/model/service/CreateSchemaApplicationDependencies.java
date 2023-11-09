@@ -47,8 +47,6 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     @Autowired
     private RolePermissionRepository rolePermissionRepository;
 
-    @Autowired
-    private IValidationReferenceToApplicationService iValidationReferenceToApplicationService;
 
     @Override
     public ApplicationFullInfoWithLanguagesDTO createFullApplication(final CreateFullApplicationDTO createApplication) {

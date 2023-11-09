@@ -4,16 +4,24 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.helpers.TimeHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.function.Function;
 
+
 public class MapperApplicationEntity {
 
-    public static Function<CreateApplicationDTO, ApplicationEntity> fnToEntity() {
+    @Autowired
+    private TimeHelper timeHelper;
+
+    public Function<CreateApplicationDTO, ApplicationEntity> fnToEntity() {
         return createApplication -> ApplicationEntity.builder()
                 .name(createApplication.getName())
                 .description(createApplication.getDescription())
-                .highIdUser(createApplication.getHighIdUser()).build();
+                .highIdUser(createApplication.getHighIdUser())
+                .highDate(timeHelper.now())
+                .build();
     }
 
     public static Function<ApplicationEntity, ApplicationDTO> fnToDto() {
