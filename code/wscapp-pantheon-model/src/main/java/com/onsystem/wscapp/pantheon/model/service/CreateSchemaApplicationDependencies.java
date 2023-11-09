@@ -2,15 +2,13 @@ package com.onsystem.wscapp.pantheon.model.service;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.*;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.*;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionWithLanguagesDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionWithLanguagesDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.*;
 import com.onsystem.wscapp.pantheon.api.dto.role.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateSchemaApplicationDependencies;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.IValidationReferenceToApplicationService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.apache.commons.collections4.CollectionUtils;
@@ -48,6 +46,9 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     private AttributeLanguageRepository attributeLanguageRepository;
     @Autowired
     private RolePermissionRepository rolePermissionRepository;
+
+    @Autowired
+    private IValidationReferenceToApplicationService iValidationReferenceToApplicationService;
 
     @Override
     public ApplicationFullInfoWithLanguagesDTO createFullApplication(final CreateFullApplicationDTO createApplication) {
@@ -131,6 +132,19 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
         });
 
         return permissionEntitiesMapped;
+    }
+
+    @Override
+    public Set<PermissionDTO> createPermission(int applicationId, Collection<CreatePermissionDTO> createPermission) {
+        final var permissionEntityMapped = createPermission.stream()
+                .map(MapperPermissionEntity.toEntity(applicationId))
+                .collect(Collectors.toSet());
+
+        final var permissionInserted = permissionRepository.saveAll(permissionEntityMapped);
+
+        return permissionInserted.stream()
+                .map(MapperPermissionEntity.toDto())
+                .collect(Collectors.toSet());
     }
 
     @Override

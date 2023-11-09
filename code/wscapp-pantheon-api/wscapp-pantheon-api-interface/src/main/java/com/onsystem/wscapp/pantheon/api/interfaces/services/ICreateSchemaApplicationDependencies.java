@@ -5,10 +5,7 @@ import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionWithLanguagesDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionWithLanguagesDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.*;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleWithLanguagesAndPermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
@@ -38,6 +35,8 @@ public interface ICreateSchemaApplicationDependencies {
                                                                            final @Nullable Integer idRole,
                                                                            final @NotNull @NotEmpty Collection<CreatePermissionWithLanguagesDTO> createPermissionWithLanguages);
 
+    @NotNull Set<PermissionDTO> createPermission(final int applicationId, final Collection<CreatePermissionDTO> createPermission);
+
     @NotNull Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> createRoleAndRespectiveLanguagesWithInnerPermissionAndLanguage(
             @Positive int idApplication,
             @NotNull @NotEmpty Set<CreateRoleWithLanguagesAndPermissionWithLanguagesDTO> applicationRoles);
@@ -56,4 +55,5 @@ public interface ICreateSchemaApplicationDependencies {
 
     @NotNull Set<AttributeLanguageDTO> createAttributesLanguages(final int attributeId,
                                                                  final @NotNull @NotEmpty Collection<CreateAttributeLanguageDTO> createAttribute);
+
 }
