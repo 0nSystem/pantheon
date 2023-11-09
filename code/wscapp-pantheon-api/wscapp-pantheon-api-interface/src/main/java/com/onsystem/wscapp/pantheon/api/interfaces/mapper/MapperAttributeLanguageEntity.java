@@ -5,9 +5,11 @@ import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageKeyEntity;
 
+import java.util.function.Function;
+
 public class MapperAttributeLanguageEntity {
 
-    public static From<AttributeLanguageEntity, CreateAttributeLanguageDTO> mapperAttributeLanguageEntityFromCreateAttributeLanguageDTO(final int attributeId) {
+    public static Function<CreateAttributeLanguageDTO, AttributeLanguageEntity> mapperAttributeLanguageEntityFromCreateAttributeLanguageDTO(final int attributeId) {
         return createAttributeLanguageDTO -> AttributeLanguageEntity.builder()
                 .attributeLanguageKeyEntity(AttributeLanguageKeyEntity.builder()
                         .idAttribute(attributeId).idLanguage(createAttributeLanguageDTO.getIdLanguage()).build())
@@ -16,7 +18,7 @@ public class MapperAttributeLanguageEntity {
                 .build();
     }
 
-    public static From<AttributeLanguageDTO, AttributeLanguageEntity> mapperAttributeLanguageDTOFromAttributeEntity(){
+    public static Function<AttributeLanguageEntity, AttributeLanguageDTO> mapperAttributeLanguageDTOFromAttributeEntity() {
         return attributeLanguageEntity -> AttributeLanguageDTO.builder()
                 .idAttribute(attributeLanguageEntity.getAttributeLanguageKeyEntity().getIdAttribute())
                 .idLanguage(attributeLanguageEntity.getAttributeLanguageKeyEntity().getIdLanguage())

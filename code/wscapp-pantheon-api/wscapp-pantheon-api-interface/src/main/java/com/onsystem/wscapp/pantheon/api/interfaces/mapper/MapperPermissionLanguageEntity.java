@@ -5,10 +5,12 @@ import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionLanguageKeyEntity;
 
+import java.util.function.Function;
+
 public class MapperPermissionLanguageEntity {
 
 
-    public static From<PermissionLanguageEntity, CreatePermissionLanguageDTO> mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(final int permissionId) {
+    public static Function<CreatePermissionLanguageDTO, PermissionLanguageEntity> mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(final int permissionId) {
         return createPermissionLanguageDTO -> PermissionLanguageEntity.builder()
                 .permissionLanguageKeyEntity(PermissionLanguageKeyEntity.builder().idPermission(permissionId).idLanguage(createPermissionLanguageDTO.getIdLanguage()).build())
                 .name(createPermissionLanguageDTO.getName())
@@ -16,7 +18,7 @@ public class MapperPermissionLanguageEntity {
                 .build();
     }
 
-    public static From<PermissionLanguageDTO, PermissionLanguageEntity> mapperPermissionLanguageDTOFromLanguageEntity() {
+    public static Function<PermissionLanguageEntity, PermissionLanguageDTO> mapperPermissionLanguageDTOFromLanguageEntity() {
         return permissionLanguageEntity -> PermissionLanguageDTO.builder()
                 .idPermission(permissionLanguageEntity.getPermissionLanguageKeyEntity().getIdPermission())
                 .idLanguage(permissionLanguageEntity.getPermissionLanguageKeyEntity().getIdLanguage())

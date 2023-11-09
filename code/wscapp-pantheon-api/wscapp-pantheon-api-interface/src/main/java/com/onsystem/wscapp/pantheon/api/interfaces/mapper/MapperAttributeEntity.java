@@ -4,10 +4,12 @@ import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 
+import java.util.function.Function;
+
 public class MapperAttributeEntity {
 
 
-    public static From<AttributeEntity, CreateAttributeDTO> mapperAttributeEntityFromCreateAttributeDTO(final int applicationId) {
+    public static Function<CreateAttributeDTO, AttributeEntity> mapperAttributeEntityFromCreateAttributeDTO(final int applicationId) {
         return createAttributeDTO -> AttributeEntity.builder()
                 .idApplication(applicationId)
                 .name(createAttributeDTO.getName())
@@ -15,7 +17,7 @@ public class MapperAttributeEntity {
                 .build();
     }
 
-    public static From<AttributeDTO, AttributeEntity> mapperAttributeDTOFromAttribute(){
+    public static Function<AttributeEntity, AttributeDTO> mapperAttributeDTOFromAttribute() {
         return attributeEntity -> AttributeDTO.builder()
                 .idAttribute(attributeEntity.getIdAttribute())
                 .idApplication(attributeEntity.getIdApplication())

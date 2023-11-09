@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 public class MapperApplicationLanguageEntity {
 
-    public static From<ApplicationLanguageEntity, CreateApplicationLanguageDTO> mapperApplicationLanguageFromCreateApplicationLanguage(final @Nullable Integer applicationId) {
+    public static Function<CreateApplicationLanguageDTO, ApplicationLanguageEntity> mapperApplicationLanguageFromCreateApplicationLanguage(final @Nullable Integer applicationId) {
         return createApplicationLanguage -> ApplicationLanguageEntity.builder()
                 .name(createApplicationLanguage.getName())
                 .description(createApplicationLanguage.getDescription())
@@ -23,7 +23,7 @@ public class MapperApplicationLanguageEntity {
     }
 
 
-    public static From<ApplicationLanguageDTO, ApplicationLanguageEntity> mapperApplicationLanguageDTOFromApplicationEntity() {
+    public static Function<ApplicationLanguageEntity, ApplicationLanguageDTO> mapperApplicationLanguageDTOFromApplicationEntity() {
         return entity -> ApplicationLanguageDTO.builder()
                 .idApplication(entity.getApplicationLanguageKeyEntity().getIdApplication())
                 .idLanguage(entity.getApplicationLanguageKeyEntity().getIdLanguage())

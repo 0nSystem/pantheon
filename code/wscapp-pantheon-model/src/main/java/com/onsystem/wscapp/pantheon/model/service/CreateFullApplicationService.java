@@ -49,7 +49,6 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
     private RolePermissionRepository rolePermissionRepository;
 
     @Override
-
     public ApplicationFullInfoWithLanguagesDTO createFullApplication(final CreateFullApplicationDTO createApplication) {
         final ApplicationDTO applicationInserted = createApplication(createApplication.getApplication());
         return ApplicationFullInfoWithLanguagesDTO
@@ -65,12 +64,12 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
 
     private @NotNull ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
         final ApplicationEntity applicationEntityMapped = MapperApplicationEntity.mapperApplicationEntityFromCreateApplication()
-                .from(createApplication);
+                .apply(createApplication);
 
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
         return MapperApplicationEntity.mapperApplicationDTOFromApplicationEntity()
-                .from(applicationInserted);
+                .apply(applicationInserted);
     }
 
     private @Nullable Set<ApplicationLanguageDTO> createApplicationLanguages(final @Positive int applicationId,
@@ -80,14 +79,14 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
 
             final Collection<ApplicationLanguageEntity> applicationLanguageEntitiesMapped = createApplicationLanguage
                     .stream()
-                    .map(MapperApplicationLanguageEntity.mapperApplicationLanguageFromCreateApplicationLanguage(applicationId)::from)
+                    .map(MapperApplicationLanguageEntity.mapperApplicationLanguageFromCreateApplicationLanguage(applicationId))
                     .collect(Collectors.toList());
 
 
             final List<ApplicationLanguageEntity> applicationLanguageEntitiesInserted = applicationLanguageRepository.saveAll(applicationLanguageEntitiesMapped);
 
             return applicationLanguageEntitiesInserted.stream()
-                    .map(MapperApplicationLanguageEntity.mapperApplicationLanguageDTOFromApplicationEntity()::from)
+                    .map(MapperApplicationLanguageEntity.mapperApplicationLanguageDTOFromApplicationEntity())
                     .collect(Collectors.toSet());
         }
 
@@ -100,11 +99,11 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
         if (createPermissionWithLanguages != null && !createPermissionWithLanguages.isEmpty()) {
             final Set<PermissionWithLanguagesDTO> permissionEntitiesMapped = createPermissionWithLanguages.stream()
                     .map(cpl -> {
-                        final PermissionEntity permissionEntityMapped = MapperPermissionEntity.mapperPermissionEntityFromCreatePermissionDTO(applicationId).from(cpl.getPermission());
+                        final PermissionEntity permissionEntityMapped = MapperPermissionEntity.mapperPermissionEntityFromCreatePermissionDTO(applicationId).apply(cpl.getPermission());
                         final PermissionEntity permissionInserted = permissionRepository.save(permissionEntityMapped);
 
                         return PermissionWithLanguagesDTO.builder()
-                                .permission(MapperPermissionEntity.mapperPermissionDTOFromPermissionEntity().from(permissionInserted))
+                                .permission(MapperPermissionEntity.mapperPermissionDTOFromPermissionEntity().apply(permissionInserted))
                                 .permissionLanguages(createPermissionLanguages(permissionInserted.getIdPermission(), cpl.getPermissionLanguages()))
                                 .build();
                     })
@@ -139,13 +138,13 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
         if (createPermissionLanguages != null && !createPermissionLanguages.isEmpty()) {
             final Set<PermissionLanguageEntity> permissionLanguagesEntitiesMapped = createPermissionLanguages
                     .stream()
-                    .map(MapperPermissionLanguageEntity.mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(permissionId)::from)
+                    .map(MapperPermissionLanguageEntity.mapperPermissionLanguageEntityFromCreatePermissionLanguageDTO(permissionId))
                     .collect(Collectors.toSet());
 
             final List<PermissionLanguageEntity> permissionLanguageEntitiesInserted = permissionLanguageRepository.saveAll(permissionLanguagesEntitiesMapped);
 
             return permissionLanguageEntitiesInserted.stream()
-                    .map(MapperPermissionLanguageEntity.mapperPermissionLanguageDTOFromLanguageEntity()::from)
+                    .map(MapperPermissionLanguageEntity.mapperPermissionLanguageDTOFromLanguageEntity())
                     .collect(Collectors.toSet());
         }
         return null;
@@ -158,9 +157,9 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
         if (applicationRoles != null && !applicationRoles.isEmpty()) {
             final Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> roleWithLanguagesAndPermissionWithLanguages = applicationRoles.stream()
                     .map(role -> {
-                        final RoleEntity roleEntityMapped = MapperRoleEntity.mapperRoleEntityFromCreateRoleDTO(idApplication).from(role.getRole());
+                        final RoleEntity roleEntityMapped = MapperRoleEntity.mapperRoleEntityFromCreateRoleDTO(idApplication).apply(role.getRole());
                         final RoleEntity roleEntityInserted = roleRepository.save(roleEntityMapped);
-                        final RoleDTO roleDTO = MapperRoleEntity.mapperRoleDTOFromRoleEntity().from(roleEntityInserted);
+                        final RoleDTO roleDTO = MapperRoleEntity.mapperRoleDTOFromRoleEntity().apply(roleEntityInserted);
 
                         return RoleWithLanguagesAndPermissionWithLanguagesDTO.builder()
                                 .role(roleDTO)
@@ -180,13 +179,13 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
 
         if (createRoleLanguages != null && !createRoleLanguages.isEmpty()) {
             final Set<RoleLanguageEntity> roleLanguageEntitiesMapped = createRoleLanguages.stream()
-                    .map(MapperRoleLanguageEntity.mapperRoleLanguageEntityFromCreateRoleLanguage(idRole)::from)
+                    .map(MapperRoleLanguageEntity.mapperRoleLanguageEntityFromCreateRoleLanguage(idRole))
                     .collect(Collectors.toSet());
 
             final List<RoleLanguageEntity> roleLanguageEntitiesInserted = roleLanguageRepository.saveAll(roleLanguageEntitiesMapped);
 
             return roleLanguageEntitiesInserted.stream()
-                    .map(MapperRoleLanguageEntity.mapperRoleLanguageDTOFromRoleLanguageEntity()::from)
+                    .map(MapperRoleLanguageEntity.mapperRoleLanguageDTOFromRoleLanguageEntity())
                     .collect(Collectors.toSet());
         }
 
@@ -200,10 +199,10 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
             final Set<AttributeWithLanguagesDTO> attributeWithLanguages = createAttribute.stream()
                     .map(attribute -> {
                         final AttributeEntity attributeEntityMapped = MapperAttributeEntity.mapperAttributeEntityFromCreateAttributeDTO(applicationId)
-                                .from(attribute);
+                                .apply(attribute);
                         final AttributeEntity attributeInsert = attributeRepository.save(attributeEntityMapped);
                         final AttributeDTO attributeDTO = MapperAttributeEntity.mapperAttributeDTOFromAttribute()
-                                .from(attributeInsert);
+                                .apply(attributeInsert);
 
                         return AttributeWithLanguagesDTO.builder()
                                 .attribute(attributeDTO)
@@ -224,13 +223,13 @@ public class CreateFullApplicationService implements ICreateFullApplicationServi
         if (createAttribute != null && !createAttribute.isEmpty()) {
 
             final Set<AttributeLanguageEntity> attributeLanguageEntitiesMapped = createAttribute.stream()
-                    .map(MapperAttributeLanguageEntity.mapperAttributeLanguageEntityFromCreateAttributeLanguageDTO(attributeId)::from)
+                    .map(MapperAttributeLanguageEntity.mapperAttributeLanguageEntityFromCreateAttributeLanguageDTO(attributeId))
                     .collect(Collectors.toSet());
 
             final List<AttributeLanguageEntity> attributeLanguageEntitiesInsert = attributeLanguageRepository.saveAll(attributeLanguageEntitiesMapped);
 
             return attributeLanguageEntitiesInsert.stream()
-                    .map(MapperAttributeLanguageEntity.mapperAttributeLanguageDTOFromAttributeEntity()::from)
+                    .map(MapperAttributeLanguageEntity.mapperAttributeLanguageDTOFromAttributeEntity())
                     .collect(Collectors.toSet());
 
         }

@@ -6,10 +6,12 @@ import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleLanguageKeyEntity;
 
+import java.util.function.Function;
+
 public class MapperRoleLanguageEntity {
 
 
-    public static From<RoleLanguageEntity, CreateRoleLanguageDTO> mapperRoleLanguageEntityFromCreateRoleLanguage(final int roleId) {
+    public static Function<CreateRoleLanguageDTO, RoleLanguageEntity> mapperRoleLanguageEntityFromCreateRoleLanguage(final int roleId) {
         return createRoleLanguageDTO -> RoleLanguageEntity.builder()
                 .roleLanguageKeyEntity(RoleLanguageKeyEntity.builder()
                         .idLanguage(createRoleLanguageDTO.getIdLanguage()).idRole(roleId).build())
@@ -18,7 +20,7 @@ public class MapperRoleLanguageEntity {
                 .build();
     }
 
-    public static From<RoleLanguageDTO, RoleLanguageEntity> mapperRoleLanguageDTOFromRoleLanguageEntity(){
+    public static Function<RoleLanguageEntity, RoleLanguageDTO> mapperRoleLanguageDTOFromRoleLanguageEntity() {
         return roleLanguageEntity -> RoleLanguageDTO.builder()
                 .idRole(roleLanguageEntity.getRoleLanguageKeyEntity().getIdRole())
                 .idLanguage(roleLanguageEntity.getRoleLanguageKeyEntity().getIdLanguage())
