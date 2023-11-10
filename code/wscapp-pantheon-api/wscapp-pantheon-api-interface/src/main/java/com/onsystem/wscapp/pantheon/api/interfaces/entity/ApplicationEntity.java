@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 
-import com.onsystem.wscapp.pantheon.api.interfaces.AuditFieldsEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

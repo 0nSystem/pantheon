@@ -1,4 +1,4 @@
-package com.onsystem.wscapp.pantheon.api.interfaces;
+package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 import java.sql.Timestamp;
 

@@ -1,6 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.helpers;
 
-import com.onsystem.wscapp.pantheon.api.interfaces.AuditFieldsEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.AuditFieldsEntity;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,6 @@ import java.util.function.Consumer;
 
 @Service
 public interface AuditFieldsHelper {
-
-    @Autowired
-    TimeHelper TIME_HELPER = null;
 
     default Consumer<AuditFieldsEntity> consumerSetHighFieldsAudit(final Timestamp ts, final int userId) {
         return auditFieldsEntity -> {
