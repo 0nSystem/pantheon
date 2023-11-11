@@ -19,7 +19,6 @@ public abstract class MapperApplicationEntity {
     @Autowired
     TimeHelper timeHelper;
 
-    //TODO forma de usar timehelper
     @Mappings({
             @Mapping(target = "idApplication", ignore = true),
             @Mapping(target = "deleteIdUser", ignore = true),
@@ -28,8 +27,6 @@ public abstract class MapperApplicationEntity {
     })
     public abstract ApplicationEntity createEntityToEntity(CreateApplicationDTO createApplicationDTO);
 
-
-    //TODO probar que se usa tambien MapperDeleteAuditFields.class, MapperHightAuditFields.class
 
     public abstract ApplicationDTO entityToDTO(ApplicationEntity applicationEntity);
 
