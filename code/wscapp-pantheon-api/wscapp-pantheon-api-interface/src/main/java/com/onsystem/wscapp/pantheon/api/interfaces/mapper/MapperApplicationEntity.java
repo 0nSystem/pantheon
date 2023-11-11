@@ -15,12 +15,11 @@ public class MapperApplicationEntity {
     @Autowired
     private TimeHelper timeHelper;
 
-    public Function<CreateApplicationDTO, ApplicationEntity> fnToEntity() {
+    public static Function<CreateApplicationDTO, ApplicationEntity> fnToEntity() {
         return createApplication -> ApplicationEntity.builder()
                 .name(createApplication.getName())
                 .description(createApplication.getDescription())
                 .highIdUser(createApplication.getHighIdUser())
-                .highDate(timeHelper.now())
                 .build();
     }
 

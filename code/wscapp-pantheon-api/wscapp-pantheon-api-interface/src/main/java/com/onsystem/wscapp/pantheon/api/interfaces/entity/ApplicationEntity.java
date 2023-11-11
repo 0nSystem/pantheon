@@ -6,7 +6,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
@@ -15,9 +18,7 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @Entity
 @Table(schema = SCHEME_APPLICATION, name = "application")
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationEntity implements AuditFieldsEntity {
@@ -40,4 +41,5 @@ public class ApplicationEntity implements AuditFieldsEntity {
     @Nullable
     @Positive
     private Integer deleteIdUser;
+
 }

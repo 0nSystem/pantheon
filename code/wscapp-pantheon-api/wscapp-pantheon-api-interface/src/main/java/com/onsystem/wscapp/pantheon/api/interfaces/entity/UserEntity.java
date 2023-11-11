@@ -14,9 +14,7 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 
 
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
