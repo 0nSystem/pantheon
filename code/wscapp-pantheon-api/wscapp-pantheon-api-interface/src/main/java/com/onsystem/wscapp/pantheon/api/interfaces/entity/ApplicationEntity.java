@@ -1,6 +1,8 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 
+import com.onsystem.wscapp.pantheon.api.dto.DeleteAuditFields;
+import com.onsystem.wscapp.pantheon.api.dto.HightAuditFields;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -21,7 +23,7 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplicationEntity implements AuditFieldsEntity {
+public class ApplicationEntity implements HightAuditFields, DeleteAuditFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idApplication;
@@ -41,5 +43,7 @@ public class ApplicationEntity implements AuditFieldsEntity {
     @Nullable
     @Positive
     private Integer deleteIdUser;
+
+
 
 }

@@ -8,7 +8,6 @@ import com.onsystem.wscapp.pantheon.api.interfaces.entity.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateSchemaApplicationDependencies;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.IValidationReferenceToApplicationService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.apache.commons.collections4.CollectionUtils;
@@ -47,6 +46,9 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     @Autowired
     private RolePermissionRepository rolePermissionRepository;
 
+    @Autowired
+    private MapperApplicationEntity mapperApplicationEntity;
+
 
     @Override
     public ApplicationFullInfoWithLanguagesDTO createFullApplication(final CreateFullApplicationDTO createApplication) {
@@ -81,13 +83,11 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
     @Override
     public @NotNull ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
-        final ApplicationEntity applicationEntityMapped = MapperApplicationEntity.fnToEntity()
-                .apply(createApplication);
+        final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createEntityToEntity(createApplication);
 
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
-        return MapperApplicationEntity.fnToDto()
-                .apply(applicationInserted);
+        return mapperApplicationEntity.entityToDTO(applicationInserted);
     }
 
     public Set<ApplicationLanguageDTO> createApplicationLanguages(final @Positive int applicationId,

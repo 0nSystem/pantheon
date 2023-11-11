@@ -1,13 +1,13 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.helpers;
 
 import lombok.NonNull;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 //TODO
-@Service
+@Component
 public interface TimeHelper {
 
     default @NonNull Timestamp now() {

@@ -1,5 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
+import com.onsystem.wscapp.pantheon.api.dto.DeleteAuditFields;
+import com.onsystem.wscapp.pantheon.api.dto.HightAuditFields;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -20,7 +22,7 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @Entity
 @Table(schema = SCHEME_USERS, name = "\"user\"",
         uniqueConstraints = @UniqueConstraint(columnNames = {"email", "login"}))
-public class UserEntity implements AuditFieldsEntity {
+public class UserEntity implements HightAuditFields, DeleteAuditFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
