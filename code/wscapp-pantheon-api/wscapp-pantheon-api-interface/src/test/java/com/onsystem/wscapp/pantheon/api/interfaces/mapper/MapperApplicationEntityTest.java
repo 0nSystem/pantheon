@@ -40,6 +40,13 @@ public class MapperApplicationEntityTest {
         Assertions.assertNotNull(applicationEntity.getHighDate());
 
     }
+    @Test
+    void testCreateEntityToEntityReturnNull(){
+        final ApplicationEntity applicationEntity = mapper
+                .createEntityToEntity(null);
+
+        Assertions.assertNull(applicationEntity);
+    }
 
     @Test
     void testEntityToDTO() {
@@ -67,6 +74,13 @@ public class MapperApplicationEntityTest {
         Assertions.assertEquals(entity.getDeleteIdUser(), applicationDTO.getDeleteIdUser());
 
 
+    }
+    @Test
+    void testEntityToDTOReturnNull(){
+        final ApplicationDTO applicationDTO = mapper
+                .entityToDTO(null);
+
+        Assertions.assertNull(applicationDTO);
     }
 
 
