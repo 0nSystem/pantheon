@@ -1,8 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_APPLICATION;
@@ -12,13 +11,17 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@IdClass(ApplicationLanguageKeyEntity.class)
 public class ApplicationLanguageEntity {
 
-    @EmbeddedId
-    private ApplicationLanguageKeyEntity applicationLanguageKeyEntity;
+    @Id
+    @NotNull
+    private Integer idApplication;
+    @Id
+    @NotNull
+    private Integer idLanguage;
 
     private String name;
     private String description;

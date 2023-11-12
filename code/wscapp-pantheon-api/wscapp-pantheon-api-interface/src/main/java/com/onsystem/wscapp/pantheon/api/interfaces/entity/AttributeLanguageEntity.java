@@ -1,10 +1,9 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -15,10 +14,15 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@IdClass(AttributeLanguageKeyEntity.class)
 public class AttributeLanguageEntity {
 
-    @EmbeddedId
-    private AttributeLanguageKeyEntity attributeLanguageKeyEntity;
+    @Id
+    @NotNull
+    private Integer idAttribute;
+    @Id
+    @NotNull
+    private Integer idLanguage;
 
     @NotEmpty
     @Max(100)

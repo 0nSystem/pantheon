@@ -1,11 +1,10 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -16,11 +15,16 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@IdClass(PermissionLanguageKeyEntity.class)
 public class PermissionLanguageEntity {
 
+    @Id
+    @NotNull
+    private Integer idPermission;
+    @Id
+    @NotNull
+    private Integer idLanguage;
 
-    @EmbeddedId
-    private PermissionLanguageKeyEntity permissionLanguageKeyEntity;
 
     @NotEmpty
     @Max(100)

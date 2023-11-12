@@ -1,34 +1,30 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageKeyEntity;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
-import org.springframework.lang.Nullable;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
+import jakarta.validation.constraints.NotNull;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
+import org.springframework.stereotype.Component;
 
-import java.util.function.Function;
-
-public class MapperApplicationLanguageEntity {
-
-    public static Function<CreateApplicationLanguageDTO, ApplicationLanguageEntity> toEntity(final @Nullable Integer applicationId) {
-        return createApplicationLanguage -> ApplicationLanguageEntity.builder()
-                .name(createApplicationLanguage.getName())
-                .description(createApplicationLanguage.getDescription())
-                .applicationLanguageKeyEntity(ApplicationLanguageKeyEntity.builder()
-                        .idApplication(applicationId)
-                        .idLanguage(createApplicationLanguage.getIdLanguage())
-                        .build())
-                .build();
-    }
+@Mapper(
+        componentModel = MappingConstants.ComponentModel.SPRING
+)
+@Component
+public abstract class MapperApplicationLanguageEntity {
 
 
-    public static Function<ApplicationLanguageEntity, ApplicationLanguageDTO> toDto() {
-        return entity -> ApplicationLanguageDTO.builder()
-                .idApplication(entity.getApplicationLanguageKeyEntity().getIdApplication())
-                .idLanguage(entity.getApplicationLanguageKeyEntity().getIdLanguage())
-                .name(entity.getName())
-                .description(entity.getDescription())
-                .build();
-    }
+    @Mappings({
+            @Mapping(source = "applicationId", target = "idApplication"),
+            @Mapping(source = "createApplicationLanguageDTO.idLanguage", target = "idLanguage"),
+    })
+    public abstract ApplicationLanguageEntity toEntity(final CreateApplicationLanguageDTO createApplicationLanguageDTO,
+                                                       final @NotNull Integer applicationId);
+
+
+    public abstract ApplicationLanguageDTO toDto(ApplicationLanguageEntity applicationLanguageEntity);
 
 }

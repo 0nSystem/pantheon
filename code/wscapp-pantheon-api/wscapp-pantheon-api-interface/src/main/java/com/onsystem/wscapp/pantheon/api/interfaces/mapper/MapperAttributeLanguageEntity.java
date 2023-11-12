@@ -1,29 +1,35 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
+import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageKeyEntity;
+import jakarta.validation.constraints.NotNull;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
-public class MapperAttributeLanguageEntity {
 
-    public static Function<CreateAttributeLanguageDTO, AttributeLanguageEntity> toEntity(final int attributeId) {
-        return createAttributeLanguageDTO -> AttributeLanguageEntity.builder()
-                .attributeLanguageKeyEntity(AttributeLanguageKeyEntity.builder()
-                        .idAttribute(attributeId).idLanguage(createAttributeLanguageDTO.getIdLanguage()).build())
-                .name(createAttributeLanguageDTO.getName())
-                .description(createAttributeLanguageDTO.getDescription())
-                .build();
-    }
+@Mapper(
+        componentModel = MappingConstants.ComponentModel.SPRING
+)
+@Component
+public abstract class MapperAttributeLanguageEntity {
 
-    public static Function<AttributeLanguageEntity, AttributeLanguageDTO> toDto() {
-        return attributeLanguageEntity -> AttributeLanguageDTO.builder()
-                .idAttribute(attributeLanguageEntity.getAttributeLanguageKeyEntity().getIdAttribute())
-                .idLanguage(attributeLanguageEntity.getAttributeLanguageKeyEntity().getIdLanguage())
-                .name(attributeLanguageEntity.getName())
-                .description(attributeLanguageEntity.getDescription())
-                .build();
-    }
+
+    @Mappings({
+            @Mapping(source = "attributeId", target = "idAttribute")
+    })
+    public abstract AttributeLanguageEntity toEntity(final CreateAttributeLanguageDTO createAttributeLanguageDTO,
+                                                     final @NotNull Integer attributeId);
+
+
+    public abstract AttributeLanguageDTO toDto(final AttributeLanguageEntity attributeLanguageEntity);
+
+
 }
