@@ -58,6 +58,10 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     private MapperPermissionEntity mapperPermissionEntity;
     @Autowired
     private MapperPermissionLanguageEntity mapperPermissionLanguageEntity;
+    @Autowired
+    private MapperRoleLanguageEntity mapperRoleLanguageEntity;
+    @Autowired
+    private MapperRoleEntity mapperRoleEntity;
 
 
     @Override
@@ -189,9 +193,9 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
 
         final Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> roleWithLanguagesAndPermissionWithLanguages = applicationRoles.stream()
                 .map(role -> {
-                    final RoleEntity roleEntityMapped = MapperRoleEntity.toEntity(idApplication).apply(role.getRole());
+                    final RoleEntity roleEntityMapped = mapperRoleEntity.toEntity(role.getRole(), idApplication);
                     final RoleEntity roleEntityInserted = roleRepository.save(roleEntityMapped);
-                    final RoleDTO roleDTO = MapperRoleEntity.toDto().apply(roleEntityInserted);
+                    final RoleDTO roleDTO = mapperRoleEntity.toDto(roleEntityInserted);
 
                     final var roleLanguages = CollectionUtils.isNotEmpty(role.getRoleLanguage())
                             ? createRoleLanguages(roleEntityInserted.getIdRole(), role.getRoleLanguage())
@@ -216,13 +220,13 @@ public class CreateSchemaApplicationDependencies implements ICreateSchemaApplica
     public Set<RoleLanguageDTO> createRoleLanguages(final @Positive int idRole, final Collection<CreateRoleLanguageDTO> createRoleLanguages) {
 
         final Set<RoleLanguageEntity> roleLanguageEntitiesMapped = createRoleLanguages.stream()
-                .map(MapperRoleLanguageEntity.toEntity(idRole))
+                .map(createLanguageRole -> mapperRoleLanguageEntity.toEntity(createLanguageRole, idRole))
                 .collect(Collectors.toSet());
 
         final List<RoleLanguageEntity> roleLanguageEntitiesInserted = roleLanguageRepository.saveAll(roleLanguageEntitiesMapped);
 
         return roleLanguageEntitiesInserted.stream()
-                .map(MapperRoleLanguageEntity.toDto())
+                .map(roleLanguageEntity -> mapperRoleLanguageEntity.toDto(roleLanguageEntity))
                 .collect(Collectors.toSet());
     }
 

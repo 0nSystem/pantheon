@@ -3,24 +3,27 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
+import jakarta.validation.constraints.NotNull;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
-public class MapperRoleEntity {
+@Mapper(
+        componentModel = MappingConstants.ComponentModel.SPRING
+)
+@Component
+public abstract class MapperRoleEntity {
 
-    public static Function<CreateRoleDTO, RoleEntity> toEntity(final int applicationId) {
-        return createRoleDTO -> RoleEntity.builder()
-                .idApplication(applicationId)
-                .name(createRoleDTO.getName())
-                .description(createRoleDTO.getDescription())
-                .build();
-    }
+    @Mappings({
+            @Mapping(source = "applicationId", target = "idApplication"),
+            @Mapping(target = "idRole", ignore = true)
+    })
+    public abstract RoleEntity toEntity(CreateRoleDTO createRoleDTO, final @NotNull Integer applicationId);
 
-    public static Function<RoleEntity, RoleDTO> toDto() {
-        return roleEntity -> RoleDTO.builder()
-                .idApplication(roleEntity.getIdApplication())
-                .name(roleEntity.getName())
-                .description(roleEntity.getDescription())
-                .build();
-    }
+    public abstract RoleDTO toDto(RoleEntity roleEntity);
+
 }
