@@ -7,7 +7,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_PUBLIC;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_PUBLIC;
 
 @Entity
 @Table(schema = SCHEME_PUBLIC, name = "user_application")

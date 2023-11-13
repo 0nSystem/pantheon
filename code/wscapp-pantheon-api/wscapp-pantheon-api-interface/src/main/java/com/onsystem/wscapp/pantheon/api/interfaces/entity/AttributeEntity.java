@@ -6,10 +6,11 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_APPLICATION;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ATTRIBUTE;
 
 @Entity
-@Table(schema = SCHEME_APPLICATION, name = "attribute")
+@Table(schema = SCHEME_APPLICATION, name = TABLE_ATTRIBUTE)
 @Builder
 @Getter
 @Setter

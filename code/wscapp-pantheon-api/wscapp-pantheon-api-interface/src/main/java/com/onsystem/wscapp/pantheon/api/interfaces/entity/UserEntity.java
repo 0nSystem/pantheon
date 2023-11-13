@@ -12,7 +12,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_USERS;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_USERS;
 
 
 @Builder

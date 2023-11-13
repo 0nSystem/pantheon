@@ -7,10 +7,13 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_APPLICATION;
+import java.util.Set;
+
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ROLE;
 
 @Entity
-@Table(schema = SCHEME_APPLICATION, name = "role")
+@Table(schema = SCHEME_APPLICATION, name = TABLE_ROLE)
 @Builder
 @Getter
 @Setter
@@ -24,7 +27,7 @@ public class RoleEntity {
     private Integer idRole;
 
     @Positive
-    private int idApplication;
+    private Integer idApplication;
 
     @NotEmpty
     @Size(max = 100)
@@ -34,5 +37,11 @@ public class RoleEntity {
     @Size(max = 255)
     private String description;
 
-    //TODO AUDIT interface?
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idApplication", referencedColumnName = "idApplication")
+    private ApplicationEntity application;
+
+
 }

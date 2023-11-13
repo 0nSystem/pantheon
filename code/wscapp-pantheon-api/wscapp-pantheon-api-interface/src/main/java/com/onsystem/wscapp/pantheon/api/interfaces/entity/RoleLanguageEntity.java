@@ -1,13 +1,19 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
-import jakarta.persistence.*;
+import com.onsystem.wscapp.pantheon.api.interfaces.Constants;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ROLE_LANGUAGE;
+
 @Entity
-@Table(schema = Constants.SCHEME_APPLICATION, name = "role_language")
+@Table(schema = Constants.SCHEME_APPLICATION, name = TABLE_ROLE_LANGUAGE)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

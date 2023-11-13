@@ -1,6 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 
+import com.onsystem.wscapp.pantheon.api.interfaces.Constants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
@@ -33,5 +34,11 @@ public class PermissionLanguageEntity {
     @NotEmpty
     @Max(255)
     private String description;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idLanguage")
+    private PermissionEntity permission;
+
 
 }
