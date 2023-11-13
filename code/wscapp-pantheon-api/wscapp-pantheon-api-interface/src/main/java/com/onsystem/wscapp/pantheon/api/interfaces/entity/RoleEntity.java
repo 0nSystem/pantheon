@@ -40,7 +40,7 @@ public class RoleEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idApplication", referencedColumnName = "idApplication")
+    @JoinColumn(name = "idApplication", columnDefinition = "idApplication", insertable = false, updatable = false)
     private ApplicationEntity application;
 
 

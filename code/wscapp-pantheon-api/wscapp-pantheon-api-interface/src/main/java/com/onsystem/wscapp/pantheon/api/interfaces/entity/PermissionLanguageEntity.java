@@ -37,7 +37,7 @@ public class PermissionLanguageEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idLanguage")
+    @JoinColumn(name = "idLanguage", insertable = false, updatable = false)
     private PermissionEntity permission;
 
 

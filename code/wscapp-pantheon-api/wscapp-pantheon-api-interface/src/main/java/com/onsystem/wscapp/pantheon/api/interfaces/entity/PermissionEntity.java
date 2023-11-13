@@ -39,12 +39,12 @@ public class PermissionEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idApplication")
+    @JoinColumn(name = "idApplication", referencedColumnName = "idApplication", insertable = false, updatable = false)
     private ApplicationEntity application;
 
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "permission",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "permission", fetch = FetchType.LAZY)
     private Set<PermissionLanguageEntity> permissionLanguages;
 
 }
