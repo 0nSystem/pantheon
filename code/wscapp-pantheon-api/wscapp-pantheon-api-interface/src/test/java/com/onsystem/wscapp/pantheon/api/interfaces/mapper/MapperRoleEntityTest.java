@@ -2,6 +2,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class MapperRoleEntityTest {
 
 
         Assertions.assertNotNull(roleEntity);
-        Assertions.assertEquals(applicationId, roleEntity.getIdApplication());
+        Assertions.assertEquals(applicationId, roleEntity.getApplication().getIdApplication());
         Assertions.assertEquals(createRoleDTO.getName(), roleEntity.getName());
         Assertions.assertEquals(createRoleDTO.getDescription(), roleEntity.getDescription());
 
@@ -44,7 +45,7 @@ public class MapperRoleEntityTest {
     public void testEntityToDto() {
 
         final RoleEntity roleEntity = RoleEntity.builder()
-                .idApplication(1)
+                .application(ApplicationEntity.builder().idApplication(1).build())
                 .idRole(1)
                 .name("asd")
                 .description("asd")
@@ -55,7 +56,7 @@ public class MapperRoleEntityTest {
 
         Assertions.assertNotNull(roleDTO);
         Assertions.assertEquals(roleEntity.getIdRole(), roleDTO.getIdRole());
-        Assertions.assertEquals(roleEntity.getIdApplication(), roleDTO.getIdApplication());
+        Assertions.assertEquals(roleEntity.getApplication().getIdApplication(), roleDTO.getIdApplication());
         Assertions.assertEquals(roleEntity.getName(), roleDTO.getName());
         Assertions.assertEquals(roleEntity.getDescription(), roleDTO.getDescription());
 

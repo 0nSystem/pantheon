@@ -26,8 +26,6 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idRole;
 
-    @Positive
-    private Integer idApplication;
 
     @NotEmpty
     @Size(max = 100)
@@ -40,8 +38,12 @@ public class RoleEntity {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idApplication", columnDefinition = "idApplication", insertable = false, updatable = false)
+    @JoinColumn(name = "idApplication")
     private ApplicationEntity application;
+
+
+    @OneToMany(mappedBy = "role")
+    private Set<RoleLanguageEntity> roleLanguages;
 
 
 }

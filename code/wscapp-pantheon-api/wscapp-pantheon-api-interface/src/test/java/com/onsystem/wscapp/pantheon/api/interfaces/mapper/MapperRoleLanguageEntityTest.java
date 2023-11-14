@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleLanguageEntity;
 import org.junit.jupiter.api.Assertions;
@@ -30,8 +31,8 @@ public class MapperRoleLanguageEntityTest {
 
 
         Assertions.assertNotNull(roleLanguageEntity);
-        Assertions.assertEquals(roleId, roleLanguageEntity.getIdRole());
-        Assertions.assertEquals(createRoleLanguageDTO.getIdLanguage(), roleLanguageEntity.getIdLanguage());
+        Assertions.assertEquals(roleId, roleLanguageEntity.getRole().getIdRole());
+        Assertions.assertEquals(createRoleLanguageDTO.getIdLanguage(), roleLanguageEntity.getLanguage().getIdLanguage());
         Assertions.assertEquals(createRoleLanguageDTO.getName(), roleLanguageEntity.getName());
         Assertions.assertEquals(createRoleLanguageDTO.getDescription(), roleLanguageEntity.getDescription());
 
@@ -47,8 +48,8 @@ public class MapperRoleLanguageEntityTest {
     public void testEntityToDto() {
 
         final RoleLanguageEntity roleEntity = RoleLanguageEntity.builder()
-                .idLanguage(1)
-                .idRole(1)
+                .language(LanguageEntity.builder().idLanguage(1).build())
+                .role(RoleEntity.builder().idRole(1).build())
                 .name("asd")
                 .description("asd")
                 .build();
@@ -57,8 +58,8 @@ public class MapperRoleLanguageEntityTest {
 
 
         Assertions.assertNotNull(roleLanguageDTO);
-        Assertions.assertEquals(roleEntity.getIdRole(), roleLanguageDTO.getIdRole());
-        Assertions.assertEquals(roleEntity.getIdLanguage(), roleLanguageDTO.getIdLanguage());
+        Assertions.assertEquals(roleEntity.getRole().getIdRole(), roleLanguageDTO.getIdRole());
+        Assertions.assertEquals(roleEntity.getLanguage().getIdLanguage(), roleLanguageDTO.getIdLanguage());
         Assertions.assertEquals(roleEntity.getName(), roleLanguageDTO.getName());
         Assertions.assertEquals(roleEntity.getDescription(), roleLanguageDTO.getDescription());
 

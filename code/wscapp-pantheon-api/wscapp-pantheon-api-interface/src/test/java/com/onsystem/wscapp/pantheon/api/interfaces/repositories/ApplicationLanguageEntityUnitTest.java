@@ -55,6 +55,7 @@ public class ApplicationLanguageEntityUnitTest {
 
         Assertions.assertNotNull(applicationLanguageEntity);
         Assertions.assertEquals(applicationEntity, applicationLanguageEntity.getApplication());
+        Assertions.assertEquals(languageEntity, applicationLanguageEntity.getLanguage());
 
     }
 

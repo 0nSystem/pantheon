@@ -23,7 +23,10 @@ public abstract class MapperApplicationEntity {
             @Mapping(target = "idApplication", ignore = true),
             @Mapping(target = "deleteIdUser", ignore = true),
             @Mapping(target = "deleteDate", ignore = true),
-            @Mapping(target = "highDate", expression = "java(timeHelper.now())")
+            @Mapping(target = "highDate", expression = "java(timeHelper.now())"),
+            @Mapping(target = "applicationLanguages", ignore = true),
+            @Mapping(target = "permissions", ignore = true),
+            @Mapping(target = "roles", ignore = true)
     })
     public abstract ApplicationEntity createEntityToEntity(CreateApplicationDTO createApplicationDTO);
 

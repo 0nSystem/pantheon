@@ -20,11 +20,16 @@ public abstract class MapperRoleLanguageEntity {
 
 
     @Mappings({
-            @Mapping(source = "roleId", target = "idRole")
+            @Mapping(target = "language.idLanguage", source = "createRoleLanguageDTO.idLanguage"),
+            @Mapping(target = "role.idRole", source = "roleId")
     })
     public abstract RoleLanguageEntity toEntity(CreateRoleLanguageDTO createRoleLanguageDTO, final Integer roleId);
 
 
+    @Mappings({
+            @Mapping(target = "idRole", source = "role.idRole"),
+            @Mapping(target = "idLanguage", source = "language.idLanguage")
+    })
     public abstract RoleLanguageDTO toDto(RoleLanguageEntity roleLanguageEntity);
 
 }

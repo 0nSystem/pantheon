@@ -15,7 +15,7 @@ import lombok.*;
 public class RoleLanguageKeyEntity {
 
     @NotNull
-    private Integer idRole;
+    private Integer role;
     @NotNull
-    private Integer idLanguage;
+    private Integer language;
 }
