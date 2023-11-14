@@ -2,6 +2,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
 import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
@@ -18,13 +19,21 @@ public abstract class MapperApplicationLanguageEntity {
 
 
     @Mappings({
-            @Mapping(source = "applicationId", target = "idApplication"),
-            @Mapping(source = "createApplicationLanguageDTO.idLanguage", target = "idLanguage"),
+            @Mapping(source = "createApplicationLanguageDTO.idLanguage", target = "language.idLanguage"), //TODO
+            @Mapping(source = "createApplicationLanguageDTO.name", target = "name"),
+            @Mapping(source = "createApplicationLanguageDTO.description", target = "description"),
+            @Mapping(source = "applicationId", target = "application.idApplication"),
     })
     public abstract ApplicationLanguageEntity toEntity(final CreateApplicationLanguageDTO createApplicationLanguageDTO,
-                                                       final @NotNull Integer applicationId);
+                                                       final Integer applicationId);
 
 
+    @Mappings({
+            @Mapping(source = "application.idApplication",target = "idApplication"),
+            @Mapping(source = "language.idLanguage",target = "idLanguage"),
+            @Mapping(source = "name",target = "name"),
+            @Mapping(source = "description",target = "description"),
+    })
     public abstract ApplicationLanguageDTO toDto(ApplicationLanguageEntity applicationLanguageEntity);
 
 }

@@ -18,24 +18,18 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_APPLIC
 @IdClass(ApplicationLanguageKeyEntity.class)
 public class ApplicationLanguageEntity {
 
-    @Id
-    @NotNull
-    private Integer idApplication;
-    @Id
-    @NotNull
-    private Integer idLanguage;
-
     @NotEmpty
     private String name;
     @NotEmpty
     private String description;
 
+    @Id
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idApplication")
     private ApplicationEntity application;
 
-
+    @Id
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idLanguage")

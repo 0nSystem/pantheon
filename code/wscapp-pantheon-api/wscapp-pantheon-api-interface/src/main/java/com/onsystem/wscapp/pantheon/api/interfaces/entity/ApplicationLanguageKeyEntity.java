@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 public class ApplicationLanguageKeyEntity {
     @NotNull
-    private Integer idApplication;
+    private Integer application;
     @NotNull
-    private Integer idLanguage;
+    private Integer language;
 }
