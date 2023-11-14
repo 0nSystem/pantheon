@@ -3,7 +3,9 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,8 @@ public class MapperAttributeLanguageEntityTest {
 
 
         Assertions.assertNotNull(attributeLanguageEntity);
-        Assertions.assertEquals(attributeId, attributeLanguageEntity.getIdAttribute());
-        Assertions.assertEquals(createAttributeLanguageDTO.getIdLanguage(), attributeLanguageEntity.getIdLanguage());
+        Assertions.assertEquals(attributeId, attributeLanguageEntity.getAttribute().getIdAttribute());
+        Assertions.assertEquals(createAttributeLanguageDTO.getIdLanguage(), attributeLanguageEntity.getLanguage().getIdLanguage());
         Assertions.assertEquals(createAttributeLanguageDTO.getName(), attributeLanguageEntity.getName());
         Assertions.assertEquals(createAttributeLanguageDTO.getDescription(), attributeLanguageEntity.getDescription());
 
@@ -47,8 +49,8 @@ public class MapperAttributeLanguageEntityTest {
     public void testEntityToDto() {
 
         final AttributeLanguageEntity attributeLanguageEntity = AttributeLanguageEntity.builder()
-                .idAttribute(1)
-                .idLanguage(1)
+                .attribute(AttributeEntity.builder().idAttribute(1).build())
+                .language(LanguageEntity.builder().idLanguage(1).build())
                 .name("asd")
                 .description("asd")
                 .build();
@@ -57,8 +59,8 @@ public class MapperAttributeLanguageEntityTest {
 
 
         Assertions.assertNotNull(attributeLanguageDTO);
-        Assertions.assertEquals(attributeLanguageEntity.getIdLanguage(), attributeLanguageDTO.getIdAttribute());
-        Assertions.assertEquals(attributeLanguageEntity.getIdLanguage(), attributeLanguageDTO.getIdLanguage());
+        Assertions.assertEquals(attributeLanguageEntity.getLanguage().getIdLanguage(), attributeLanguageDTO.getIdAttribute());
+        Assertions.assertEquals(attributeLanguageEntity.getLanguage().getIdLanguage(), attributeLanguageDTO.getIdLanguage());
         Assertions.assertEquals(attributeLanguageEntity.getName(), attributeLanguageDTO.getName());
         Assertions.assertEquals(attributeLanguageEntity.getDescription(), attributeLanguageDTO.getDescription());
 

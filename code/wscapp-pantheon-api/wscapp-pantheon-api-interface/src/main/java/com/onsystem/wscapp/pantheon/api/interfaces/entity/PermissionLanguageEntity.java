@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
-@Table(schema = Constants.SCHEME_APPLICATION, name = "permission_language")
+@Table(schema = Constants.SCHEME_APPLICATION, name = Constants.TABLE_PERMISSION_LANGUAGE)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,13 +18,6 @@ import lombok.*;
 @ToString
 @IdClass(PermissionLanguageKeyEntity.class)
 public class PermissionLanguageEntity {
-
-    @Id
-    @NotNull
-    private Integer idPermission;
-    @Id
-    @NotNull
-    private Integer idLanguage;
 
 
     @NotEmpty
@@ -35,10 +28,18 @@ public class PermissionLanguageEntity {
     @Max(255)
     private String description;
 
+    @Id
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idLanguage", insertable = false, updatable = false)
+    @JoinColumn(name = "idPermission")
     private PermissionEntity permission;
+
+
+    @Id
+    @ToString.Exclude
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idLanguage")
+    private LanguageEntity language;
 
 
 }

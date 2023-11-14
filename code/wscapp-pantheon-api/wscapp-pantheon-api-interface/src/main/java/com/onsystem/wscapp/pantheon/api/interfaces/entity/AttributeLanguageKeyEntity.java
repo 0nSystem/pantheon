@@ -14,7 +14,7 @@ import lombok.*;
 public class AttributeLanguageKeyEntity {
 
     @NotNull
-    private Integer idAttribute;
+    private Integer attribute;
     @NotNull
-    private Integer idLanguage;
+    private Integer language;
 }

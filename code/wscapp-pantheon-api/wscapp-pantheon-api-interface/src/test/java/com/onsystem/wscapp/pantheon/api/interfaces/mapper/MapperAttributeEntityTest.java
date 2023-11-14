@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class MapperAttributeEntityTest {
         final AttributeEntity attributeEntity = mapperAttributeEntity.toEntity(createAttributeDTO, applicationId);
 
         Assertions.assertNotNull(attributeEntity);
-        Assertions.assertEquals(applicationId, attributeEntity.getIdApplication());
+        Assertions.assertEquals(applicationId, attributeEntity.getApplication().getIdApplication());
         Assertions.assertEquals(createAttributeDTO.getName(), attributeEntity.getName());
         Assertions.assertEquals(createAttributeDTO.getDescription(), attributeEntity.getDescription());
 
@@ -47,7 +48,7 @@ public class MapperAttributeEntityTest {
     public void testToDto() {
         final AttributeEntity attributeEntity = AttributeEntity.builder()
                 .idAttribute(1)
-                .idApplication(1)
+                .application(ApplicationEntity.builder().idApplication(1).build())
                 .name("asd")
                 .description("asd")
                 .build();

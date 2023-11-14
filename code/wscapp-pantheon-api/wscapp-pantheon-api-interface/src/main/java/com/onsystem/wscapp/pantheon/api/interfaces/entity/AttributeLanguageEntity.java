@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
-@Table(schema = Constants.SCHEME_APPLICATION, name = "attribute_language")
+@Table(schema = Constants.SCHEME_APPLICATION, name = Constants.TABLE_ATTRIBUTE_LANGUAGE)
 @Builder
 @Getter
 @Setter
@@ -18,12 +18,7 @@ import lombok.*;
 @IdClass(AttributeLanguageKeyEntity.class)
 public class AttributeLanguageEntity {
 
-    @Id
-    @NotNull
-    private Integer idAttribute;
-    @Id
-    @NotNull
-    private Integer idLanguage;
+
 
     @NotEmpty
     @Max(100)
@@ -31,5 +26,20 @@ public class AttributeLanguageEntity {
     @NotEmpty
     @Max(255)
     private String description;
+
+
+    @Id
+    @NotNull
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idAttribute")
+    private AttributeEntity attribute;
+
+    @Id
+    @NotNull
+    @ToString.Exclude
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idLanguage")
+    private LanguageEntity language;
 
 }

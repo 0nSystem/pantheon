@@ -41,9 +41,13 @@ public class RoleEntity {
     @JoinColumn(name = "idApplication")
     private ApplicationEntity application;
 
-
-    @OneToMany(mappedBy = "role")
+    @ToString.Exclude
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private Set<RoleLanguageEntity> roleLanguages;
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<PermissionEntity> permissions;
 
 
 }

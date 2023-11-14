@@ -7,20 +7,23 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ROLE_PERMISSION;
 
 @Entity
-@Table(schema = SCHEME_APPLICATION, name = "role_permission")
+@Table(schema = SCHEME_APPLICATION, name = TABLE_ROLE_PERMISSION)
 @Builder
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@IdClass(RolePermissionId.class)
+@IdClass(RolePermissionKeyEntity.class)
 public class RolePermissionEntity {
 
     @Id
     private Integer idRole;
     @Id
     private Integer idPermission;
+
+
 }

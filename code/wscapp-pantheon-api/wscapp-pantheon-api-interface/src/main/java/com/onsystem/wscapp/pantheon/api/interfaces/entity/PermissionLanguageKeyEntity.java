@@ -14,8 +14,8 @@ import lombok.*;
 public class PermissionLanguageKeyEntity {
 
     @NotNull
-    private Integer idPermission;
+    private Integer permission;
 
     @NotNull
-    private Integer idLanguage;
+    private Integer language;
 }

@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface PermissionRepository extends JpaRepository<PermissionEntity,Integer> {
 
-    List<PermissionEntity> findByIdApplication(final int idApplication);
 }
