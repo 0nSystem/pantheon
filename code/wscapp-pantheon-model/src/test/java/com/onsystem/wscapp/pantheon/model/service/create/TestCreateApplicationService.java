@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.model.service.create;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.LanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateApplicationService;
-import com.onsystem.wscapp.pantheon.model.MockData;
+import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class TestCreateApplicationService {
 
     @Test
     public void createApplication() {
-        final var createApplicationModel = MockData.DataMockSchemeApplication.createApplicationModel;
+        final var createApplicationModel = MockData.DataMockSchemeApplication.CREATE_APPLICATION_MOCK;
         final var applicationCreateDTO = iCreateApplicationService.createApplication(createApplicationModel);
 
         Assertions.assertAll(() -> {
@@ -41,12 +41,12 @@ public class TestCreateApplicationService {
 
     @Test
     public void createApplicationLanguage() {
-        final Integer idApplication = iCreateApplicationService.createApplication(MockData.DataMockSchemeApplication.createApplicationModel).getIdApplication();
-        final Integer idLanguage = languageRepository.save(MockData.DataMockSchemeApplication.language).getIdLanguage();
+        final Integer idApplication = iCreateApplicationService.createApplication(MockData.DataMockSchemeApplication.CREATE_APPLICATION_MOCK).getIdApplication();
+        final Integer idLanguage = languageRepository.save(MockData.DataMockSchemeApplication.LANGUAGE_MOCK).getIdLanguage();
 
         final var applicationLanguage = iCreateApplicationService.createApplicationLanguages(idApplication,
                         Set.of(
-                                MockData.DataMockSchemeApplication.createApplicationLanguage
+                                MockData.DataMockSchemeApplication.CREATE_APPLICATION_LANGUAGE_MOCK
                                         .idLanguage(idLanguage).build()
                         )
                 ).stream()
@@ -54,7 +54,7 @@ public class TestCreateApplicationService {
 
         Assertions.assertEquals(idApplication, applicationLanguage.getIdApplication());
         Assertions.assertEquals(idLanguage, applicationLanguage.getIdLanguage());
-        Assertions.assertEquals(MockData.DataMockSchemeApplication.createApplicationLanguage.build().getName(), applicationLanguage.getName());
-        Assertions.assertEquals(MockData.DataMockSchemeApplication.createApplicationLanguage.build().getDescription(), applicationLanguage.getDescription());
+        Assertions.assertEquals(MockData.DataMockSchemeApplication.CREATE_APPLICATION_LANGUAGE_MOCK.build().getName(), applicationLanguage.getName());
+        Assertions.assertEquals(MockData.DataMockSchemeApplication.CREATE_APPLICATION_LANGUAGE_MOCK.build().getDescription(), applicationLanguage.getDescription());
     }
 }

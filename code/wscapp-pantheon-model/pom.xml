@@ -17,6 +17,15 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- Para tener acceso a las clases de test de api-interface -->
+        <dependency>
+            <groupId>com.onsystem</groupId>
+            <artifactId>wscapp-pantheon-api-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
