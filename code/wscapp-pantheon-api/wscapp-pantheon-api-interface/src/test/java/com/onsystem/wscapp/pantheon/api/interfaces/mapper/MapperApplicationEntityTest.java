@@ -3,7 +3,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.helpers.TimeHelper;
+import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ public class MapperApplicationEntityTest {
     @Autowired
     private MapperApplicationEntity mapper;
     @Autowired
-    private TimeHelper timeHelper;
+    private ITimeHelper ITimeHelper;
 
 
     @Test
@@ -55,8 +55,8 @@ public class MapperApplicationEntityTest {
                 .name("Name")
                 .description("Description")
                 .highIdUser(1)
-                .highDate(timeHelper.now())
-                .deleteDate(timeHelper.now())
+                .highDate(ITimeHelper.now())
+                .deleteDate(ITimeHelper.now())
                 .deleteIdUser(1)
                 .build();
 

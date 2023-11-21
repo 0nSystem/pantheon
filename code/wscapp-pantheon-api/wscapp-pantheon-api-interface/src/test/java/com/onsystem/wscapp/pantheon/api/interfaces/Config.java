@@ -1,6 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces;
 
-import com.onsystem.wscapp.pantheon.api.interfaces.helpers.TimeHelper;
+import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     @Bean
-    public TimeHelper timeHelper() {
-        return new TimeHelper() {
+    public ITimeHelper timeHelper() {
+        return new ITimeHelper() {
         };
     }
 
