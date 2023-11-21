@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ApplicationLanguageEntityUnitTest {
 

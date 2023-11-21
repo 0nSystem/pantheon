@@ -1,17 +1,17 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
-import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class MapperPermissionEntityTest {
 
