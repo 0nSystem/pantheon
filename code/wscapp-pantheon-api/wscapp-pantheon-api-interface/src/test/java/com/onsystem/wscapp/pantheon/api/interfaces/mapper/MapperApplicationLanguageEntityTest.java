@@ -3,7 +3,9 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,20 +21,23 @@ public class MapperApplicationLanguageEntityTest {
     @Autowired
     private MapperApplicationLanguageEntity mapperApplicationLanguageEntity;
 
+    private static ApplicationEntity APPLICATION_ENTITY = ApplicationEntity.builder()
+            .idApplication(1)
+            .build();
+
     @Test
     public void testCreateApplicationLanguageToEntity() {
-        final Integer applicationId = 1;
         final CreateApplicationLanguageDTO createApplicationLanguageDTO = CreateApplicationLanguageDTO.builder()
                 .name("asd")
                 .description("asd")
                 .idLanguage(1)
                 .build();
 
-        final ApplicationLanguageEntity applicationLanguageEntity = mapperApplicationLanguageEntity.toEntity(createApplicationLanguageDTO, applicationId);
+        final ApplicationLanguageEntity applicationLanguageEntity = mapperApplicationLanguageEntity.toEntity(createApplicationLanguageDTO, APPLICATION_ENTITY.getIdApplication());
 
         Assertions.assertNotNull(applicationLanguageEntity);
-        Assertions.assertEquals(createApplicationLanguageDTO.getIdLanguage(), applicationLanguageEntity.getIdLanguage());
-        Assertions.assertEquals(applicationId, applicationLanguageEntity.getIdApplication());
+        Assertions.assertEquals(createApplicationLanguageDTO.getIdLanguage(), applicationLanguageEntity.getLanguage().getIdLanguage());
+        Assertions.assertEquals(APPLICATION_ENTITY.getIdApplication(), applicationLanguageEntity.getApplication().getIdApplication());
         Assertions.assertEquals(createApplicationLanguageDTO.getName(), applicationLanguageEntity.getName());
         Assertions.assertEquals(createApplicationLanguageDTO.getDescription(), applicationLanguageEntity.getDescription());
     }
@@ -51,8 +56,8 @@ public class MapperApplicationLanguageEntityTest {
     @Test
     public void testEntityToDto() {
         final ApplicationLanguageEntity applicationLanguageEntity = ApplicationLanguageEntity.builder()
-                .idApplication(1)
-                .idLanguage(1)
+                .application(ApplicationEntity.builder().idApplication(1).build())
+                .language(LanguageEntity.builder().idLanguage(1).build())
                 .name("asd")
                 .description("asd")
                 .build();
@@ -61,8 +66,8 @@ public class MapperApplicationLanguageEntityTest {
 
 
         Assertions.assertNotNull(applicationLanguageEntity);
-        Assertions.assertEquals(applicationLanguageEntity.getIdLanguage(), applicationLanguageDTO.getIdLanguage());
-        Assertions.assertEquals(applicationLanguageEntity.getIdApplication(), applicationLanguageDTO.getIdApplication());
+        Assertions.assertEquals(applicationLanguageEntity.getLanguage().getIdLanguage(), applicationLanguageDTO.getIdLanguage());
+        Assertions.assertEquals(applicationLanguageEntity.getApplication().getIdApplication(), applicationLanguageDTO.getIdApplication());
         Assertions.assertEquals(applicationLanguageEntity.getName(), applicationLanguageDTO.getName());
         Assertions.assertEquals(applicationLanguageEntity.getDescription(), applicationLanguageDTO.getDescription());
     }

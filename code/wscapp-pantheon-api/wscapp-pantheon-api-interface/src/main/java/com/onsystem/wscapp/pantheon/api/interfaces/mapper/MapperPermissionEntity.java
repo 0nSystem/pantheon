@@ -20,11 +20,17 @@ public abstract class MapperPermissionEntity {
 
 
     @Mappings({
-            @Mapping(source = "applicationId", target = "idApplication"),
-            @Mapping(target = "idPermission", ignore = true)
+
+            @Mapping(target = "application.idApplication", source = "applicationId"),
+            @Mapping(target = "idPermission", ignore = true),
+            @Mapping(target = "roles", ignore = true),
+            @Mapping(target = "permissionLanguages", ignore = true)
     })
     public abstract PermissionEntity toEntity(final CreatePermissionDTO createPermissionDTO,
                                               final @NotNull Integer applicationId);
 
+    @Mappings({
+            @Mapping(target = "idApplication", source = "application.idApplication")
+    })
     public abstract PermissionDTO toDto(final PermissionEntity permissionEntity);
 }

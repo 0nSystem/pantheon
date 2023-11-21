@@ -2,6 +2,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 import com.onsystem.wscapp.pantheon.api.dto.DeleteAuditFields;
 import com.onsystem.wscapp.pantheon.api.dto.HightAuditFields;
+import com.onsystem.wscapp.pantheon.api.interfaces.Constants;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -12,7 +13,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_USERS;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_USERS;
 
 
 @Builder
@@ -20,7 +21,7 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEM
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(schema = SCHEME_USERS, name = "\"user\"",
+@Table(schema = SCHEME_USERS, name = Constants.TABLE_USER,
         uniqueConstraints = @UniqueConstraint(columnNames = {"email", "login"}))
 public class UserEntity implements HightAuditFields, DeleteAuditFields {
 

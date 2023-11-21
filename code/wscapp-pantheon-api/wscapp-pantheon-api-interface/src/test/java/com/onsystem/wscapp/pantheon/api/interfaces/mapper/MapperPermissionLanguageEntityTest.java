@@ -31,7 +31,7 @@ public class MapperPermissionLanguageEntityTest {
 
 
         Assertions.assertNotNull(permissionLanguageEntity);
-        Assertions.assertEquals(permissionId, permissionLanguageEntity.getIdPermission());
+        Assertions.assertEquals(permissionId, permissionLanguageEntity.getPermission().getIdPermission());
         Assertions.assertEquals(createPermissionLanguageDTO.getName(), permissionLanguageEntity.getName());
         Assertions.assertEquals(createPermissionLanguageDTO.getDescription(), permissionLanguageEntity.getDescription());
 
@@ -47,7 +47,7 @@ public class MapperPermissionLanguageEntityTest {
     public void testEntityToDto() {
 
         final PermissionLanguageEntity permissionLanguageEntity = PermissionLanguageEntity.builder()
-                .idPermission(1)
+                .permission(PermissionEntity.builder().idPermission(1).build())
                 .name("asd")
                 .description("asd")
                 .build();
@@ -56,7 +56,7 @@ public class MapperPermissionLanguageEntityTest {
 
 
         Assertions.assertNotNull(permissionLanguageDTO);
-        Assertions.assertEquals(permissionLanguageEntity.getIdPermission(), permissionLanguageDTO.getIdPermission());
+        Assertions.assertEquals(permissionLanguageEntity.getPermission().getIdPermission(), permissionLanguageDTO.getIdPermission());
         Assertions.assertEquals(permissionLanguageEntity.getName(), permissionLanguageDTO.getName());
         Assertions.assertEquals(permissionLanguageEntity.getDescription(), permissionLanguageDTO.getDescription());
 

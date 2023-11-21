@@ -10,8 +10,6 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.Mappings;
 import org.springframework.stereotype.Component;
 
-import java.util.function.Function;
-
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING
 )
@@ -19,12 +17,14 @@ import java.util.function.Function;
 public abstract class MapperAttributeEntity {
 
     @Mappings({
-            @Mapping(source = "applicationId", target = "idApplication"),
+            @Mapping(target = "application.idApplication", source = "applicationId"),
             @Mapping(target = "idAttribute", ignore = true)
     })
     public abstract AttributeEntity toEntity(final CreateAttributeDTO createAttributeDTO,
                                              final @NotNull Integer applicationId);
 
-
+    @Mappings({
+            @Mapping(target = "idApplication", source = "application.idApplication")
+    })
     public abstract AttributeDTO toDto(final AttributeEntity attributeEntity);
 }

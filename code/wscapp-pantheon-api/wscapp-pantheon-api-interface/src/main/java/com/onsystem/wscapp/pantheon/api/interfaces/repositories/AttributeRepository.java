@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface AttributeRepository extends JpaRepository<AttributeEntity, Integer> {
 
-    List<AttributeEntity> findByIdApplication(final int idApplication);
 }

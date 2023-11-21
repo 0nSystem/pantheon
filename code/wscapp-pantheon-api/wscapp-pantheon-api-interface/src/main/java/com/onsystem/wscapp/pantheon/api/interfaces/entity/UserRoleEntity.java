@@ -6,7 +6,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.*;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_APPLICATION;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
 
 @Entity
 @Table(schema = SCHEME_APPLICATION, name = "user_role")

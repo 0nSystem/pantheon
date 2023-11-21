@@ -1,16 +1,16 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity;
 
 
+import com.onsystem.wscapp.pantheon.api.interfaces.Constants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.entity.Constants.SCHEME_PUBLIC;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_PUBLIC;
 
 @Entity
-@Table(schema = SCHEME_PUBLIC, name = "language")
+@Table(schema = SCHEME_PUBLIC, name = Constants.TABLE_LANGUAGE)
 @Builder
 @Getter
 @Setter

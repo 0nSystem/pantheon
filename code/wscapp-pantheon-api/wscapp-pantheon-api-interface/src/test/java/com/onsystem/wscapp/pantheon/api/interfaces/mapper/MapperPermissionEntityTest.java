@@ -4,6 +4,7 @@ import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +31,7 @@ public class MapperPermissionEntityTest {
 
 
         Assertions.assertNotNull(permissionEntity);
-        Assertions.assertEquals(applicationId, permissionEntity.getIdApplication());
+        Assertions.assertEquals(applicationId, permissionEntity.getApplication().getIdApplication());
         Assertions.assertEquals(createPermissionDTO.getName(), permissionEntity.getName());
         Assertions.assertEquals(createPermissionDTO.getDescription(), permissionEntity.getDescription());
 
@@ -46,7 +47,7 @@ public class MapperPermissionEntityTest {
     public void testEntityToDto() {
 
         final PermissionEntity permissionEntity = PermissionEntity.builder()
-                .idApplication(1)
+                .application(ApplicationEntity.builder().idApplication(1).build())
                 .idPermission(1)
                 .name("asd")
                 .description("asd")
@@ -57,7 +58,7 @@ public class MapperPermissionEntityTest {
 
         Assertions.assertNotNull(permissionDTO);
         Assertions.assertEquals(permissionEntity.getIdPermission(), permissionDTO.getIdPermission());
-        Assertions.assertEquals(permissionEntity.getIdApplication(), permissionDTO.getIdApplication());
+        Assertions.assertEquals(permissionEntity.getApplication().getIdApplication(), permissionDTO.getIdApplication());
         Assertions.assertEquals(permissionEntity.getName(), permissionDTO.getName());
         Assertions.assertEquals(permissionEntity.getDescription(), permissionDTO.getDescription());
 

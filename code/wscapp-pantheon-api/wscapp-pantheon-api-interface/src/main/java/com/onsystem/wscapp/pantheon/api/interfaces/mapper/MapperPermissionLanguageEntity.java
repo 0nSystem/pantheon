@@ -20,11 +20,15 @@ import java.util.function.Function;
 public abstract class MapperPermissionLanguageEntity {
 
     @Mappings({
-            @Mapping(source = "permissionId", target = "idPermission")
+            @Mapping(target = "language.idLanguage", source = "createPermissionLanguageDTO.idLanguage"),
+            @Mapping(target = "permission.idPermission", source = "permissionId")
     })
     public abstract PermissionLanguageEntity toEntity(final CreatePermissionLanguageDTO createPermissionLanguageDTO,
                                                       final Integer permissionId);
 
-
+    @Mappings({
+            @Mapping(target = "idLanguage", source = "language.idLanguage"),
+            @Mapping(target = "idPermission", source = "permission.idPermission")
+    })
     public abstract PermissionLanguageDTO toDto(final PermissionLanguageEntity permissionLanguageEntity);
 }

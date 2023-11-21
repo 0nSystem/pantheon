@@ -19,11 +19,14 @@ import java.util.function.Function;
 public abstract class MapperRoleEntity {
 
     @Mappings({
-            @Mapping(source = "applicationId", target = "idApplication"),
-            @Mapping(target = "idRole", ignore = true)
+            @Mapping(source = "applicationId", target = "application.idApplication"),
+            @Mapping(target = "idRole", ignore = true),
+            @Mapping(target = "roleLanguages", ignore = true)
     })
     public abstract RoleEntity toEntity(CreateRoleDTO createRoleDTO, final @NotNull Integer applicationId);
 
+
+    @Mapping(target = "idApplication", source = "application.idApplication")
     public abstract RoleDTO toDto(RoleEntity roleEntity);
 
 }

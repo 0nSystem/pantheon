@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 //TODO
 @Component
-public interface TimeHelper {
+public interface ITimeHelper {
 
     default @NonNull Timestamp now() {
         return Timestamp.valueOf(LocalDateTime.now());
