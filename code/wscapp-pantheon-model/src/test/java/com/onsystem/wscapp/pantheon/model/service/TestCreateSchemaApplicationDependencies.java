@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.model.service;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.LanguageRepository;
 import com.onsystem.wscapp.pantheon.model.MockData;
+import com.onsystem.wscapp.pantheon.model.service.create.CreateFullApplicationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,32 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestCreateSchemaApplicationDependencies {
 
     @Autowired
-    private CreateSchemaApplicationDependencies createSchemaApplicationDependencies;
+    private CreateFullApplicationService createSchemaApplicationDependencies;
     @Autowired
     private LanguageRepository languageRepository;
 
-
-    @Test
-    public void createApplication() {
-        final var createApplicationModel = MockData.DataMockSchemeApplication.createApplicationModel;
-        final var applicationCreateDTO = createSchemaApplicationDependencies.createApplication(createApplicationModel);
-
-        Assertions.assertAll(() -> {
-            Assertions.assertNotNull(applicationCreateDTO);
-            Assertions.assertTrue(applicationCreateDTO.getIdApplication() > 0);
-
-            Assertions.assertEquals(createApplicationModel.getName(), applicationCreateDTO.getName());
-            Assertions.assertEquals(createApplicationModel.getDescription(), applicationCreateDTO.getDescription());
-
-            Assertions.assertNull(applicationCreateDTO.getDeleteIdUser());
-            Assertions.assertNull(applicationCreateDTO.getDeleteDate());
-
-            Assertions.assertNotNull(applicationCreateDTO.getHighDate());
-            Assertions.assertEquals(createApplicationModel.getHighIdUser(), applicationCreateDTO.getHighIdUser());
-
-        });
-
-    }
 
     @Test
     public void createFullApplication() {

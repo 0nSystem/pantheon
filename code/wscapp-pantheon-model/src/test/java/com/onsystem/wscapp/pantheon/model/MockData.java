@@ -20,12 +20,8 @@ public class MockData {
                 .description("description")
                 .highIdUser(1)
                 .build();
-        public static Set<CreateApplicationLanguageDTO> createApplicationLanguage = Set.of(
-                CreateApplicationLanguageDTO.builder()
-                        .name("name language")
-                        .description("description language")
-                        .idLanguage(language.getIdLanguage())
-                        .build()
-        );
+        public static CreateApplicationLanguageDTO.CreateApplicationLanguageDTOBuilder createApplicationLanguage = CreateApplicationLanguageDTO.builder()
+                .name("name language")
+                .description("description language");
     }
 }
