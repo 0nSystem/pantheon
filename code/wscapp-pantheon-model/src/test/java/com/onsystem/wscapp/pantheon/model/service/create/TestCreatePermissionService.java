@@ -19,14 +19,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestCreatePermission {
+public class TestCreatePermissionService {
     @Autowired
     private Integer idApplication;
     @Autowired
@@ -40,15 +43,16 @@ public class TestCreatePermission {
     @Autowired
     private ICreatePermissionService iCreatePermissionService;
 
+
     //TODO create test to assing role to permission
     @TestFactory
-    public Stream<DynamicTest> createPermission(TestInfo testInfo) {
+    public Stream<DynamicTest> createPermission() {
         final Collection<CreatePermissionDTO> createPermission = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK);
         final Set<PermissionDTO> permissionInserted = iCreatePermissionService.createPermission(idApplication, null, createPermission);
 
 
         return DynamicTest.stream(permissionInserted.stream(),
-                (permission) -> String.format("%s - Execute test permission name: %s , description: %s", testInfo.getDisplayName(), permission.getName(), permission.getDescription()),
+                (permission) -> String.format("test permission name: %s , description: %s", permission.getName(), permission.getDescription()),
                 (permission) -> {
                     Assertions.assertNotNull(permission);
                     Assertions.assertTrue(permission.getIdPermission() > 0);
@@ -60,14 +64,14 @@ public class TestCreatePermission {
 
 
     @TestFactory
-    public Stream<DynamicTest> createPermissionLanguage(TestInfo testInfo) {
+    public Stream<DynamicTest> createPermissionLanguage() {
         final Collection<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build());
         final Set<PermissionLanguageDTO> permissionLanguageInserted = iCreatePermissionService.createPermissionLanguages(idPermission, createPermissionLanguage);
 
         return DynamicTest.stream(permissionLanguageInserted.stream(),
-                (permission) -> String.format("%s - Execute test language permission name: %s , description: %s", testInfo.getDisplayName(), permission.getName(), permission.getDescription()),
+                (permission) -> String.format("test language permission name: %s , description: %s", permission.getName(), permission.getDescription()),
                 (permission) -> {
                     Assertions.assertNotNull(permission);
                     Assertions.assertEquals(idPermission, permission.getIdPermission());
@@ -78,7 +82,7 @@ public class TestCreatePermission {
     }
 
     @TestFactory
-    public Stream<DynamicTest> createPermissionWithLanguages(TestInfo testInfo) {
+    public Stream<DynamicTest> createPermissionWithLanguages() {
         final CreatePermissionDTO createPermission = MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK;
         final Set<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
@@ -91,29 +95,39 @@ public class TestCreatePermission {
 
         final Set<PermissionWithLanguagesDTO> permissionWithLanguagesInserted = iCreatePermissionService.createPermissionWithLanguages(idApplication, null, Set.of(createPermissionWithLanguages));
 
-        final Stream<DynamicTest> testCreatedPermission = DynamicTest.stream(permissionWithLanguagesInserted.stream(),
-                (permission) -> String.format("%s - Execute test permission id: %s, name: %s , description: %s", testInfo.getDisplayName(), permission.getPermission().getIdPermission(), permission.getPermission().getName(), permission.getPermission().getDescription()),
-                (permission) -> {
-                    Assertions.assertNotNull(permission);
-                    Assertions.assertTrue(permission.getPermission().getIdPermission() > 0);
-                    Assertions.assertNotNull(permission.getPermission().getName());
-                    Assertions.assertNotNull(permission.getPermission().getDescription());
-                });
+        final Stream<DynamicTest> testCreationPermissionWithLanguages = permissionWithLanguagesInserted.stream().map(permissionWithLanguage -> {
+            final List<DynamicTest> dynamicTests = new ArrayList<>();
 
+            //Test default create permission
+            dynamicTests.add(
+                    DynamicTest.dynamicTest(
+                            String.format("test permission id: %s, name: %s , description: %s", permissionWithLanguage.getPermission().getIdPermission(), permissionWithLanguage.getPermission().getName(), permissionWithLanguage.getPermission().getDescription()),
+                            () -> {
+                                Assertions.assertNotNull(permissionWithLanguage);
+                                Assertions.assertTrue(permissionWithLanguage.getPermission().getIdPermission() > 0);
+                                Assertions.assertNotNull(permissionWithLanguage.getPermission().getName());
+                                Assertions.assertNotNull(permissionWithLanguage.getPermission().getDescription());
+                            })
+            );
 
-        final Stream<PermissionLanguageDTO> allPermissionLanguageInserted = permissionWithLanguagesInserted.stream().map(PermissionWithLanguagesDTO::getPermissionLanguages).flatMap(Collection::stream);
-        final Stream<DynamicTest> testCreatedPermissionLanguage = DynamicTest.stream(
-                allPermissionLanguageInserted,
-                permissionLanguage -> String.format("%s - Execute test language permission id: %s, name: %s , description: %s", testInfo.getDisplayName(), permissionLanguage.getIdPermission(), permissionLanguage.getName(), permissionLanguage.getDescription()),
-                permissionLanguage -> {
-                    Assertions.assertNotNull(permissionLanguage);
-                    Assertions.assertTrue(permissionLanguage.getIdPermission() > 0);
-                    Assertions.assertTrue(permissionLanguage.getIdLanguage() > 0);
-                    Assertions.assertNotNull(permissionLanguage.getName());
-                    Assertions.assertNotNull(permissionLanguage.getDescription());
-                });
+            //Test default create language permission
+            dynamicTests.addAll(
+                    DynamicTest.stream(
+                            permissionWithLanguage.getPermissionLanguages().stream(),
+                            permissionLanguage -> String.format("test language permission id: %s, name: %s , description: %s", permissionLanguage.getIdPermission(), permissionLanguage.getName(), permissionLanguage.getDescription()),
+                            permissionLanguage -> {
+                                Assertions.assertNotNull(permissionLanguage);
+                                Assertions.assertTrue(permissionLanguage.getIdPermission() > 0);
+                                Assertions.assertTrue(permissionLanguage.getIdLanguage() > 0);
+                                Assertions.assertNotNull(permissionLanguage.getName());
+                                Assertions.assertNotNull(permissionLanguage.getDescription());
+                            }).toList()
+            );
 
-        return Stream.concat(testCreatedPermission, testCreatedPermissionLanguage);
+            return dynamicTests;
+        }).flatMap(Collection::stream);
+
+        return testCreationPermissionWithLanguages;
     }
 
 
