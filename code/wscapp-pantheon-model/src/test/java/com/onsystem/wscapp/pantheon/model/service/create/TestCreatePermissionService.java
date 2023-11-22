@@ -8,6 +8,10 @@ import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RoleRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
@@ -42,13 +46,14 @@ public class TestCreatePermissionService {
 
     @Autowired
     private ICreatePermissionService iCreatePermissionService;
+    @Autowired
+    private RolePermissionRepository rolePermissionRepository;
 
 
-    //TODO create test to assing role to permission
     @TestFactory
-    public Stream<DynamicTest> createPermission() {
+    public Stream<DynamicTest> createPermissionAddingRole() {
         final Collection<CreatePermissionDTO> createPermission = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK);
-        final Set<PermissionDTO> permissionInserted = iCreatePermissionService.createPermission(idApplication, null, createPermission);
+        final Set<PermissionDTO> permissionInserted = iCreatePermissionService.createPermission(idApplication, idRole, createPermission);
 
 
         return DynamicTest.stream(permissionInserted.stream(),
@@ -59,6 +64,12 @@ public class TestCreatePermissionService {
                     Assertions.assertEquals(idApplication, permission.getIdApplication());
                     Assertions.assertNotNull(permission.getName());
                     Assertions.assertNotNull(permission.getDescription());
+
+                    final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
+                            .idPermission(permission.getIdPermission())
+                            .idRole(idRole).build()).orElseThrow();
+                    Assertions.assertEquals(permission.getIdPermission(), rolePermissionEntity.getIdPermission());
+                    Assertions.assertEquals(idRole, rolePermissionEntity.getIdRole());
                 });
     }
 
@@ -81,8 +92,9 @@ public class TestCreatePermissionService {
                 });
     }
 
+
     @TestFactory
-    public Stream<DynamicTest> createPermissionWithLanguages() {
+    public Stream<DynamicTest> createPermissionWithLanguagesBelongRoles() {
         final CreatePermissionDTO createPermission = MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK;
         final Set<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
@@ -93,7 +105,7 @@ public class TestCreatePermissionService {
                 .permissionLanguages(createPermissionLanguage)
                 .build();
 
-        final Set<PermissionWithLanguagesDTO> permissionWithLanguagesInserted = iCreatePermissionService.createPermissionWithLanguages(idApplication, null, Set.of(createPermissionWithLanguages));
+        final Set<PermissionWithLanguagesDTO> permissionWithLanguagesInserted = iCreatePermissionService.createPermissionWithLanguages(idApplication, idRole, Set.of(createPermissionWithLanguages));
 
         final Stream<DynamicTest> testCreationPermissionWithLanguages = permissionWithLanguagesInserted.stream().map(permissionWithLanguage -> {
             final List<DynamicTest> dynamicTests = new ArrayList<>();
@@ -107,6 +119,11 @@ public class TestCreatePermissionService {
                                 Assertions.assertTrue(permissionWithLanguage.getPermission().getIdPermission() > 0);
                                 Assertions.assertNotNull(permissionWithLanguage.getPermission().getName());
                                 Assertions.assertNotNull(permissionWithLanguage.getPermission().getDescription());
+                                final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
+                                        .idPermission(permissionWithLanguage.getPermission().getIdPermission())
+                                        .idRole(idRole).build()).orElseThrow();
+                                Assertions.assertEquals(permissionWithLanguage.getPermission().getIdPermission(), rolePermissionEntity.getIdPermission());
+                                Assertions.assertEquals(idRole, rolePermissionEntity.getIdRole());
                             })
             );
 
