@@ -13,7 +13,8 @@ public interface ICreatePermissionService {
     @NotNull Set<PermissionWithLanguagesDTO> createPermissionWithLanguages(final @Positive int applicationId,
                                                                            final @Nullable Integer idRole,
                                                                            final @NotNull @NotEmpty Collection<CreatePermissionWithLanguagesDTO> createPermissionWithLanguages);
-    @NotNull Set<PermissionDTO> createPermission(final @Positive int applicationId, final Collection<CreatePermissionDTO> createPermission);
+
+    @NotNull Set<PermissionDTO> createPermission(final @Positive int applicationId, final @Nullable Integer roleId, final Collection<CreatePermissionDTO> createPermission);
 
     @NotNull Set<PermissionLanguageDTO> createPermissionLanguages(final @Positive int permissionId,
                                                                   final @NotNull @NotEmpty Collection<CreatePermissionLanguageDTO> createPermissionLanguages);

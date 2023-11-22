@@ -65,12 +65,17 @@ public class CreatePermissionService implements ICreatePermissionService {
     }
 
     @Override
-    public Set<PermissionDTO> createPermission(int applicationId, Collection<CreatePermissionDTO> createPermission) {
+    public Set<PermissionDTO> createPermission(int applicationId, Integer roleId, Collection<CreatePermissionDTO> createPermission) {
         final var permissionEntityMapped = createPermission.stream()
                 .map(createPermissionDTO -> mapperPermissionEntity.toEntity(createPermissionDTO, applicationId))
                 .collect(Collectors.toSet());
 
         final var permissionInserted = permissionRepository.saveAll(permissionEntityMapped);
+
+        Optional.ofNullable(roleId).ifPresent(id -> {
+            final List<Integer> idsPermissionInserted = permissionInserted.stream().map(PermissionEntity::getIdPermission).toList();
+            createRelationsRoleWithPermission(id, idsPermissionInserted);
+        });
 
         return permissionInserted.stream()
                 .map(permissionEntity -> mapperPermissionEntity.toDto(permissionEntity))
