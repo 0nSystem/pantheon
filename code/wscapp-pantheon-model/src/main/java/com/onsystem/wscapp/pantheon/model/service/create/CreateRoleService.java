@@ -36,6 +36,18 @@ public class CreateRoleService implements ICreateRoleService {
 
 
     @Override
+    public Set<RoleDTO> createRole(int idApplication, Set<CreateRoleDTO> createRole) {
+        final Set<RoleEntity> roleEntityMapped = createRole.stream()
+                .map(role -> mapperRoleEntity.toEntity(role, idApplication))
+                .collect(Collectors.toSet());
+        final List<RoleEntity> roleEntityInserted = roleRepository.saveAll(roleEntityMapped);
+
+        return roleEntityInserted.stream()
+                .map(roleEntity -> mapperRoleEntity.toDto(roleEntity))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
     public Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> createRoleAndRespectiveLanguagesWithInnerPermissionAndLanguage(
             @Positive int idApplication,
             Set<CreateRoleWithLanguagesAndPermissionWithLanguagesDTO> applicationRoles) {
@@ -46,8 +58,8 @@ public class CreateRoleService implements ICreateRoleService {
                     final RoleEntity roleEntityInserted = roleRepository.save(roleEntityMapped);
                     final RoleDTO roleDTO = mapperRoleEntity.toDto(roleEntityInserted);
 
-                    final var roleLanguages = CollectionUtils.isNotEmpty(role.getRoleLanguage())
-                            ? createRoleLanguages(roleEntityInserted.getIdRole(), role.getRoleLanguage())
+                    final var roleLanguages = CollectionUtils.isNotEmpty(role.getRoleLanguages())
+                            ? createRoleLanguages(roleEntityInserted.getIdRole(), role.getRoleLanguages())
                             : null;
 
                     final var rolePermission = CollectionUtils.isNotEmpty(role.getRolePermission())

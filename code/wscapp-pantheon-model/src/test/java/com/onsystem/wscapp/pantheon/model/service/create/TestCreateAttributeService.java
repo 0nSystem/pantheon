@@ -49,7 +49,7 @@ public class TestCreateAttributeService {
 
         return DynamicTest.stream(attributesInserted.stream(),
                 attribute -> String.format("Id: %s, IdApp %s,", attribute.getIdAttribute(), attribute.getIdApplication()),
-                consumerDefaultTestCreateAttribute(idApplication)
+                ThrowingConsumerDTO.caseDefaultCorrectCreateAttribute(idApplication)
         );
     }
 
@@ -75,7 +75,7 @@ public class TestCreateAttributeService {
                                             attributeWithLanguages.getAttribute().getIdAttribute(),
                                             attributeWithLanguages.getAttribute().getIdApplication()),
                                     () -> {
-                                        consumerDefaultTestCreateAttribute(idApplication).accept(attributeWithLanguages.getAttribute());
+                                        ThrowingConsumerDTO.caseDefaultCorrectCreateAttribute(idApplication).accept(attributeWithLanguages.getAttribute());
                                     }
                             )
                     );
@@ -84,7 +84,7 @@ public class TestCreateAttributeService {
                             DynamicTest.stream(
                                     attributeWithLanguages.getAttributeLanguages().stream(),
                                     attributeLanguage -> String.format("Create Attribute Language IdAttribute: %s , IdLanguage :%s", attributeLanguage.getIdAttribute(), attributeLanguage.getIdLanguage()),
-                                    consumerDefaultTestCreateAttributeLanguage(attributeWithLanguages.getAttribute().getIdAttribute(), idLanguage)
+                                    ThrowingConsumerDTO.caseDefaultCorrectCreateAttributeLanguage(attributeWithLanguages.getAttribute().getIdAttribute(), idLanguage)
                             ).toList()
                     );
 
@@ -104,27 +104,10 @@ public class TestCreateAttributeService {
 
         return DynamicTest.stream(attributesLanguagesDto.stream(),
                 attributeLanguage -> String.format("IdAttribute: %s , IdLanguage :%s", attributeLanguage.getIdAttribute(), attributeLanguage.getIdLanguage()),
-                consumerDefaultTestCreateAttributeLanguage(idLanguage, idLanguage));
+                ThrowingConsumerDTO.caseDefaultCorrectCreateAttributeLanguage(idAttribute, idLanguage));
     }
 
-    private ThrowingConsumer<AttributeDTO> consumerDefaultTestCreateAttribute(final int applicationId) {
-        return attribute -> {
-            Assertions.assertNotNull(attribute);
-            Assertions.assertTrue(attribute.getIdApplication() > 0);
-            Assertions.assertEquals(applicationId, attribute.getIdApplication());
-            Assertions.assertNotNull(attribute.getName());
-            Assertions.assertNotNull(attribute.getDescription());
-        };
-    }
 
-    private ThrowingConsumer<AttributeLanguageDTO> consumerDefaultTestCreateAttributeLanguage(final int attributeId,
-                                                                                              final int languageId) {
-        return attributeLanguage -> {
-            Assertions.assertNotNull(attributeLanguage);
-            Assertions.assertEquals(attributeId, attributeLanguage.getIdAttribute());
-            Assertions.assertEquals(languageId, attributeLanguage.getIdLanguage());
-            Assertions.assertNotNull(attributeLanguage.getName());
-            Assertions.assertNotNull(attributeLanguage.getDescription());
-        };
-    }
+
+
 }

@@ -7,6 +7,9 @@ import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleWithLanguagesAndPermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
@@ -34,6 +37,16 @@ public class MockData {
         public static CreatePermissionLanguageDTO.CreatePermissionLanguageDTOBuilder CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER = CreatePermissionLanguageDTO.builder()
                 .name("permission name")
                 .description("permission description");
+
+        public static CreateRoleDTO CREATE_ROLE_MOCK = CreateRoleDTO.builder()
+                .name("role name")
+                .description("role description")
+                .build();
+
+        public static CreateRoleLanguageDTO.CreateRoleLanguageDTOBuilder CREATE_ROLE_LANGUAGE_MOCK = CreateRoleLanguageDTO.builder()
+                .name("role name")
+                .description("role description");
+
 
         public static CreateAttributeDTO ATTRIBUTE_MOCK = CreateAttributeDTO.builder()
                 .name("name attribute")
