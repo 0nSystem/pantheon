@@ -1,9 +1,11 @@
 package com.onsystem.wscapp.pantheon.api.interfaces;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.AttributeRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.LanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.PermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RoleRepository;
@@ -34,10 +36,19 @@ public class DataInsertedBeforeTest {
 
     @Bean
     public Integer idRole(@Autowired RoleRepository roleRepository, @Autowired Integer idApplication) {
-        final RoleEntity entity = MockData.DataMockSchemeApplicationEntities.ROLE_MOCK
+        final RoleEntity entity = MockData.DataMockSchemeApplicationEntities.ROLE_MOCK_BUILDER
                 .application(ApplicationEntity.builder().idApplication(idApplication).build())
                 .build();
         return roleRepository.save(entity).getIdRole();
+    }
+
+    @Bean
+    public Integer idAttribute(@Autowired AttributeRepository attributeRepository, @Autowired Integer idApplication) {
+        final AttributeEntity attributeEntity = MockData.DataMockSchemeApplicationEntities.ATTRIBUTE_MOCK_BUILDER
+                .application(ApplicationEntity.builder().idApplication(idApplication).build())
+                .build();
+
+        return attributeRepository.save(attributeEntity).getIdAttribute();
     }
 
 }

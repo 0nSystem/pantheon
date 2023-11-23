@@ -24,7 +24,7 @@ public class CreateAttributeDTO {
     @Size(max = 255, message = Constants.ErrorValidationMessages.MAX)
     private String description;
 
-    private Set<CreateAttributeLanguageDTO> attributeLanguages;
+
 
 
 }

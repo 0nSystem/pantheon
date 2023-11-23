@@ -11,12 +11,10 @@ import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RoleRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
-import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @ExtendWith(SpringExtension.class)

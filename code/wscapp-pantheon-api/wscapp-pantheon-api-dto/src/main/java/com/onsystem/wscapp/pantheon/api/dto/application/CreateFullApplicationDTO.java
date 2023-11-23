@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.dto.application;
 
 import com.onsystem.wscapp.pantheon.api.dto.Constants;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleWithLanguagesAndPermissionWithLanguagesDTO;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +27,7 @@ public class CreateFullApplicationDTO {
 
     private Set<CreateRoleWithLanguagesAndPermissionWithLanguagesDTO> applicationRoles;
 
-    private Set<CreateAttributeDTO> applicationAttributes;
+    private Set<CreateAttributeWithLanguageDTO> applicationAttributes;
 
 
 }

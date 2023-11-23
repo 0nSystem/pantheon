@@ -2,9 +2,13 @@ package com.onsystem.wscapp.pantheon.api.interfaces;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
@@ -30,6 +34,16 @@ public class MockData {
         public static CreatePermissionLanguageDTO.CreatePermissionLanguageDTOBuilder CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER = CreatePermissionLanguageDTO.builder()
                 .name("permission name")
                 .description("permission description");
+
+        public static CreateAttributeDTO ATTRIBUTE_MOCK = CreateAttributeDTO.builder()
+                .name("name attribute")
+                .description("description attribute")
+                .build();
+
+        public static CreateAttributeLanguageDTO.CreateAttributeLanguageDTOBuilder ATTRIBUTE_LANGUAGE_MOCK_BUILDER = CreateAttributeLanguageDTO.builder()
+                .name("name attribute")
+                .description("description attribute");
+
     }
 
     public static class DataMockSchemeApplicationEntities {
@@ -50,8 +64,12 @@ public class MockData {
                 .name("name permission entity")
                 .description("description permission entity");
 
-        public static RoleEntity.RoleEntityBuilder ROLE_MOCK = RoleEntity.builder()
+        public static RoleEntity.RoleEntityBuilder ROLE_MOCK_BUILDER = RoleEntity.builder()
                 .name("name role entity")
                 .description("description role entity");
+
+        public static AttributeEntity.AttributeEntityBuilder ATTRIBUTE_MOCK_BUILDER = AttributeEntity.builder()
+                .name("name attribute")
+                .description("description attribute");
     }
 }

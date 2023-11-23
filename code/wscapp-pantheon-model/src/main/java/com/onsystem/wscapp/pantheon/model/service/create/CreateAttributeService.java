@@ -31,11 +31,11 @@ public class CreateAttributeService implements ICreateAttributeService {
     private MapperAttributeLanguageEntity mapperAttributeLanguageEntity;
 
     @Override
-    public Set<AttributeWithLanguagesDTO> createAttributesWithLanguages(final @Positive int applicationId, final Collection<CreateAttributeDTO> createAttribute) {
+    public Set<AttributeWithLanguagesDTO> createAttributesWithLanguages(final @Positive int applicationId, final Set<CreateAttributeWithLanguageDTO> createAttribute) {
 
         final Set<AttributeWithLanguagesDTO> attributeWithLanguages = createAttribute.stream()
                 .map(attribute -> {
-                    final AttributeEntity attributeEntityMapped = mapperAttributeEntity.toEntity(attribute, applicationId);
+                    final AttributeEntity attributeEntityMapped = mapperAttributeEntity.toEntity(attribute.getAttribute(), applicationId);
                     final AttributeEntity attributeInsert = attributeRepository.save(attributeEntityMapped);
                     final AttributeDTO attributeDTO = mapperAttributeEntity.toDto(attributeInsert);
 
@@ -50,7 +50,23 @@ public class CreateAttributeService implements ICreateAttributeService {
     }
 
     @Override
-    public Set<AttributeLanguageDTO> createAttributesLanguages(final @Positive int attributeId, final Collection<CreateAttributeLanguageDTO> createAttribute) {
+    public Set<AttributeDTO> createAttributes(final int applicationId, final Set<CreateAttributeDTO> createAttributes) {
+
+
+        final List<AttributeEntity> attributeEntitiesMapped = createAttributes.stream()
+                .map(att -> mapperAttributeEntity.toEntity(att, applicationId))
+                .collect(Collectors.toList());
+        final List<AttributeEntity> attributeEntitiesInserted = attributeRepository.saveAll(attributeEntitiesMapped);
+
+        return attributeEntitiesInserted.stream()
+                .map(att -> mapperAttributeEntity.toDto(att))
+                .collect(Collectors.toSet());
+
+    }
+
+
+    @Override
+    public Set<AttributeLanguageDTO> createAttributesLanguages(final @Positive int attributeId, final Set<CreateAttributeLanguageDTO> createAttribute) {
 
         final Set<AttributeLanguageEntity> attributeLanguageEntitiesMapped = createAttribute.stream()
                 .map(createAttributeLanguageDto -> mapperAttributeLanguageEntity.toEntity(createAttributeLanguageDto, attributeId))
