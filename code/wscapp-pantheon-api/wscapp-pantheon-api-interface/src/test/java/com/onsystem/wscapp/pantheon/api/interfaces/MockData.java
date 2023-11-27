@@ -6,8 +6,12 @@ import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
@@ -73,6 +77,21 @@ public class MockData {
                 .name("update name")
                 .description("update description");
         public static UpdateRoleLanguageDTO.UpdateRoleLanguageDTOBuilder UPDATE_ROLE_LANGUAGE_MOCK_BUILDER = UpdateRoleLanguageDTO.builder()
+                .name("update name")
+                .description("update description");
+
+        public static UpdatePermissionDTO.UpdatePermissionDTOBuilder UPDATE_PERMISSION_MOCK_BUILDER = UpdatePermissionDTO.builder()
+                .name("update name")
+                .description("update description");
+        public static UpdatePermissionLanguageDTO.UpdatePermissionLanguageDTOBuilder UPDATE_PERMISSION_LANGUAGE_MOCK_BUILDER = UpdatePermissionLanguageDTO.builder()
+                .name("update name")
+                .description("update description");
+
+        public static UpdateAttributeDTO.UpdateAttributeDTOBuilder UPDATE_ATTRIBUTE_MOCK_BUILDER = UpdateAttributeDTO.builder()
+                .name("update name")
+                .description("update description");
+
+        public static UpdateAttributeLanguageDTO.UpdateAttributeLanguageDTOBuilder UPDATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER = UpdateAttributeLanguageDTO.builder()
                 .name("update name")
                 .description("update description");
     }

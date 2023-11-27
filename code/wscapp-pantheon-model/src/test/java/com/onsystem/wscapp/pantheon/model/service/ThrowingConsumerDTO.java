@@ -4,16 +4,17 @@ import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionDTO;
+import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.*;
 import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;
@@ -130,4 +131,49 @@ public class ThrowingConsumerDTO {
         };
     }
 
+    public static ThrowingConsumer<PermissionEntity> caseDefaultCorrectUpdatePermission(
+            final @NotNull UpdatePermissionDTO updatePermissionDTO
+    ) {
+        return permissionEntity -> {
+            Assertions.assertNotNull(permissionEntity);
+            Assertions.assertEquals(updatePermissionDTO.getIdPermission(), permissionEntity.getIdPermission());
+            Assertions.assertEquals(updatePermissionDTO.getName(), permissionEntity.getName());
+            Assertions.assertEquals(updatePermissionDTO.getDescription(), permissionEntity.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<PermissionLanguageEntity> caseDefaultCorrectUpdatePermissionLanguage(
+            final @NotNull UpdatePermissionLanguageDTO updatePermissionLanguage
+    ) {
+        return permissionLanguageEntity -> {
+            Assertions.assertNotNull(permissionLanguageEntity);
+            Assertions.assertEquals(updatePermissionLanguage.getIdLanguage(), permissionLanguageEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updatePermissionLanguage.getIdPermission(), permissionLanguageEntity.getPermission().getIdPermission());
+            Assertions.assertEquals(updatePermissionLanguage.getName(), permissionLanguageEntity.getName());
+            Assertions.assertEquals(updatePermissionLanguage.getDescription(), permissionLanguageEntity.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<AttributeEntity> caseDefaultCorrectUpdateAttribute(
+            final @NotNull UpdateAttributeDTO updateAttributeDTO
+    ){
+        return attributeEntity -> {
+            Assertions.assertNotNull(attributeEntity);
+            Assertions.assertEquals(updateAttributeDTO.getIdAttribute(), attributeEntity.getIdAttribute());
+            Assertions.assertEquals(updateAttributeDTO.getName(), attributeEntity.getName());
+            Assertions.assertEquals(updateAttributeDTO.getDescription(), attributeEntity.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<AttributeLanguageEntity> caseDefaultCorrectUpdateAttributeLanguage(
+            final @NotNull UpdateAttributeLanguageDTO updateAttributeLanguageDTO
+    ){
+        return attributeLanguageEntity -> {
+            Assertions.assertNotNull(attributeLanguageEntity);
+            Assertions.assertEquals(updateAttributeLanguageDTO.getIdAttribute(), attributeLanguageEntity.getAttribute().getIdAttribute());
+            Assertions.assertEquals(updateAttributeLanguageDTO.getIdLanguage(),attributeLanguageEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updateAttributeLanguageDTO.getName(), attributeLanguageEntity.getName());
+            Assertions.assertEquals(updateAttributeLanguageDTO.getDescription(), attributeLanguageEntity.getDescription());
+        };
+    }
 }
