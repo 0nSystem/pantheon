@@ -6,7 +6,9 @@ import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreatePermissionService;
+import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerDTO;
+import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerEntity;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,7 +48,7 @@ public class TestCreatePermissionService {
 
     @TestFactory
     public Stream<DynamicTest> createPermissionAddingRole() {
-        final Collection<CreatePermissionDTO> createPermission = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK);
+        final Collection<CreatePermissionDTO> createPermission = Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK);
         final Set<PermissionDTO> permissionInserted = iCreatePermissionService.createPermission(idApplication, idRole, createPermission);
 
         return permissionInserted.stream()
@@ -82,7 +84,7 @@ public class TestCreatePermissionService {
     public void createPermissionLanguage(final int permissionId, final int languageId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
 
         final PermissionLanguageDTO permissionLanguageInserted = iCreatePermissionService.createPermissionLanguages(
-                        idPermission, Set.of(createPermissionLanguage)
+                        permissionId, Set.of(createPermissionLanguage)
                 ).stream().findFirst()
                 .orElseThrow();
 
@@ -94,8 +96,8 @@ public class TestCreatePermissionService {
 
     @TestFactory
     public Stream<DynamicTest> createPermissionWithLanguagesBelongRoles() {
-        final CreatePermissionDTO createPermission = MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK;
-        final Set<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
+        final CreatePermissionDTO createPermission = MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK;
+        final Set<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build());
 

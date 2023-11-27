@@ -2,18 +2,16 @@ package com.onsystem.wscapp.pantheon.model.service.create;
 
 
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateAttributeService;
-import org.junit.jupiter.api.Assertions;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreateAttributeService;
+import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerDTO;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.ThrowingConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
@@ -43,7 +41,7 @@ public class TestCreateAttributeService {
 
     @TestFactory
     public Stream<DynamicTest> createAttribute() {
-        final CreateAttributeDTO createAttribute = MockData.DataMockSchemeApplicationDTO.ATTRIBUTE_MOCK;
+        final CreateAttributeDTO createAttribute = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_MOCK;
 
         final Set<AttributeDTO> attributesInserted = iCreateAttributeService.createAttributes(idApplication, Set.of(createAttribute));
 
@@ -55,12 +53,12 @@ public class TestCreateAttributeService {
 
     @TestFactory
     public Stream<DynamicTest> createAttributeWithLanguages() {
-        final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataMockSchemeApplicationDTO.ATTRIBUTE_LANGUAGE_MOCK_BUILDER
+        final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build();
 
         final CreateAttributeWithLanguageDTO createAttributeWithLanguage = CreateAttributeWithLanguageDTO.builder()
-                .attribute(MockData.DataMockSchemeApplicationDTO.ATTRIBUTE_MOCK)
+                .attribute(MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_MOCK)
                 .attributeLanguages(Set.of(createAttributeLanguage))
                 .build();
 
@@ -96,7 +94,7 @@ public class TestCreateAttributeService {
 
     @TestFactory
     public Stream<DynamicTest> createAttributeLanguage() {
-        final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataMockSchemeApplicationDTO.ATTRIBUTE_LANGUAGE_MOCK_BUILDER
+        final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build();
 

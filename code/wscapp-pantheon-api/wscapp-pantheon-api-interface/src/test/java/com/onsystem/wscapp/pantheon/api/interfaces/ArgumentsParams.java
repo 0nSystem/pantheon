@@ -33,7 +33,28 @@ public class ArgumentsParams {
     public static Stream<Arguments> argumentsCreatePermissionLanguage() {
         return Stream.of(
                 Arguments.of(ID_PERMISSION, ID_LANGUAGE,
-                        MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER.idLanguage(ID_LANGUAGE).build())
+                        MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER.idLanguage(ID_LANGUAGE).build())
+        );
+    }
+
+    public static Stream<Arguments> argumentsUpdateApplication() {
+        return Stream.of(
+                Arguments.arguments(
+                        MockData.DataUpdateMockSchemeApplicationDTO.UPDATE_APPLICATION_MOCK_BUILDER
+                                .idApplication(ID_APPLICATION)
+                                .build()
+                )
+        );
+    }
+
+    public static Stream<Arguments> argumentsUpdateApplicationLanguage() {
+        return Stream.of(
+                Arguments.arguments(
+                        MockData.DataUpdateMockSchemeApplicationDTO.UPDATE_APPLICATION_LANGUAGE_MOCK_BUILDER
+                                .idLanguage(ID_LANGUAGE)
+                                .idApplication(ID_APPLICATION)
+                                .build()
+                )
         );
     }
 }

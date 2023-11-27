@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.model.service.create;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateApplicationService;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreateApplicationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class TestCreateApplicationService {
 
     @Test
     public void createApplication() {
-        final var createApplicationModel = MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
+        final var createApplicationModel = MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
         final var applicationCreateDTO = iCreateApplicationService.createApplication(createApplicationModel);
 
         Assertions.assertAll(() -> {
@@ -47,11 +47,11 @@ public class TestCreateApplicationService {
 
     @Test
     public void createApplicationLanguage() {
-        final Integer idApplication = iCreateApplicationService.createApplication(MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK).getIdApplication();
+        final Integer idApplication = iCreateApplicationService.createApplication(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK).getIdApplication();
 
         final var applicationLanguage = iCreateApplicationService.createApplicationLanguages(idApplication,
                         Set.of(
-                                MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK
+                                MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK
                                         .idLanguage(idLanguage).build()
                         )
                 ).stream()
@@ -59,7 +59,7 @@ public class TestCreateApplicationService {
 
         Assertions.assertEquals(idApplication, applicationLanguage.getIdApplication());
         Assertions.assertEquals(idLanguage, applicationLanguage.getIdLanguage());
-        Assertions.assertEquals(MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getName(), applicationLanguage.getName());
-        Assertions.assertEquals(MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getDescription(), applicationLanguage.getDescription());
+        Assertions.assertEquals(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getName(), applicationLanguage.getName());
+        Assertions.assertEquals(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getDescription(), applicationLanguage.getDescription());
     }
 }

@@ -9,7 +9,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.mapper.MapperPermissionLangua
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.PermissionLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.PermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreatePermissionService;
 import jakarta.validation.constraints.Positive;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

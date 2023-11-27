@@ -1,5 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.repositories;
 
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
@@ -19,20 +20,21 @@ import java.util.Optional;
 
 @Repository
 @Validated
-public interface ApplicationRepository extends JpaRepository<ApplicationEntity,Integer> {
+public interface ApplicationRepository extends JpaRepository<ApplicationEntity, Integer> {
 
     Optional<ApplicationEntity> findByName(final @Valid @NotEmpty String name);
 
 
     @Modifying
-    @Query("UPDATE ApplicationEntity SET deleteDate = :deleteDate, deleteIdUser = :deleteIdUser WHERE idApplication IN (:applicationIds)")
+    @Query("UPDATE ApplicationEntity SET deleteDate = :deleteDate, deleteIdUser = :deleteIdUser " +
+            "WHERE idApplication IN (:applicationIds)")
     void delete(final @Param("deleteDate") @Valid @NotNull Timestamp ts,
                 final @Param("deleteIdUser") @Valid @Positive int userId,
                 final @Param("applicationIds") @Valid @NotEmpty @Positive Collection<Integer> applicationIds);
 
+
     @Modifying
-    @Query("UPDATE ApplicationEntity SET name = :name, description = :description WHERE idApplication = :applicationId")
-    void update(final @Param("name") @Valid @NotEmpty String name,
-                final @Param("description") @Nullable String description,
-                final @Param("applicationId") @Valid @Positive int applicationId);
+    @Query("UPDATE ApplicationEntity SET name = :#{#dto.name}, description = :#{#dto.description} " +
+            "WHERE idApplication = :#{#dto.idApplication}")
+    void update(final @Param("dto") UpdateApplicationDTO updateApplicationDTO);
 }

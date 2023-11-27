@@ -17,8 +17,6 @@ public class UpdateAttributeDTO {
 
     @Positive
     private int idAttribute;
-    @Positive
-    private int idApplication;
 
     @NotEmpty(message = Constants.ErrorValidationMessages.NOT_EMPTY)
     @Size(max = 100, message = Constants.ErrorValidationMessages.MAX)

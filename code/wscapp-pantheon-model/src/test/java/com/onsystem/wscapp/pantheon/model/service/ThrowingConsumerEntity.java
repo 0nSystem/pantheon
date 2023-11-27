@@ -1,4 +1,4 @@
-package com.onsystem.wscapp.pantheon.model.service.create;
+package com.onsystem.wscapp.pantheon.model.service;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
 import org.junit.jupiter.api.Assertions;

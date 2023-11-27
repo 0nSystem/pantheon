@@ -7,7 +7,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.mapper.MapperAttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.MapperAttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.AttributeLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.AttributeRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateAttributeService;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreateAttributeService;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

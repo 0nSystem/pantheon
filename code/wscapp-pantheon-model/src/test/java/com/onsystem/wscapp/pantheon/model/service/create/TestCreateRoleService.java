@@ -10,8 +10,9 @@ import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateRoleService;
-import org.junit.jupiter.api.Assertions;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreateRoleService;
+import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerDTO;
+import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerEntity;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @ExtendWith(SpringExtension.class)
@@ -47,7 +47,7 @@ public class TestCreateRoleService {
 
     @TestFactory
     public Stream<DynamicTest> createRole() {
-        final CreateRoleDTO createRole = MockData.DataMockSchemeApplicationDTO.CREATE_ROLE_MOCK;
+        final CreateRoleDTO createRole = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ROLE_MOCK;
 
         final Set<RoleDTO> rolesInserted = createRoleService.createRole(idApplication, Set.of(createRole));
 
@@ -59,7 +59,7 @@ public class TestCreateRoleService {
 
     @TestFactory
     public Stream<DynamicTest> createRoleLanguages() {
-        final var createRoleLanguage = MockData.DataMockSchemeApplicationDTO.CREATE_ROLE_LANGUAGE_MOCK
+        final var createRoleLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ROLE_LANGUAGE_MOCK
                 .idLanguage(idLanguage)
                 .build();
 
@@ -77,15 +77,15 @@ public class TestCreateRoleService {
 
 
         final CreateRoleWithLanguagesAndPermissionWithLanguagesDTO createRoleWithLanguagesAndPermissionWithLanguagesDTO = CreateRoleWithLanguagesAndPermissionWithLanguagesDTO.builder()
-                .role(MockData.DataMockSchemeApplicationDTO.CREATE_ROLE_MOCK)
+                .role(MockData.DataCreateMockSchemeApplicationDTO.CREATE_ROLE_MOCK)
                 .roleLanguages(
-                        Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_ROLE_LANGUAGE_MOCK.idLanguage(idLanguage)
+                        Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_ROLE_LANGUAGE_MOCK.idLanguage(idLanguage)
                                 .build())
                 ).rolePermission(
                         Set.of(
                                 CreatePermissionWithLanguagesDTO.builder()
-                                        .permission(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK)
-                                        .permissionLanguages(Set.of(MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
+                                        .permission(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK)
+                                        .permissionLanguages(Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                                                 .idLanguage(idLanguage).build()))
                                         .build()
                         )

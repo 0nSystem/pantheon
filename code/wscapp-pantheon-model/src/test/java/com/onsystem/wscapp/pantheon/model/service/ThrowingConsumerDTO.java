@@ -1,11 +1,16 @@
-package com.onsystem.wscapp.pantheon.model.service.create;
+package com.onsystem.wscapp.pantheon.model.service;
 
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
+import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;
 
@@ -72,6 +77,28 @@ public class ThrowingConsumerDTO {
             Assertions.assertEquals(languageId, roleLanguageDTO.getIdLanguage());
             Assertions.assertNotNull(roleLanguageDTO.getName());
             Assertions.assertNotNull(roleLanguageDTO.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<ApplicationEntity> caseDefaultCorrectUpdateApplication(
+            final @NotNull UpdateApplicationDTO updateApplication
+    ) {
+        return applicationEntity -> {
+            Assertions.assertNotNull(applicationEntity);
+            Assertions.assertEquals(updateApplication.getIdApplication(), applicationEntity.getIdApplication());
+            Assertions.assertEquals(updateApplication.getName(), applicationEntity.getName());
+            Assertions.assertEquals(updateApplication.getDescription(), applicationEntity.getDescription());
+        };
+    }
+    public static ThrowingConsumer<ApplicationLanguageEntity> caseDefaultCorrectUpdateApplicationLanguage(
+            final @NotNull UpdateApplicationLanguageDTO updateApplicationLanguage
+    ) {
+        return applicationEntity -> {
+            Assertions.assertNotNull(applicationEntity);
+            Assertions.assertEquals(updateApplicationLanguage.getIdApplication(), applicationEntity.getApplication().getIdApplication());
+            Assertions.assertEquals(updateApplicationLanguage.getIdLanguage(),applicationEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updateApplicationLanguage.getName(), applicationEntity.getName());
+            Assertions.assertEquals(updateApplicationLanguage.getDescription(), applicationEntity.getDescription());
         };
     }
 

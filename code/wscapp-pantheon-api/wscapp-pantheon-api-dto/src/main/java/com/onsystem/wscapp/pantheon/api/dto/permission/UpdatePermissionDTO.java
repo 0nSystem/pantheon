@@ -19,8 +19,6 @@ public class UpdatePermissionDTO {
     @Positive
     private int idPermission;
 
-    @Positive
-    private int idApplication;
 
     @NotEmpty(message = Constants.ErrorValidationMessages.NOT_EMPTY)
     @Max(value = 100, message = Constants.ErrorValidationMessages.MAX)

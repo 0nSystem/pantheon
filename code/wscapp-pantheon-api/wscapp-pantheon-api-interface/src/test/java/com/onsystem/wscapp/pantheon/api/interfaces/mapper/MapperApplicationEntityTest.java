@@ -2,7 +2,6 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
-import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
@@ -25,7 +24,7 @@ public class MapperApplicationEntityTest {
 
     @Test
     void testCreateEntityToEntityAndAssignHighDate() {
-        final CreateApplicationDTO createApplicationDTO = MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
+        final CreateApplicationDTO createApplicationDTO = MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
 
 
         final ApplicationEntity applicationEntity = mapper

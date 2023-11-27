@@ -10,7 +10,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.mapper.MapperApplicationEntit
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.MapperApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateApplicationService;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.create.ICreateApplicationService;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

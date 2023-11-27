@@ -6,12 +6,10 @@ import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleWithLanguagesAndPermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
@@ -21,7 +19,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
 
 public class MockData {
 
-    public static class DataMockSchemeApplicationDTO{
+    public static class DataCreateMockSchemeApplicationDTO {
         public static CreateApplicationDTO CREATE_APPLICATION_MOCK = CreateApplicationDTO.builder()
                 .name("name")
                 .description("description")
@@ -49,15 +47,25 @@ public class MockData {
                 .description("role description");
 
 
-        public static CreateAttributeDTO ATTRIBUTE_MOCK = CreateAttributeDTO.builder()
+        public static CreateAttributeDTO CREATE_ATTRIBUTE_MOCK = CreateAttributeDTO.builder()
                 .name("name attribute")
                 .description("description attribute")
                 .build();
 
-        public static CreateAttributeLanguageDTO.CreateAttributeLanguageDTOBuilder ATTRIBUTE_LANGUAGE_MOCK_BUILDER = CreateAttributeLanguageDTO.builder()
+        public static CreateAttributeLanguageDTO.CreateAttributeLanguageDTOBuilder CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER = CreateAttributeLanguageDTO.builder()
                 .name("name attribute")
                 .description("description attribute");
 
+    }
+
+    public static class DataUpdateMockSchemeApplicationDTO {
+        public static UpdateApplicationDTO.UpdateApplicationDTOBuilder UPDATE_APPLICATION_MOCK_BUILDER = UpdateApplicationDTO.builder()
+                .name("update name")
+                .description("update description");
+
+        public static UpdateApplicationLanguageDTO.UpdateApplicationLanguageDTOBuilder UPDATE_APPLICATION_LANGUAGE_MOCK_BUILDER = UpdateApplicationLanguageDTO.builder()
+                .name("update name")
+                .description("update description");
     }
 
     public static class DataMockSchemeApplicationEntities {
