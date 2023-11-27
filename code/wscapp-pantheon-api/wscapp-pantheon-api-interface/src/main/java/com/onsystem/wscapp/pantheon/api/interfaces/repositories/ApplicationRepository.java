@@ -2,7 +2,6 @@ package com.onsystem.wscapp.pantheon.api.interfaces.repositories;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -28,9 +27,11 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
     @Modifying
     @Query("UPDATE ApplicationEntity SET deleteDate = :deleteDate, deleteIdUser = :deleteIdUser " +
             "WHERE idApplication IN (:applicationIds)")
-    void delete(final @Param("deleteDate") @Valid @NotNull Timestamp ts,
-                final @Param("deleteIdUser") @Valid @Positive int userId,
-                final @Param("applicationIds") @Valid @NotEmpty @Positive Collection<Integer> applicationIds);
+    void updateDelete(
+            final @Param("deleteDate") @Valid @NotNull Timestamp ts,
+            final @Param("deleteIdUser") @Valid @Positive int userId,
+            final @Param("applicationIds") @Valid @NotEmpty @Positive Collection<Integer> applicationIds
+    );
 
 
     @Modifying

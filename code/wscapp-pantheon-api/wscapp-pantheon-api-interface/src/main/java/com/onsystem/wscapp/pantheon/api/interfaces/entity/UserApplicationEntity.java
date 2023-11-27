@@ -8,9 +8,10 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_PUBLIC;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_USERS;
 
 @Entity
-@Table(schema = SCHEME_PUBLIC, name = "user_application")
+@Table(schema = SCHEME_USERS, name = "user_application")
 @Getter
 @Setter
 @ToString

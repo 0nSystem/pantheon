@@ -12,4 +12,5 @@ public interface IUpdateRoleService {
 
     @Transactional
     void updateRoleLanguages(final Collection<UpdateRoleLanguageDTO> updateRoleLanguages);
+
 }

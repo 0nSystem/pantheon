@@ -10,8 +10,8 @@ public interface IUpdateApplicationService {
 
     @Transactional
     void updateApplication(final Collection<UpdateApplicationDTO> updateApplication);
+
     @Transactional
     void updateApplicationLanguages(final Collection<UpdateApplicationLanguageDTO> updateApplicationLanguage);
-
 
 }

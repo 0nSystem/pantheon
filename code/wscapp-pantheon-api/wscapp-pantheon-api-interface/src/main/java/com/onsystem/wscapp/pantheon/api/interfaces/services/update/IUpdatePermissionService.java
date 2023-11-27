@@ -12,4 +12,6 @@ public interface IUpdatePermissionService {
 
     @Transactional
     void updatePermissionLanguages(final Collection<UpdatePermissionLanguageDTO> updatePermissionLanguage);
+
+
 }

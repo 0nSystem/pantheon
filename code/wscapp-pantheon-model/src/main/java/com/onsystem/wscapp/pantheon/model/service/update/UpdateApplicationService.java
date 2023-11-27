@@ -2,13 +2,10 @@ package com.onsystem.wscapp.pantheon.model.service.update;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.update.IUpdateApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

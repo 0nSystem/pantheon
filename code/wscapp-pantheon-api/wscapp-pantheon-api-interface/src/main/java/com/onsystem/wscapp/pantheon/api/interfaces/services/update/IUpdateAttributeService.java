@@ -10,6 +10,7 @@ public interface IUpdateAttributeService {
 
     @Transactional
     void updateAttribute(final Collection<UpdateAttributeDTO> updateAttribute);
+
     @Transactional
     void updateAttributeLanguages(final Collection<UpdateAttributeLanguageDTO> updateAttributeLanguage);
 
