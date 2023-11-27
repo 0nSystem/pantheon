@@ -11,8 +11,10 @@ import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerDTO;
 import com.onsystem.wscapp.pantheon.model.service.ThrowingConsumerEntity;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
@@ -79,16 +82,23 @@ public class TestCreatePermissionService {
     }
 
 
+    private Stream<Arguments> argumentsCreatePermissionLanguage() {
+        return Stream.of(
+                Arguments.of(idPermission,
+                        MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
+                                .idLanguage(idLanguage).build())
+        );
+    }
     @ParameterizedTest
-    @MethodSource({"com.onsystem.wscapp.pantheon.api.interfaces.ArgumentsParams#argumentsCreatePermissionLanguage"})
-    public void createPermissionLanguage(final int permissionId, final int languageId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
+    @MethodSource({"argumentsCreatePermissionLanguage"})
+    public void createPermissionLanguage(final int permissionId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
 
         final PermissionLanguageDTO permissionLanguageInserted = iCreatePermissionService.createPermissionLanguages(
                         permissionId, Set.of(createPermissionLanguage)
                 ).stream().findFirst()
                 .orElseThrow();
 
-        ThrowingConsumerDTO.caseDefaultCorrectCreatePermissionLanguageDTO(permissionId, languageId)
+        ThrowingConsumerDTO.caseDefaultCorrectCreatePermissionLanguageDTO(permissionId, createPermissionLanguage.getIdLanguage())
                 .accept(permissionLanguageInserted);
 
     }
