@@ -2,6 +2,8 @@ package com.onsystem.wscapp.pantheon.api.interfaces;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeWithLanguageDTO;
@@ -28,7 +30,6 @@ public class MockData {
         public static CreateApplicationLanguageDTO.CreateApplicationLanguageDTOBuilder CREATE_APPLICATION_LANGUAGE_MOCK = CreateApplicationLanguageDTO.builder()
                 .name("name language")
                 .description("description language");
-
         public static CreatePermissionDTO CREATE_PERMISSION_MOCK = CreatePermissionDTO.builder()
                 .name("permission name")
                 .description("permission description")

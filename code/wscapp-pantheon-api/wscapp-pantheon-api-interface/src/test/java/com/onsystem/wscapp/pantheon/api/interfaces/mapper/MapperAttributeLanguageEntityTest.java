@@ -31,7 +31,7 @@ public class MapperAttributeLanguageEntityTest {
                 .description("asd")
                 .build();
 
-        final AttributeLanguageEntity attributeLanguageEntity = mapperAttributeLanguageEntity.toEntity(createAttributeLanguageDTO, attributeId);
+        final AttributeLanguageEntity attributeLanguageEntity = mapperAttributeLanguageEntity.createToEntity(createAttributeLanguageDTO, attributeId);
 
 
         Assertions.assertNotNull(attributeLanguageEntity);
@@ -44,7 +44,7 @@ public class MapperAttributeLanguageEntityTest {
 
     @Test
     public void testCreateToEntityReturnNull() {
-        final AttributeLanguageEntity attributeLanguageEntity = mapperAttributeLanguageEntity.toEntity(null, null);
+        final AttributeLanguageEntity attributeLanguageEntity = mapperAttributeLanguageEntity.createToEntity(null, null);
         Assertions.assertNull(attributeLanguageEntity);
     }
 

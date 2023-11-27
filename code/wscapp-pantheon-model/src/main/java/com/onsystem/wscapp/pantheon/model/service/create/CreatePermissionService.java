@@ -42,7 +42,7 @@ public class CreatePermissionService implements ICreatePermissionService {
                                                                          final Collection<CreatePermissionWithLanguagesDTO> createPermissionWithLanguages) {
         final Set<PermissionWithLanguagesDTO> permissionEntitiesMapped = createPermissionWithLanguages.stream()
                 .map(cpl -> {
-                    final PermissionEntity permissionEntityMapped = mapperPermissionEntity.toEntity(cpl.getPermission(), applicationId);
+                    final PermissionEntity permissionEntityMapped = mapperPermissionEntity.createToEntity(cpl.getPermission(), applicationId);
                     final PermissionEntity permissionInserted = permissionRepository.save(permissionEntityMapped);
 
 
@@ -68,7 +68,7 @@ public class CreatePermissionService implements ICreatePermissionService {
     @Override
     public Set<PermissionDTO> createPermission(int applicationId, Integer roleId, Collection<CreatePermissionDTO> createPermission) {
         final var permissionEntityMapped = createPermission.stream()
-                .map(createPermissionDTO -> mapperPermissionEntity.toEntity(createPermissionDTO, applicationId))
+                .map(createPermissionDTO -> mapperPermissionEntity.createToEntity(createPermissionDTO, applicationId))
                 .collect(Collectors.toSet());
 
         final var permissionInserted = permissionRepository.saveAll(permissionEntityMapped);
@@ -100,7 +100,7 @@ public class CreatePermissionService implements ICreatePermissionService {
     public @Nullable Set<PermissionLanguageDTO> createPermissionLanguages(final @Positive int permissionId, final Collection<CreatePermissionLanguageDTO> createPermissionLanguages) {
         final Set<PermissionLanguageEntity> permissionLanguagesEntitiesMapped = createPermissionLanguages
                 .stream()
-                .map(createPermissionLanguage -> mapperPermissionLanguageEntity.toEntity(createPermissionLanguage, permissionId))
+                .map(createPermissionLanguage -> mapperPermissionLanguageEntity.createToEntity(createPermissionLanguage, permissionId))
                 .collect(Collectors.toSet());
 
         final List<PermissionLanguageEntity> permissionLanguageEntitiesInserted = permissionLanguageRepository.saveAll(permissionLanguagesEntitiesMapped);

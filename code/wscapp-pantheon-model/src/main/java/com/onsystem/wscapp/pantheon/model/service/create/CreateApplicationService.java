@@ -34,7 +34,7 @@ public class CreateApplicationService implements ICreateApplicationService {
 
     @Override
     public ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
-        final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createEntityToEntity(createApplication);
+        final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createToEntity(createApplication);
 
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
@@ -46,7 +46,7 @@ public class CreateApplicationService implements ICreateApplicationService {
 
         final Collection<ApplicationLanguageEntity> applicationLanguageEntitiesMapped = createApplicationLanguage
                 .stream()
-                .map(modelApplicationLanguage -> mapperApplicationLanguageEntity.toEntity(modelApplicationLanguage, applicationId))
+                .map(modelApplicationLanguage -> mapperApplicationLanguageEntity.createToEntity(modelApplicationLanguage, applicationId))
                 .collect(Collectors.toList());
 
 

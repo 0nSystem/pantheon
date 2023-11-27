@@ -2,9 +2,8 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
-import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -24,15 +23,15 @@ public abstract class MapperApplicationLanguageEntity {
             @Mapping(source = "createApplicationLanguageDTO.description", target = "description"),
             @Mapping(source = "applicationId", target = "application.idApplication"),
     })
-    public abstract ApplicationLanguageEntity toEntity(final CreateApplicationLanguageDTO createApplicationLanguageDTO,
-                                                       final Integer applicationId);
+    public abstract ApplicationLanguageEntity createToEntity(final CreateApplicationLanguageDTO createApplicationLanguageDTO,
+                                                             final Integer applicationId);
 
 
     @Mappings({
-            @Mapping(source = "application.idApplication",target = "idApplication"),
-            @Mapping(source = "language.idLanguage",target = "idLanguage"),
-            @Mapping(source = "name",target = "name"),
-            @Mapping(source = "description",target = "description"),
+            @Mapping(source = "application.idApplication", target = "idApplication"),
+            @Mapping(source = "language.idLanguage", target = "idLanguage"),
+            @Mapping(source = "name", target = "name"),
+            @Mapping(source = "description", target = "description"),
     })
     public abstract ApplicationLanguageDTO toDto(ApplicationLanguageEntity applicationLanguageEntity);
 

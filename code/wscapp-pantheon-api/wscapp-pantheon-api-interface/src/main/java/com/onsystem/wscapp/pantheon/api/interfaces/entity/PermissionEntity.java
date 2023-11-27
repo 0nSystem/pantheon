@@ -27,7 +27,6 @@ public class PermissionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPermission;
 
-
     @NotEmpty
     @Size(max = 100)
     private String name;

@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
 import org.mapstruct.Mapper;
@@ -26,9 +27,10 @@ public abstract class MapperApplicationEntity {
             @Mapping(target = "highDate", expression = "java(ITimeHelper.now())"),
             @Mapping(target = "applicationLanguages", ignore = true),
             @Mapping(target = "permissions", ignore = true),
-            @Mapping(target = "roles", ignore = true)
+            @Mapping(target = "roles", ignore = true),
+            @Mapping(target = "attributes", ignore = true)
     })
-    public abstract ApplicationEntity createEntityToEntity(CreateApplicationDTO createApplicationDTO);
+    public abstract ApplicationEntity createToEntity(CreateApplicationDTO createApplicationDTO);
 
 
     public abstract ApplicationDTO entityToDTO(ApplicationEntity applicationEntity);

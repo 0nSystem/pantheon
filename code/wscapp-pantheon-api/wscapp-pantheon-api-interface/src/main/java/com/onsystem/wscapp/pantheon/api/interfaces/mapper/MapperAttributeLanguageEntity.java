@@ -2,6 +2,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.attribute.AttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeLanguageEntity;
 import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
@@ -22,8 +23,8 @@ public abstract class MapperAttributeLanguageEntity {
             @Mapping(target = "attribute.idAttribute", source = "attributeId"),
             @Mapping(target = "language.idLanguage", source = "createAttributeLanguageDTO.idLanguage")
     })
-    public abstract AttributeLanguageEntity toEntity(final CreateAttributeLanguageDTO createAttributeLanguageDTO,
-                                                     final @NotNull Integer attributeId);
+    public abstract AttributeLanguageEntity createToEntity(final CreateAttributeLanguageDTO createAttributeLanguageDTO,
+                                                           final @NotNull Integer attributeId);
 
     @Mappings({
             @Mapping(target = "idAttribute", source = "attribute.idAttribute"),

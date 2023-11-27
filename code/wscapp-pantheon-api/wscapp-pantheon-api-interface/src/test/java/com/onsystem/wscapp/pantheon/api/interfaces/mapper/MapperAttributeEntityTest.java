@@ -29,7 +29,7 @@ public class MapperAttributeEntityTest {
                 .description("asd")
                 .build();
 
-        final AttributeEntity attributeEntity = mapperAttributeEntity.toEntity(createAttributeDTO, applicationId);
+        final AttributeEntity attributeEntity = mapperAttributeEntity.createToEntity(createAttributeDTO, applicationId);
 
         Assertions.assertNotNull(attributeEntity);
         Assertions.assertEquals(applicationId, attributeEntity.getApplication().getIdApplication());
@@ -40,7 +40,7 @@ public class MapperAttributeEntityTest {
 
     @Test
     public void testToEntityReturnNull() {
-        final AttributeEntity attributeEntity = mapperAttributeEntity.toEntity(null, null);
+        final AttributeEntity attributeEntity = mapperAttributeEntity.createToEntity(null, null);
         Assertions.assertNull(attributeEntity);
     }
 

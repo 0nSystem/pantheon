@@ -2,6 +2,8 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
 import org.junit.jupiter.api.Assertions;
@@ -23,15 +25,11 @@ public class MapperApplicationEntityTest {
 
     @Test
     void testCreateEntityToEntityAndAssignHighDate() {
-        final CreateApplicationDTO createApplicationDTO = CreateApplicationDTO.builder()
-                .name("Name")
-                .description("Description")
-                .highIdUser(1)
-                .build();
+        final CreateApplicationDTO createApplicationDTO = MockData.DataMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
 
 
         final ApplicationEntity applicationEntity = mapper
-                .createEntityToEntity(createApplicationDTO);
+                .createToEntity(createApplicationDTO);
 
         Assertions.assertNotNull(applicationEntity);
         Assertions.assertEquals(createApplicationDTO.getName(), applicationEntity.getName());
@@ -43,7 +41,7 @@ public class MapperApplicationEntityTest {
     @Test
     void testCreateEntityToEntityReturnNull(){
         final ApplicationEntity applicationEntity = mapper
-                .createEntityToEntity(null);
+                .createToEntity(null);
 
         Assertions.assertNull(applicationEntity);
     }
@@ -82,6 +80,7 @@ public class MapperApplicationEntityTest {
 
         Assertions.assertNull(applicationDTO);
     }
+
 
 
 }

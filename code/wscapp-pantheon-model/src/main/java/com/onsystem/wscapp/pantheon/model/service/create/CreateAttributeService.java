@@ -12,7 +12,6 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,7 +34,7 @@ public class CreateAttributeService implements ICreateAttributeService {
 
         final Set<AttributeWithLanguagesDTO> attributeWithLanguages = createAttribute.stream()
                 .map(attribute -> {
-                    final AttributeEntity attributeEntityMapped = mapperAttributeEntity.toEntity(attribute.getAttribute(), applicationId);
+                    final AttributeEntity attributeEntityMapped = mapperAttributeEntity.createToEntity(attribute.getAttribute(), applicationId);
                     final AttributeEntity attributeInsert = attributeRepository.save(attributeEntityMapped);
                     final AttributeDTO attributeDTO = mapperAttributeEntity.toDto(attributeInsert);
 
@@ -54,7 +53,7 @@ public class CreateAttributeService implements ICreateAttributeService {
 
 
         final List<AttributeEntity> attributeEntitiesMapped = createAttributes.stream()
-                .map(att -> mapperAttributeEntity.toEntity(att, applicationId))
+                .map(att -> mapperAttributeEntity.createToEntity(att, applicationId))
                 .collect(Collectors.toList());
         final List<AttributeEntity> attributeEntitiesInserted = attributeRepository.saveAll(attributeEntitiesMapped);
 
@@ -69,7 +68,7 @@ public class CreateAttributeService implements ICreateAttributeService {
     public Set<AttributeLanguageDTO> createAttributesLanguages(final @Positive int attributeId, final Set<CreateAttributeLanguageDTO> createAttribute) {
 
         final Set<AttributeLanguageEntity> attributeLanguageEntitiesMapped = createAttribute.stream()
-                .map(createAttributeLanguageDto -> mapperAttributeLanguageEntity.toEntity(createAttributeLanguageDto, attributeId))
+                .map(createAttributeLanguageDto -> mapperAttributeLanguageEntity.createToEntity(createAttributeLanguageDto, attributeId))
                 .collect(Collectors.toSet());
 
         final List<AttributeLanguageEntity> attributeLanguageEntitiesInsert = attributeLanguageRepository.saveAll(attributeLanguageEntitiesMapped);

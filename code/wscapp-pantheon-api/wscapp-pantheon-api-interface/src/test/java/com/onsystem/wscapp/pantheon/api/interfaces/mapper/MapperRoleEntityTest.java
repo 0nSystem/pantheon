@@ -28,7 +28,7 @@ public class MapperRoleEntityTest {
                 .description("asd")
                 .build();
 
-        final RoleEntity roleEntity = mapperRoleEntity.toEntity(createRoleDTO, applicationId);
+        final RoleEntity roleEntity = mapperRoleEntity.createToEntity(createRoleDTO, applicationId);
 
 
         Assertions.assertNotNull(roleEntity);
@@ -40,7 +40,7 @@ public class MapperRoleEntityTest {
 
     @Test
     public void testCreateToEntityReturnNull() {
-        final RoleEntity permissionEntity = mapperRoleEntity.toEntity(null, null);
+        final RoleEntity permissionEntity = mapperRoleEntity.createToEntity(null, null);
         Assertions.assertNull(permissionEntity);
     }
 

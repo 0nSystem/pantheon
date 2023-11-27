@@ -29,7 +29,7 @@ public class MapperRoleLanguageEntityTest {
                 .description("asd")
                 .build();
 
-        final RoleLanguageEntity roleLanguageEntity = mapperRoleLanguageEntity.toEntity(createRoleLanguageDTO, roleId);
+        final RoleLanguageEntity roleLanguageEntity = mapperRoleLanguageEntity.createToEntity(createRoleLanguageDTO, roleId);
 
 
         Assertions.assertNotNull(roleLanguageEntity);
@@ -42,7 +42,7 @@ public class MapperRoleLanguageEntityTest {
 
     @Test
     public void testCreateToEntityReturnNull() {
-        final RoleLanguageEntity permissionEntity = mapperRoleLanguageEntity.toEntity(null, null);
+        final RoleLanguageEntity permissionEntity = mapperRoleLanguageEntity.createToEntity(null, null);
         Assertions.assertNull(permissionEntity);
     }
 

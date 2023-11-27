@@ -1,8 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionLanguageEntity;
@@ -30,7 +28,7 @@ public class MapperPermissionLanguageEntityTest {
                 .description("asd")
                 .build();
 
-        final PermissionLanguageEntity permissionLanguageEntity = mapperPermissionLanguageEntity.toEntity(createPermissionLanguageDTO, permissionId);
+        final PermissionLanguageEntity permissionLanguageEntity = mapperPermissionLanguageEntity.createToEntity(createPermissionLanguageDTO, permissionId);
 
 
         Assertions.assertNotNull(permissionLanguageEntity);
@@ -42,7 +40,7 @@ public class MapperPermissionLanguageEntityTest {
 
     @Test
     public void testCreateToEntityReturnNull() {
-        final PermissionLanguageEntity permissionLanguageEntity = mapperPermissionLanguageEntity.toEntity(null, null);
+        final PermissionLanguageEntity permissionLanguageEntity = mapperPermissionLanguageEntity.createToEntity(null, null);
         Assertions.assertNull(permissionLanguageEntity);
     }
 

@@ -3,6 +3,9 @@ package com.onsystem.wscapp.pantheon.api.interfaces.mapper;
 
 import com.onsystem.wscapp.pantheon.api.dto.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
@@ -33,7 +36,7 @@ public class MapperApplicationLanguageEntityTest {
                 .idLanguage(1)
                 .build();
 
-        final ApplicationLanguageEntity applicationLanguageEntity = mapperApplicationLanguageEntity.toEntity(createApplicationLanguageDTO, APPLICATION_ENTITY.getIdApplication());
+        final ApplicationLanguageEntity applicationLanguageEntity = mapperApplicationLanguageEntity.createToEntity(createApplicationLanguageDTO, APPLICATION_ENTITY.getIdApplication());
 
         Assertions.assertNotNull(applicationLanguageEntity);
         Assertions.assertEquals(createApplicationLanguageDTO.getIdLanguage(), applicationLanguageEntity.getLanguage().getIdLanguage());
@@ -47,7 +50,7 @@ public class MapperApplicationLanguageEntityTest {
 
         //Resolve And condition to return null, but is not problema if use @Valid
         final ApplicationLanguageEntity applicationLanguageEntity = mapperApplicationLanguageEntity
-                .toEntity(null, null);
+                .createToEntity(null, null);
 
         Assertions.assertNull(applicationLanguageEntity);
 

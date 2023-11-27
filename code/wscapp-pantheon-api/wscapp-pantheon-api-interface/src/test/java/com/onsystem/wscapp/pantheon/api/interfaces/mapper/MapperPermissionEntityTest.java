@@ -27,7 +27,7 @@ public class MapperPermissionEntityTest {
                 .description("asd")
                 .build();
 
-        final PermissionEntity permissionEntity = mapperPermissionEntity.toEntity(createPermissionDTO, applicationId);
+        final PermissionEntity permissionEntity = mapperPermissionEntity.createToEntity(createPermissionDTO, applicationId);
 
 
         Assertions.assertNotNull(permissionEntity);
@@ -39,7 +39,7 @@ public class MapperPermissionEntityTest {
 
     @Test
     public void testCreateToEntityReturnNull() {
-        final PermissionEntity permissionEntity = mapperPermissionEntity.toEntity(null, null);
+        final PermissionEntity permissionEntity = mapperPermissionEntity.createToEntity(null, null);
         Assertions.assertNull(permissionEntity);
     }
 

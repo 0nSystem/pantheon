@@ -38,7 +38,7 @@ public class CreateRoleService implements ICreateRoleService {
     @Override
     public Set<RoleDTO> createRole(int idApplication, Set<CreateRoleDTO> createRole) {
         final Set<RoleEntity> roleEntityMapped = createRole.stream()
-                .map(role -> mapperRoleEntity.toEntity(role, idApplication))
+                .map(role -> mapperRoleEntity.createToEntity(role, idApplication))
                 .collect(Collectors.toSet());
         final List<RoleEntity> roleEntityInserted = roleRepository.saveAll(roleEntityMapped);
 
@@ -54,7 +54,7 @@ public class CreateRoleService implements ICreateRoleService {
 
         final Set<RoleWithLanguagesAndPermissionWithLanguagesDTO> roleWithLanguagesAndPermissionWithLanguages = applicationRoles.stream()
                 .map(role -> {
-                    final RoleEntity roleEntityMapped = mapperRoleEntity.toEntity(role.getRole(), idApplication);
+                    final RoleEntity roleEntityMapped = mapperRoleEntity.createToEntity(role.getRole(), idApplication);
                     final RoleEntity roleEntityInserted = roleRepository.save(roleEntityMapped);
                     final RoleDTO roleDTO = mapperRoleEntity.toDto(roleEntityInserted);
 
@@ -81,7 +81,7 @@ public class CreateRoleService implements ICreateRoleService {
     public Set<RoleLanguageDTO> createRoleLanguages(final @Positive int idRole, final Collection<CreateRoleLanguageDTO> createRoleLanguages) {
 
         final Set<RoleLanguageEntity> roleLanguageEntitiesMapped = createRoleLanguages.stream()
-                .map(createLanguageRole -> mapperRoleLanguageEntity.toEntity(createLanguageRole, idRole))
+                .map(createLanguageRole -> mapperRoleLanguageEntity.createToEntity(createLanguageRole, idRole))
                 .collect(Collectors.toSet());
 
         final List<RoleLanguageEntity> roleLanguageEntitiesInserted = roleLanguageRepository.saveAll(roleLanguageEntitiesMapped);
