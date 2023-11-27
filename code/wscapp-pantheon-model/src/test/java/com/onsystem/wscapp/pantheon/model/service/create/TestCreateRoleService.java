@@ -7,6 +7,9 @@ import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleWithLanguagesAndPermissionWithLanguagesDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreateRoleService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
@@ -31,6 +34,8 @@ public class TestCreateRoleService {
 
     @Autowired
     private ICreateRoleService createRoleService;
+    @Autowired
+    private RolePermissionRepository rolePermissionRepository;
 
     @Autowired
     private Integer idApplication;
@@ -69,8 +74,7 @@ public class TestCreateRoleService {
 
     @TestFactory
     public Stream<DynamicTest> createRoleAndRespectiveLanguagesWithInnerPermissionAndLanguage() {
-        //TODO remove but this it to pending refactor with  parameter test and create integracion with dynamic test
-        Assertions.fail();
+
 
         final CreateRoleWithLanguagesAndPermissionWithLanguagesDTO createRoleWithLanguagesAndPermissionWithLanguagesDTO = CreateRoleWithLanguagesAndPermissionWithLanguagesDTO.builder()
                 .role(MockData.DataMockSchemeApplicationDTO.CREATE_ROLE_MOCK)
@@ -111,7 +115,34 @@ public class TestCreateRoleService {
                             roleWithLanguagesAndPermissionWithLanguages.getPermissions().stream()
                                     .map(permissionsLanguages -> {
                                         final List<DynamicTest> dynamicTestsPermissions = new ArrayList<>();
-                                        //TODO
+                                        dynamicTestsPermissions.add(
+                                                DynamicTest.dynamicTest(
+                                                        String.format("Permission id: %s , application id: %s ", permissionsLanguages.getPermission().getIdPermission(), permissionsLanguages.getPermission().getIdApplication()),
+                                                        () -> ThrowingConsumerDTO.caseDefaultCorrectCreatePermissionDTO(idApplication).accept(permissionsLanguages.getPermission())
+                                                )
+                                        );
+
+                                        final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
+                                                        .idPermission(permissionsLanguages.getPermission().getIdPermission())
+                                                        .idRole(roleWithLanguagesAndPermissionWithLanguages.getRole().getIdRole()).build())
+
+                                                .orElseThrow();
+                                        dynamicTests.add(
+                                                DynamicTest.dynamicTest(
+                                                        String.format("belong permission role permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                                                        () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(
+                                                                roleWithLanguagesAndPermissionWithLanguages.getRole().getIdRole(), permissionsLanguages.getPermission().getIdPermission()
+                                                        ).accept(rolePermissionEntity)
+                                                )
+                                        );
+
+                                        dynamicTestsPermissions.addAll(
+                                                DynamicTest.stream(permissionsLanguages.getPermissionLanguages().stream(),
+                                                                permissionLanguage -> String.format("Permission Language idPermission : %s, idLanguage: %s", permissionLanguage.getIdPermission(), permissionLanguage.getIdLanguage()),
+                                                                ThrowingConsumerDTO.caseDefaultCorrectCreatePermissionLanguageDTO(permissionsLanguages.getPermission().getIdPermission(), idLanguage))
+                                                        .toList()
+                                        );
+
                                         return dynamicTestsPermissions;
                                     })
                                     .flatMap(Collection::stream)

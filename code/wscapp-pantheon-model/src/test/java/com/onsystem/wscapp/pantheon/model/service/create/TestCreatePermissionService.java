@@ -1,25 +1,16 @@
 package com.onsystem.wscapp.pantheon.model.service.create;
 
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionWithLanguagesDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionWithLanguagesDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.ArgumentsParams;
+import com.onsystem.wscapp.pantheon.api.dto.permission.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.RolePermissionKeyEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -100,15 +91,6 @@ public class TestCreatePermissionService {
 
     }
 
-    /**
-     * @return Argument (idPermission, idLanguage, PermissionLanguageDTO)
-     */
-    public Stream<Arguments> argumentsCreatePermissionLanguage() {
-        return Stream.of(
-                Arguments.of(idPermission, idLanguage,
-                        MockData.DataMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER.idLanguage(idLanguage).build())
-        );
-    }
 
     @TestFactory
     public Stream<DynamicTest> createPermissionWithLanguagesBelongRoles() {
