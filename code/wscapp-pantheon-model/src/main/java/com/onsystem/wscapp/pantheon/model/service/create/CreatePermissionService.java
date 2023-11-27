@@ -11,14 +11,12 @@ import com.onsystem.wscapp.pantheon.api.interfaces.repositories.PermissionReposi
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RolePermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.ICreatePermissionService;
 import jakarta.validation.constraints.Positive;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,9 +45,12 @@ public class CreatePermissionService implements ICreatePermissionService {
                     final PermissionEntity permissionEntityMapped = mapperPermissionEntity.toEntity(cpl.getPermission(), applicationId);
                     final PermissionEntity permissionInserted = permissionRepository.save(permissionEntityMapped);
 
+
                     return PermissionWithLanguagesDTO.builder()
                             .permission(mapperPermissionEntity.toDto(permissionInserted))
-                            .permissionLanguages(createPermissionLanguages(permissionInserted.getIdPermission(), cpl.getPermissionLanguages()))
+                            .permissionLanguages(CollectionUtils.isNotEmpty(cpl.getPermissionLanguages())
+                                    ? createPermissionLanguages(permissionInserted.getIdPermission(), cpl.getPermissionLanguages())
+                                    : null)
                             .build();
                 })
                 .collect(Collectors.toSet());
