@@ -10,6 +10,8 @@ import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
@@ -64,6 +66,13 @@ public class MockData {
                 .description("update description");
 
         public static UpdateApplicationLanguageDTO.UpdateApplicationLanguageDTOBuilder UPDATE_APPLICATION_LANGUAGE_MOCK_BUILDER = UpdateApplicationLanguageDTO.builder()
+                .name("update name")
+                .description("update description");
+
+        public static UpdateRoleDTO.UpdateRoleDTOBuilder UPDATE_ROLE_MOCK_BUILDER = UpdateRoleDTO.builder()
+                .name("update name")
+                .description("update description");
+        public static UpdateRoleLanguageDTO.UpdateRoleLanguageDTOBuilder UPDATE_ROLE_LANGUAGE_MOCK_BUILDER = UpdateRoleLanguageDTO.builder()
                 .name("update name")
                 .description("update description");
     }

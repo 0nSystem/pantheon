@@ -8,8 +8,12 @@ import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionDTO;
 import com.onsystem.wscapp.pantheon.api.dto.permission.PermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.RoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleLanguageEntity;
 import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;
@@ -90,15 +94,39 @@ public class ThrowingConsumerDTO {
             Assertions.assertEquals(updateApplication.getDescription(), applicationEntity.getDescription());
         };
     }
+
     public static ThrowingConsumer<ApplicationLanguageEntity> caseDefaultCorrectUpdateApplicationLanguage(
             final @NotNull UpdateApplicationLanguageDTO updateApplicationLanguage
     ) {
         return applicationEntity -> {
             Assertions.assertNotNull(applicationEntity);
             Assertions.assertEquals(updateApplicationLanguage.getIdApplication(), applicationEntity.getApplication().getIdApplication());
-            Assertions.assertEquals(updateApplicationLanguage.getIdLanguage(),applicationEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updateApplicationLanguage.getIdLanguage(), applicationEntity.getLanguage().getIdLanguage());
             Assertions.assertEquals(updateApplicationLanguage.getName(), applicationEntity.getName());
             Assertions.assertEquals(updateApplicationLanguage.getDescription(), applicationEntity.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<RoleEntity> caseDefaultCorrectUpdateRole(
+            final @NotNull UpdateRoleDTO updateRoleDTO
+    ) {
+        return roleEntity -> {
+            Assertions.assertNotNull(roleEntity);
+            Assertions.assertEquals(updateRoleDTO.getIdRole(), roleEntity.getIdRole());
+            Assertions.assertEquals(updateRoleDTO.getName(), roleEntity.getName());
+            Assertions.assertEquals(updateRoleDTO.getDescription(), roleEntity.getDescription());
+        };
+    }
+
+    public static ThrowingConsumer<RoleLanguageEntity> caseDefaultCorrectUpdateRoleLanguage(
+            final @NotNull UpdateRoleLanguageDTO updateRoleLanguageDTO
+    ) {
+        return roleLanguageEntity -> {
+            Assertions.assertNotNull(roleLanguageEntity);
+            Assertions.assertEquals(updateRoleLanguageDTO.getIdLanguage(), roleLanguageEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updateRoleLanguageDTO.getIdRole(), roleLanguageEntity.getRole().getIdRole());
+            Assertions.assertEquals(updateRoleLanguageDTO.getName(), roleLanguageEntity.getName());
+            Assertions.assertEquals(updateRoleLanguageDTO.getDescription(), roleLanguageEntity.getDescription());
         };
     }
 
