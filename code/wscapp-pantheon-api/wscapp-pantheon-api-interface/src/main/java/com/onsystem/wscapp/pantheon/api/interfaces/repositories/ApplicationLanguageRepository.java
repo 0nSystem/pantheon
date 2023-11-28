@@ -26,9 +26,10 @@ public interface ApplicationLanguageRepository extends JpaRepository<Application
             "WHERE application.idApplication = :#{#dto.idApplication} AND language.idLanguage = :#{#dto.idLanguage}")
     void update(final @NotNull @Param("dto") UpdateApplicationLanguageDTO updateApplicationLanguage);
 
+
     @Modifying
-    @Query("DELETE FROM ApplicationLanguageEntity WHERE application.idApplication = :applicationId AND language.idLanguage IN (:languageIds)")
-    void delete(final @Positive @Param("applicationId") int applicationId,
-                final @NotEmpty @Param("languageIds") Collection<Integer> languageIds);
+    @Query("DELETE FROM ApplicationLanguageEntity WHERE application.idApplication = :applicationId AND language.idLanguage IN (:languageIds) ")
+    void deleteByIdApplicationAndIdLanguageIn(final @Positive int applicationId,
+                                              final @NotEmpty Collection<Integer> languageIds);
 
 }

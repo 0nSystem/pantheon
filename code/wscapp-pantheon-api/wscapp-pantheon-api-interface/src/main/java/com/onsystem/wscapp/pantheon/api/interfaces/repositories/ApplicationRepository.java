@@ -27,9 +27,9 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
     @Modifying
     @Query("UPDATE ApplicationEntity SET deleteDate = :deleteDate, deleteIdUser = :deleteIdUser " +
             "WHERE idApplication IN (:applicationIds)")
-    void updateDelete(
-            final @Param("deleteDate") @Valid @NotNull Timestamp ts,
-            final @Param("deleteIdUser") @Valid @Positive int userId,
+    void updateDeleteDateAndDeleteIdUserByIdApplicationIn(
+            final @Param("deleteDate") @Valid @NotNull Timestamp deleteDate,
+            final @Param("deleteIdUser") @Valid @Positive int deleteIdUser,
             final @Param("applicationIds") @Valid @NotEmpty @Positive Collection<Integer> applicationIds
     );
 

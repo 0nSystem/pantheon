@@ -19,4 +19,13 @@ public interface AttributeLanguageRepository extends JpaRepository<AttributeLang
     @Query("UPDATE AttributeLanguageEntity SET name = :#{#dto.name}, description = :#{#dto.description} " +
             "WHERE attribute.idAttribute = :#{#dto.idAttribute} AND language.idLanguage =:#{#dto.idLanguage}")
     void update(final @Param("dto") UpdateAttributeLanguageDTO updateAttributeLanguage);
+
+    @Modifying
+    @Query("DELETE FROM AttributeLanguageEntity WHERE attribute.idAttribute = :attributeId AND language.idLanguage IN (:languageIds)")
+    void deleteByIdAttributeAndIdLanguageIn(final int attributeId,
+                                            final Collection<Integer> languageIds);
+
+    @Modifying
+    @Query("DELETE FROM AttributeLanguageEntity WHERE attribute.idAttribute IN (:attributeIds)")
+    void deleteByAttributeIdAttributeIn(Collection<Integer> attributeIds);
 }

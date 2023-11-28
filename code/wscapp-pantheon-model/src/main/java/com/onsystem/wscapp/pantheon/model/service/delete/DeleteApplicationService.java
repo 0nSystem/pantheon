@@ -21,11 +21,12 @@ public class DeleteApplicationService implements IDeleteApplicationService {
 
     @Override
     public void deleteApplication(final int userDeleteId, Collection<Integer> applicationIds) {
-        applicationRepository.updateDelete(iTimeHelper.now(), userDeleteId, applicationIds);
+        applicationRepository.updateDeleteDateAndDeleteIdUserByIdApplicationIn(iTimeHelper.now(), userDeleteId, applicationIds);
     }
 
     @Override
-    public void deleteApplicationLanguage(int applicationIds, Collection<Integer> languageIds) {
-        applicationLanguageRepository.delete(applicationIds, languageIds);
+    public void deleteApplicationLanguage(int applicationId, Collection<Integer> languageIds) {
+
+        applicationLanguageRepository.deleteByIdApplicationAndIdLanguageIn(applicationId, languageIds);
     }
 }

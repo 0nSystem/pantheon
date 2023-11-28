@@ -18,4 +18,6 @@ public interface AttributeRepository extends JpaRepository<AttributeEntity, Inte
     @Query("UPDATE AttributeEntity SET name = :#{#dto.name}, description = :#{#dto.description} " +
             "WHERE idAttribute = :#{#dto.idAttribute}")
     void update(final @Param("dto") UpdateAttributeDTO updateAttribute);
+
+
 }
