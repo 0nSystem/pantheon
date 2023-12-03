@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -28,8 +29,8 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-@Rollback
-public class TestDeleteApplication {
+@Transactional
+class TestDeleteApplication {
 
     @Autowired
     private IDeleteApplicationService iDeleteApplicationService;
@@ -51,9 +52,10 @@ public class TestDeleteApplication {
         );
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeleteApplication")
-    public void testDeleteApplication(final @Positive int idUser, final @Positive int idApplication) {
+    void testDeleteApplication(final @Positive int idUser, final @Positive int idApplication) {
         iDeleteApplicationService.deleteApplication(idUser, List.of(idApplication));
 
         final ApplicationEntity applicationEntity = applicationRepository.findById(idApplication)
@@ -69,9 +71,10 @@ public class TestDeleteApplication {
         );
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeleteApplicationLanguage")
-    public void testDeleteApplicationLanguage(final @Positive int idApplication, final Integer languageId) {
+    void testDeleteApplicationLanguage(final @Positive int idApplication, final Integer languageId) {
 
 
         final CreateApplicationLanguageDTO createApplicationLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK

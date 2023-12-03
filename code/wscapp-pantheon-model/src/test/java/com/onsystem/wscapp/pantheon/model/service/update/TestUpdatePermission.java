@@ -22,6 +22,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Set;
@@ -31,7 +32,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestUpdatePermission {
+class TestUpdatePermission {
     @Autowired
     private IUpdatePermissionService iUpdatePermissionService;
     @Autowired
@@ -58,7 +59,8 @@ public class TestUpdatePermission {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdatePermission")
-    public void updatePermission(final @NotNull UpdatePermissionDTO updatePermissionDTO) throws Throwable {
+    void updatePermission(final @NotNull UpdatePermissionDTO updatePermissionDTO) throws Throwable {
+
         iUpdatePermissionService.updatePermission(Set.of(updatePermissionDTO));
 
         final PermissionEntity permissionEntity = permissionRepository.findById(updatePermissionDTO.getIdPermission())
@@ -81,7 +83,7 @@ public class TestUpdatePermission {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdatePermissionLanguages")
-    public void updatePermissionLanguages(final @NotNull UpdatePermissionLanguageDTO updatePermissionLanguageDTO) throws Throwable {
+    void updatePermissionLanguages(final @NotNull UpdatePermissionLanguageDTO updatePermissionLanguageDTO) throws Throwable {
         final CreatePermissionLanguageDTO createPermissionLanguageDTO = MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(updatePermissionLanguageDTO.getIdLanguage())
                 .build();

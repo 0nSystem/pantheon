@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -28,7 +29,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-@Rollback
+@Transactional
 class TestDeletePermissionService {
 
 
@@ -52,6 +53,7 @@ class TestDeletePermissionService {
         );
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeletePermission")
     void testDeletePermission(final @Positive int permissionId) {
@@ -72,6 +74,7 @@ class TestDeletePermissionService {
         );
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeletePermissionLanguage")
     void testDeletePermissionLanguage(final @Positive int permissionId, final @Positive int languageId) {

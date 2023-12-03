@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestCreateAttributeService {
+class TestCreateAttributeService {
 
     @Autowired
     private Integer idApplication;
@@ -40,7 +40,7 @@ public class TestCreateAttributeService {
 
 
     @TestFactory
-    public Stream<DynamicTest> createAttribute() {
+    Stream<DynamicTest> createAttribute() {
         final CreateAttributeDTO createAttribute = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_MOCK;
 
         final Set<AttributeDTO> attributesInserted = iCreateAttributeService.createAttributes(idApplication, Set.of(createAttribute));
@@ -52,7 +52,7 @@ public class TestCreateAttributeService {
     }
 
     @TestFactory
-    public Stream<DynamicTest> createAttributeWithLanguages() {
+    Stream<DynamicTest> createAttributeWithLanguages() {
         final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build();
@@ -93,7 +93,7 @@ public class TestCreateAttributeService {
     }
 
     @TestFactory
-    public Stream<DynamicTest> createAttributeLanguage() {
+    Stream<DynamicTest> createAttributeLanguage() {
         final CreateAttributeLanguageDTO createAttributeLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)
                 .build();

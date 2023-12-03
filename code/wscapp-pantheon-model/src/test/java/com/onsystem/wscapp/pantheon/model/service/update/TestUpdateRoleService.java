@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.model.service.update;
 
 
-import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleLanguageDTO;
@@ -32,7 +31,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestUpdateRoleService {
+class TestUpdateRoleService {
 
     @Autowired
     private IUpdateRoleService iUpdateRoleService;
@@ -60,7 +59,7 @@ public class TestUpdateRoleService {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdateRole")
-    public void updateRole(final UpdateRoleDTO updateRoleDTO) throws Throwable {
+    void updateRole(final UpdateRoleDTO updateRoleDTO) throws Throwable {
         iUpdateRoleService.updateRoles(Set.of(updateRoleDTO));
 
         final RoleEntity roleEntity = roleRepository.findById(updateRoleDTO.getIdRole())
@@ -84,7 +83,7 @@ public class TestUpdateRoleService {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdateRoleLanguage")
-    public void updateRoleLanguage(final UpdateRoleLanguageDTO updateRoleLanguage) throws Throwable {
+    void updateRoleLanguage(final UpdateRoleLanguageDTO updateRoleLanguage) throws Throwable {
         final CreateRoleLanguageDTO createRoleLanguage = MockData.DataCreateMockSchemeApplicationDTO.CREATE_ROLE_LANGUAGE_MOCK
                 .idLanguage(updateRoleLanguage.getIdLanguage())
                 .build();

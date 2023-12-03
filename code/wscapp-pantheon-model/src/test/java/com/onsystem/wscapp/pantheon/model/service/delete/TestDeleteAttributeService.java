@@ -21,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -30,7 +31,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-@Rollback
+@Transactional
 class TestDeleteAttributeService {
     @Autowired
     private ICreateAttributeService iCreateAttributeService;
@@ -53,6 +54,7 @@ class TestDeleteAttributeService {
         return Stream.of(Arguments.of(idApplication));
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeleteApplication")
     void testDeleteApplication(final @Positive int applicationId) {
@@ -75,6 +77,7 @@ class TestDeleteAttributeService {
         return Stream.of(Arguments.of(idAttribute, idLanguage));
     }
 
+    @Rollback
     @ParameterizedTest
     @MethodSource("argumentsDeleteApplicationLanguage")
     void testDeleteApplicationLanguage(final @Positive int attributeId, final @Positive int languageId) {

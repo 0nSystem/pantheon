@@ -16,7 +16,7 @@ import java.util.Set;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestCreateApplicationService {
+class TestCreateApplicationService {
     @Autowired
     private ICreateApplicationService iCreateApplicationService;
 
@@ -24,7 +24,7 @@ public class TestCreateApplicationService {
     private Integer idLanguage;
 
     @Test
-    public void createApplication() {
+    void createApplication() {
         final var createApplicationModel = MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
         final var applicationCreateDTO = iCreateApplicationService.createApplication(createApplicationModel);
 
@@ -46,7 +46,7 @@ public class TestCreateApplicationService {
 
 
     @Test
-    public void createApplicationLanguage() {
+    void createApplicationLanguage() {
         final Integer idApplication = iCreateApplicationService.createApplication(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK).getIdApplication();
 
         final var applicationLanguage = iCreateApplicationService.createApplicationLanguages(idApplication,

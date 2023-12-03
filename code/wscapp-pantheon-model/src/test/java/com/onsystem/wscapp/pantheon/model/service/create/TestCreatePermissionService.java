@@ -31,7 +31,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestCreatePermissionService {
+class TestCreatePermissionService {
     @Autowired
     private Integer idApplication;
     @Autowired
@@ -50,7 +50,7 @@ public class TestCreatePermissionService {
 
 
     @TestFactory
-    public Stream<DynamicTest> createPermissionAddingRole() {
+    Stream<DynamicTest> createPermissionAddingRole() {
         final Collection<CreatePermissionDTO> createPermission = Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK);
         final Set<PermissionDTO> permissionInserted = iCreatePermissionService.createPermission(idApplication, idRole, createPermission);
 
@@ -91,7 +91,7 @@ public class TestCreatePermissionService {
     }
     @ParameterizedTest
     @MethodSource({"argumentsCreatePermissionLanguage"})
-    public void createPermissionLanguage(final int permissionId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
+    void createPermissionLanguage(final int permissionId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
 
         final PermissionLanguageDTO permissionLanguageInserted = iCreatePermissionService.createPermissionLanguages(
                         permissionId, Set.of(createPermissionLanguage)
@@ -105,7 +105,7 @@ public class TestCreatePermissionService {
 
 
     @TestFactory
-    public Stream<DynamicTest> createPermissionWithLanguagesBelongRoles() {
+    Stream<DynamicTest> createPermissionWithLanguagesBelongRoles() {
         final CreatePermissionDTO createPermission = MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_MOCK;
         final Set<CreatePermissionLanguageDTO> createPermissionLanguage = Set.of(MockData.DataCreateMockSchemeApplicationDTO.CREATE_PERMISSION_LANGUAGE_MOCK_BUILDER
                 .idLanguage(idLanguage)

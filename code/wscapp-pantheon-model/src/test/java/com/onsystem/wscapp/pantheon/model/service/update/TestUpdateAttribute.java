@@ -21,6 +21,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Set;
@@ -30,7 +31,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
-public class TestUpdateAttribute {
+class TestUpdateAttribute {
 
     @Autowired
     private ICreateAttributeService iCreateAttributeService;
@@ -60,7 +61,7 @@ public class TestUpdateAttribute {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdateAttribute")
-    public void updateAttribute(final @NotNull UpdateAttributeDTO updateAttributeDTO) throws Throwable {
+    void updateAttribute(final @NotNull UpdateAttributeDTO updateAttributeDTO) throws Throwable {
 
         iUpdateAttributeService.updateAttribute(Set.of(updateAttributeDTO));
 
@@ -82,7 +83,7 @@ public class TestUpdateAttribute {
 
     @ParameterizedTest
     @MethodSource("argumentsUpdateAttributeLanguage")
-    public void updateAttribute(final @NotNull UpdateAttributeLanguageDTO updateAttributeLanguageDTO) throws Throwable {
+    void updateAttribute(final @NotNull UpdateAttributeLanguageDTO updateAttributeLanguageDTO) throws Throwable {
         iCreateAttributeService.createAttributesLanguages(idApplication,
                 Set.of(
                         MockData.DataCreateMockSchemeApplicationDTO.CREATE_ATTRIBUTE_LANGUAGE_MOCK_BUILDER
