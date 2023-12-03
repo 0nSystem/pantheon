@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS applications.application
     name character varying(100) COLLATE pg_catalog."default" NOT NULL,
     description character varying(255) COLLATE pg_catalog."default",
     high_date timestamp NOT NULL,
-    high_id_user integer  NOT NULL references users.user(id_user),
+    high_id_user integer NOT NULL references users.user(id_user),
     delete_date timestamp,
     delete_id_user integer references users.user(id_user),
     CONSTRAINT applications_pk PRIMARY KEY (id_application)

@@ -19,13 +19,14 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <org.projectlombok.version>1.18.30</org.projectlombok.version>
+
     </properties>
 
     <modules>
         <module>wscapp-pantheon-boot</module>
         <module>wscapp-pantheon-api</module>
-        <module>wscapp-pantheon-api/wscapp-pantheon-api-request</module>
-        <module>wscapp-pantheon-api/wscapp-pantheon-api-response</module>
+        <module>wscapp-pantheon-api/wscapp-pantheon-api-dto</module>
         <module>wscapp-pantheon-api/wscapp-pantheon-api-interface</module>
         <module>wscapp-pantheon-model</module>
         <module>wscapp-pantheon-controller</module>
@@ -71,6 +72,13 @@
             </dependency>
 
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -87,12 +95,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

@@ -1,6 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.repositories;
 
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

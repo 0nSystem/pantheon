@@ -12,10 +12,6 @@ public class TranslatorUtils {
     private MessageSource messageSource;
 
 
-    public String createMessage(final String code) {
-        return createMessage(code, null, null);
-    }
-
     public String createMessage(final String code, final Locale locale, final Object... args) {
         return messageSource.getMessage(code, args, locale);
     }

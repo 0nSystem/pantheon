@@ -41,5 +41,11 @@
             <version>3.0.0</version> <!-- Asegúrate de usar la versión más reciente -->
         </dependency>
 
+        <!-- lombok dependencies should not end up on classpath -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

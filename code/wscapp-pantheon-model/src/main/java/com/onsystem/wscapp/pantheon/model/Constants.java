@@ -1,8 +1,5 @@
 package com.onsystem.wscapp.pantheon.model;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class Constants {
 
 
