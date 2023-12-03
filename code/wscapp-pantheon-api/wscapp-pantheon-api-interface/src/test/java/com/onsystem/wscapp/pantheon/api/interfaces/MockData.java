@@ -1,26 +1,26 @@
 package com.onsystem.wscapp.pantheon.api.interfaces;
 
-import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationDTO;
-import com.onsystem.wscapp.pantheon.api.dto.application.CreateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationDTO;
-import com.onsystem.wscapp.pantheon.api.dto.application.UpdateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.CreateAttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeDTO;
-import com.onsystem.wscapp.pantheon.api.dto.attribute.UpdateAttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.CreatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionDTO;
-import com.onsystem.wscapp.pantheon.api.dto.permission.UpdatePermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleDTO;
-import com.onsystem.wscapp.pantheon.api.dto.role.CreateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleDTO;
-import com.onsystem.wscapp.pantheon.api.dto.role.UpdateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
+import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.application.UpdateApplicationDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.application.UpdateApplicationLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.attribute.CreateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.attribute.CreateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.attribute.UpdateAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.attribute.UpdateAttributeLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.permission.CreatePermissionDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.permission.CreatePermissionLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.permission.UpdatePermissionDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.permission.UpdatePermissionLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.role.CreateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.role.CreateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
 
 
 public class MockData {

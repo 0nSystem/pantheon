@@ -1,9 +1,12 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.repositories;
 
 
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.LanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationLanguageRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.spublic.LanguageRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +20,7 @@ import java.time.LocalDateTime;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class ApplicationLanguageEntityUnitTest {
+class ApplicationLanguageEntityUnitTest {
 
     @Autowired
     private LanguageRepository languageRepository;

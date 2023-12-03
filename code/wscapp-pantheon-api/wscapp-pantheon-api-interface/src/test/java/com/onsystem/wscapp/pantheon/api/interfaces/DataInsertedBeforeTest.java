@@ -1,14 +1,14 @@
 package com.onsystem.wscapp.pantheon.api.interfaces;
 
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.AttributeEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.PermissionEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.RoleEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.ApplicationRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.AttributeRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.LanguageRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.PermissionRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.RoleRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.AttributeRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.spublic.LanguageRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
