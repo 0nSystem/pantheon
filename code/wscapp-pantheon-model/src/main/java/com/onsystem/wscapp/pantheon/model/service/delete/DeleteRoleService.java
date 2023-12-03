@@ -21,7 +21,7 @@ public class DeleteRoleService implements IDeleteRoleService {
 
     @Override
     public void deleteRole(Collection<Integer> roleIds) {
-        roleLanguageRepository.deleteByRoleIdRoleIn(roleIds);
+        roleLanguageRepository.deleteByIdRoleIn(roleIds);
         rolePermissionRepository.deleteByIdRoleIn(roleIds);
 
         roleRepository.deleteAllById(roleIds);

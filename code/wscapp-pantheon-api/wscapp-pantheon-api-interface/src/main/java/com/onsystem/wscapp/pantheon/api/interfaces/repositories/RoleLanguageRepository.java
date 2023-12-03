@@ -20,8 +20,10 @@ public interface RoleLanguageRepository extends JpaRepository<RoleLanguageEntity
     void update(final @Param("dto") UpdateRoleLanguageDTO updateRoleLanguage);
 
     @Modifying
+    @Query("DELETE FROM RoleLanguageEntity WHERE role.idRole = :roleId AND language.idLanguage IN (:languageIds) ")
     void deleteByRoleIdRoleAndLanguageIdLanguageIn(int roleId, Collection<Integer> languageIds);
 
     @Modifying
-    void deleteByRoleIdRoleIn(Collection<Integer> roleIds);
+    @Query("DELETE FROM RoleLanguageEntity WHERE role.idRole IN (:roleIds) ")
+    void deleteByIdRoleIn(Collection<Integer> roleIds);
 }
