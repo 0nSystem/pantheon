@@ -6,14 +6,18 @@ import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateAppli
 import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateApplicationService;
+import com.onsystem.wscapp.pantheon.model.Constants;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,15 +36,27 @@ public class CreateApplicationService implements ICreateApplicationService {
     @Autowired
     private MapperApplicationLanguageEntity mapperApplicationLanguageEntity;
 
+    @Autowired
+    private PermissionRepository permissionRepository;
+
+    @Transactional
     @Override
     public ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
         final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createToEntity(createApplication);
-
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
+
+        final PermissionEntity authorizedPermission = PermissionEntity.builder()
+                .application(applicationInserted)
+                .description(Constants.AUTORIZED_PERMISSION_NAME)
+                .name(Constants.AUTORIZED_PERMISSION_DESCRIPTION)
+                .build();
+
+        permissionRepository.save(authorizedPermission);
 
         return mapperApplicationEntity.entityToDTO(applicationInserted);
     }
 
+    @Transactional
     public Set<ApplicationLanguageDTO> createApplicationLanguages(final @Positive int applicationId,
                                                                   final Collection<CreateApplicationLanguageDTO> createApplicationLanguage) {
 

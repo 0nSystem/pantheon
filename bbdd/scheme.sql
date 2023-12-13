@@ -2,8 +2,8 @@
 -- Please log an issue at https://redmine.postgresql.org/projects/pgadmin4/issues/new if you find any bugs, including reproduction steps.
 
 
---CREATE DATABASE management;
---\c management;
+CREATE DATABASE management;
+\c management;
 
 CREATE SCHEMA users;
 CREATE SCHEMA applications;
@@ -105,14 +105,6 @@ CREATE TABLE IF NOT EXISTS public.language
     iso_639_1_code character varying(50) COLLATE pg_catalog."default" NOT NULL,
     language_family character varying(50) NOT NULL,
     CONSTRAINT language_pkey PRIMARY KEY (id_language)
-);
-
-
-CREATE TABLE IF NOT EXISTS users.user_application
-(
-    id_user integer NOT NULL,
-    id_application integer NOT NULL,
-    CONSTRAINT user_application_pkey PRIMARY KEY (id_user, id_application)
 );
 
 CREATE TABLE IF NOT EXISTS users.user_attribute
