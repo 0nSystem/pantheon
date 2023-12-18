@@ -8,7 +8,8 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPermissionKeyEntity {
+public class UserAttributeKeyEntity {
     private Integer user;
-    private Integer permission;
+
+    private Integer attribute;
 }

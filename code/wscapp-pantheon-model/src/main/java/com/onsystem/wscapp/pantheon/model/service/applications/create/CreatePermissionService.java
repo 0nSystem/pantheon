@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.model.service.applications.create;
 import com.onsystem.wscapp.pantheon.api.dto.applications.permission.*;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionLanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperPermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperPermissionLanguageEntity;
@@ -16,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -88,8 +92,8 @@ public class CreatePermissionService implements ICreatePermissionService {
 
         final Set<RolePermissionEntity> rolePermissionEntity = idsPermissionsInserted.stream()
                 .map(idPermission -> RolePermissionEntity.builder()
-                        .idPermission(idPermission)
-                        .idRole(idRole)
+                        .permission(PermissionEntity.builder().idPermission(idPermission).build())
+                        .role(RoleEntity.builder().idRole(idRole).build())
                         .build())
                 .collect(Collectors.toSet());
 

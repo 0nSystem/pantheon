@@ -14,7 +14,7 @@ public class Constants {
         public static final String PERMISSION_CONTROLLER = START_URI + "/permission";
         public static final String ATTRIBUTE_CONTROLLER = START_URI + "/attribute";
         public static final String USER_ROLE_CONTROLLER = START_URI + "/userRole";
-        public static final String USER_APPLICATION_CONTROLLER = START_URI + "/userApplication";
+        public static final String USER_APPLICATION_CONTROLLER = START_URI + "/ ";
         public static final String USER_PERMISSION_CONTROLLER = START_URI + "/userPermission";
         public static final String ROLE_PERMISSION_CONTROLLER = START_URI + "/rolePermission";
 

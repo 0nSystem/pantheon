@@ -42,7 +42,6 @@ class TestCreatePermissionService {
     private Integer idRole;
 
 
-
     @Autowired
     private ICreatePermissionService iCreatePermissionService;
     @Autowired
@@ -65,13 +64,14 @@ class TestCreatePermissionService {
                             )
                     );
 
-                    final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
-                                    .idPermission(permission.getIdPermission())
-                                    .idRole(idRole).build())
+                    final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(
+                                    RolePermissionKeyEntity.builder()
+                                            .permission(permission.getIdPermission())
+                                            .role(idRole).build())
                             .orElseThrow();
                     dynamicTests.add(
                             DynamicTest.dynamicTest(
-                                    String.format("permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                                    String.format("permission id: %s , role id: %s", rolePermissionEntity.getPermission().getIdPermission(), rolePermissionEntity.getRole().getIdRole()),
                                     () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(idRole, permission.getIdPermission()).accept(rolePermissionEntity)
                             )
                     );
@@ -89,6 +89,7 @@ class TestCreatePermissionService {
                                 .idLanguage(idLanguage).build())
         );
     }
+
     @ParameterizedTest
     @MethodSource({"argumentsCreatePermissionLanguage"})
     void createPermissionLanguage(final int permissionId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
@@ -131,12 +132,12 @@ class TestCreatePermissionService {
 
 
             final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
-                            .idPermission(permissionWithLanguage.getPermission().getIdPermission())
-                            .idRole(idRole).build())
+                            .permission(permissionWithLanguage.getPermission().getIdPermission())
+                            .role(idRole).build())
                     .orElseThrow();
             dynamicTests.add(
                     DynamicTest.dynamicTest(
-                            String.format("belong permission role  permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                            String.format("belong permission role  permission id: %s , role id: %s", rolePermissionEntity.getPermission().getIdPermission(), rolePermissionEntity.getRole().getIdRole()),
                             () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(
                                     idRole, permissionWithLanguage.getPermission().getIdPermission()
                             ).accept(rolePermissionEntity)

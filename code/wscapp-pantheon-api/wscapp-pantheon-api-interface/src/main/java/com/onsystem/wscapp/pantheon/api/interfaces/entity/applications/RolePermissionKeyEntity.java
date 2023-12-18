@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class RolePermissionKeyEntity {
-    private Integer idRole;
-    private Integer idPermission;
+    private Integer role;
+    private Integer permission;
 
 }

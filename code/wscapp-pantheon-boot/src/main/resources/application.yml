@@ -5,14 +5,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/management
     username: postgres
     password: postgres
-    initialization-mode: never
 
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: create
-        default-schema: applications, enterprise, users, public
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    database: postgresql
 
   logging:
     level:

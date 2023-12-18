@@ -1,9 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
@@ -21,9 +18,13 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ROLE_P
 public class RolePermissionEntity {
 
     @Id
-    private Integer idRole;
+    @OneToOne
+    @JoinColumn(name = "id_role")
+    private RoleEntity role;
     @Id
-    private Integer idPermission;
+    @OneToOne
+    @JoinColumn(name = "id_permission")
+    private PermissionEntity permission;
 
 
 }
