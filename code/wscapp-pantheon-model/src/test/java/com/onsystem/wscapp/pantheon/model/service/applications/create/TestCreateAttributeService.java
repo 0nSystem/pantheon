@@ -9,6 +9,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateAttributeService;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerDTO;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
+@Transactional
 class TestCreateAttributeService {
 
     @Autowired

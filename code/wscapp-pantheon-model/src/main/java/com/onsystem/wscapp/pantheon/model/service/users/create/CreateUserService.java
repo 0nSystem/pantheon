@@ -7,8 +7,10 @@ import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.users.MapperUserEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.users.create.ICreateUserService;
+import com.onsystem.wscapp.pantheon.model.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,8 +24,9 @@ public class CreateUserService implements ICreateUserService {
 
 
     @Override
+    @Transactional
     public CreateAfterUserDTO createUser(CreateUserDTO createUser) {
-        validationUserNotExistEmailAndLogin(List.of(createUser));
+        validationNotExistEmailOrLogin(List.of(createUser));
 
         //FIXME remove createUserDTO
         //FIXME LOWER CASE?
@@ -33,8 +36,11 @@ public class CreateUserService implements ICreateUserService {
     }
 
     @Override
+    @Transactional
     public List<CreateAfterUserDTO> createUsers(List<CreateUserDTO> createUser) {
-        validationUserNotExistEmailAndLogin(createUser);
+        validationNotRepeatedArgumentsEmailAndLogin(createUser);
+        validationNotExistEmailOrLogin(createUser);
+
 
         //FIXME remove createUserDTO
         //FIXME LOWER CASE?
@@ -55,7 +61,7 @@ public class CreateUserService implements ICreateUserService {
      * @param createUser
      * @throws InfoException
      */
-    private void validationUserNotExistEmailAndLogin(List<CreateUserDTO> createUser) throws InfoException {
+    private void validationNotExistEmailOrLogin(List<CreateUserDTO> createUser) throws InfoException {
         final List<String> login = createUser.stream().map(CreateUserDTO::getLogin).toList();
         final List<String> email = createUser.stream().map(CreateUserDTO::getEmail).toList();
 
@@ -64,5 +70,19 @@ public class CreateUserService implements ICreateUserService {
             //FIXME
             throw new InfoException("Error");
         }
+    }
+
+    private void validationNotRepeatedArgumentsEmailAndLogin(List<CreateUserDTO> createUser) {
+
+        if (Utils.elementsRepeatedInList(createUser, CreateUserDTO::getLogin)) {
+            //TODO
+            throw new InfoException("");
+        }
+
+        if (Utils.elementsRepeatedInList(createUser, CreateUserDTO::getEmail)) {
+            //TODO
+            throw new InfoException("");
+        }
+
     }
 }

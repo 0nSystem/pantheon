@@ -24,7 +24,7 @@ public abstract class MapperUserAttributeEntity {
                                 .builder()
                                 .attribute(AttributeEntity.builder().idAttribute(createUserAttributeDTO.getAttributeId()).build())
                                 .user(UserEntity.builder().idUser(userId).build())
-                                .value(value)
+                                .attribute_value(value)
                                 .build()
                 )
                 .collect(Collectors.toList());

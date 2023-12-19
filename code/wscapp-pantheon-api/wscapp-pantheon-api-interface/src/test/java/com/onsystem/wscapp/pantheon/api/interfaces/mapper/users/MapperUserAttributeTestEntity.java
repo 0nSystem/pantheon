@@ -33,7 +33,7 @@ public class MapperUserAttributeTestEntity {
             Assertions.assertEquals(createUserAttribute.getAttributeId(), userAttributeEntity.getAttribute().getIdAttribute());
             Assertions.assertNotNull(userAttributeEntity.getUser());
             Assertions.assertEquals(userId, userAttributeEntity.getUser().getIdUser());
-            Assertions.assertTrue(createUserAttribute.getValue().contains(userAttributeEntity.getValue()));
+            Assertions.assertTrue(createUserAttribute.getValue().contains(userAttributeEntity.getAttribute_value()));
 
         };
     }
@@ -52,7 +52,7 @@ public class MapperUserAttributeTestEntity {
                         "UserAttribute assign user: %s ,attribute: %s, value: %s ",
                         uae.getUser().getIdUser(),
                         uae.getAttribute().getIdAttribute(),
-                        uae.getValue()
+                        uae.getAttribute_value()
                 ),
                 caseDefaultCorrectCreateUserAttributeToEntity(createUserAttribute, userId)
         );

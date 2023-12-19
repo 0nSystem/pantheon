@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
 
@@ -15,5 +17,8 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
     @Query("UPDATE RoleEntity SET name = :#{#dto.name}, description = :#{#dto.description} " +
             "WHERE idRole = :#{#dto.idRole}")
     void update(final @Param("dto") UpdateRoleDTO updateRole);
+
+    @Query(" SELECT application.idApplication FROM RoleEntity WHERE idRole IN (:roleIds)")
+    List<Integer> findIdsApplicationByIdRoleIn(List<Integer> roleIds);
 
 }

@@ -13,9 +13,6 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-
-    List<UserEntity> findByDeleteDateNullAndIdUserIn(final Collection<Integer> idsUser);
-
     //TODO update
     @Modifying
     @Query("UPDATE UserEntity SET deleteDate = :deleteDate, deleteIdUser = :deleteIdUser WHERE idUser IN (:userIds)")
@@ -24,7 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
                 final @Param("deleteIdUser") Integer deleteIdUser);
 
 
-    @Query("SELECT COUNT(*) FROM UserEntity WHERE email IN (:emails) OR login IN (:logins) AND deleteDate IS NOT NULL")
+    @Query("SELECT COUNT(*) FROM UserEntity WHERE email IN (:emails) OR login IN (:logins) AND deleteDate IS NULL ")
     int countByEmailInOrLoginInAndDeleteIdUserIsNot(
             final List<String> emails,
             final List<String> logins

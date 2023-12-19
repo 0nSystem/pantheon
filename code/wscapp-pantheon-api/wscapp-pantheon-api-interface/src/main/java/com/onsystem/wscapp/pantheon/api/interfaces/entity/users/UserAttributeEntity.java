@@ -29,7 +29,7 @@ public class UserAttributeEntity {
     private AttributeEntity attribute;
 
     @NotEmpty
-    private String value;
+    private String attribute_value;
 
 
 }

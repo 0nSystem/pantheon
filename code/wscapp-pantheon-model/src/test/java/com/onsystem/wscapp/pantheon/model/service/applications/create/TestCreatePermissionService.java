@@ -9,6 +9,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.Rol
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreatePermissionService;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerDTO;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerEntity;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.TestInstance;
@@ -31,6 +32,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
+@Transactional
 class TestCreatePermissionService {
     @Autowired
     private Integer idApplication;

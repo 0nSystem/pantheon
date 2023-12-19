@@ -2,8 +2,8 @@ package com.onsystem.wscapp.pantheon.model.service.users;
 
 import com.onsystem.wscapp.pantheon.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserDTO;
-import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.users.create.ICreateUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,16 +25,20 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.MockData.DataCreateMoc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@Import({DataInsertedBeforeTest.class})
 @Transactional
 class TestCreateUserService {
 
     @Autowired
     private ICreateUserService iCreateUserService;
+    @Autowired
+    private UserRepository userRepository;
 
     private Stream<Arguments> argumentsCorrectCreateUser() {
+        final var a = CREATE_USER_MOCK;
+        a.setLogin("1");
+        a.setEmail("2");
         return Stream.of(
-                Arguments.of(CREATE_USER_MOCK)
+                Arguments.of(a)
         );
     }
 
@@ -52,24 +54,27 @@ class TestCreateUserService {
         };
     }
 
-    @Rollback
     @MethodSource({"argumentsCorrectCreateUser"})
     @ParameterizedTest
     void testCorrectCreateUser(CreateUserDTO createUser) throws Throwable {
+        //TODO Resolve transational error
         final CreateAfterUserDTO createAfterUser = iCreateUserService.createUser(createUser);
 
         throwingCorrectCreateUser(createUser)
                 .accept(createAfterUser);
     }
 
-    @Rollback
+
     @Test
     void testErrorCreateUserExistFieldsWithMailOrLogin() {
-        iCreateUserService.createUser(CREATE_USER_MOCK);
+        final var a = CREATE_USER_MOCK;
+        a.setLogin("1");
+        a.setEmail("2");
+        iCreateUserService.createUser(a);
 
         Assertions.assertThrowsExactly(
                 InfoException.class,
-                () -> iCreateUserService.createUser(CREATE_USER_MOCK)
+                () -> iCreateUserService.createUser(a)
         );
     }
 
