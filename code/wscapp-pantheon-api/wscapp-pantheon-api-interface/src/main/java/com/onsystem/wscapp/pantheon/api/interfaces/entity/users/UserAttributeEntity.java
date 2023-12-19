@@ -4,6 +4,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.entity.users;
 import com.onsystem.wscapp.pantheon.api.interfaces.Constants;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.AttributeEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class UserAttributeEntity {
     @JoinColumn(name = "id_attribute")
     private AttributeEntity attribute;
 
+    @NotEmpty
     private String value;
 
 

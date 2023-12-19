@@ -5,6 +5,7 @@ import com.onsystem.wscapp.pantheon.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.helpers.ITimeHelper;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.ISessionManager;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

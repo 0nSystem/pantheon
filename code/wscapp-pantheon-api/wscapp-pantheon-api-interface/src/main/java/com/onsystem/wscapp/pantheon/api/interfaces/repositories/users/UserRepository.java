@@ -22,4 +22,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     void delete(final @Param("userIds") Collection<Integer> userIds,
                 final @Param("deleteDate") Timestamp deleteDate,
                 final @Param("deleteIdUser") Integer deleteIdUser);
+
+
+    @Query("SELECT COUNT(*) FROM UserEntity WHERE email IN (:emails) OR login IN (:logins) AND deleteDate IS NOT NULL")
+    int countByEmailInOrLoginInAndDeleteIdUserIsNot(
+            final List<String> emails,
+            final List<String> logins
+    );
 }
