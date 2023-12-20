@@ -47,8 +47,8 @@ public class CreateApplicationService implements ICreateApplicationService {
 
         final PermissionEntity authorizedPermission = PermissionEntity.builder()
                 .application(applicationInserted)
-                .description(Constants.AUTORIZED_PERMISSION_NAME)
-                .name(Constants.AUTORIZED_PERMISSION_DESCRIPTION)
+                .name(Constants.AUTORIZED_PERMISSION_NAME)
+                .description(Constants.AUTORIZED_PERMISSION_DESCRIPTION)
                 .build();
 
         permissionRepository.save(authorizedPermission);

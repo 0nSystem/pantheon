@@ -12,25 +12,40 @@ public class Utils {
     //TODO test
     public static <T, R> boolean elementsRepeatedInList(final @NotEmpty List<T> objects,
                                                         final @Nullable Function<T, R> fn_extract_data_in_object) {
-
+        //If is one elements
         //TODO CollectionUtils.containsAny()?
         if (fn_extract_data_in_object == null) {
-            return objects.stream()
-                    .anyMatch(o1 ->
-                            objects.stream().anyMatch(o2 -> equalsMethod(o1, o2))
-                    );
+            for (int i = 0; i < objects.size(); i++) {
+                T o1 = objects.get(i);
+                for (int j = 0; j < objects.size(); j++) {
+                    if (i == j) {
+                        continue;
+                    }
+                    T o2 = objects.get(j);
+                    if (equalsMethod(o1, o2)) {
+                        return true;
+                    }
+                }
+            }
         } else {
-            return objects.stream()
-                    .anyMatch(o1 ->
-                            objects.stream()
-                                    .anyMatch(o2 -> equalsMethod(
-                                            fn_extract_data_in_object.apply(o1),
-                                            fn_extract_data_in_object.apply(o2))
-                                    )
-                    );
+            for (int i = 0; i < objects.size(); i++) {
+                R o1 = fn_extract_data_in_object.apply(objects.get(i));
+                for (int j = 0; j < objects.size(); j++) {
+                    if (i == j) {
+                        continue;
+                    }
+                    R o2 = fn_extract_data_in_object.apply(objects.get(j));
+                    if (equalsMethod(o1, o2)) {
+                        return true;
+                    }
+                }
+            }
         }
 
+        return false;
+
     }
+
     private static <T> boolean equalsMethod(T t, T o) {
         return t.equals(o);
     }

@@ -25,13 +25,13 @@ public class ApplicationLanguageEntity {
 
     @Id
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idApplication")
     private ApplicationEntity application;
 
     @Id
     @ToString.Exclude
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "idLanguage")
     private LanguageEntity language;
 }

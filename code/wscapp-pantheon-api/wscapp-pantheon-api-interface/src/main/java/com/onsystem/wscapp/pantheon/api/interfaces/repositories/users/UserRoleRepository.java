@@ -19,4 +19,5 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, UserRo
             " FROM UserRoleEntity WHERE user.idUser = :userId AND role.name = :authorizedPermission")
     List<Integer> findIdsApplicationByUser(final Integer userId, final String authorizedPermission);
 
+
 }

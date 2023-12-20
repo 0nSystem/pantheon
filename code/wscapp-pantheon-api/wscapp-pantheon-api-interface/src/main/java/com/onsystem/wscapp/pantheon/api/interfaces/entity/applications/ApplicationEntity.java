@@ -46,18 +46,18 @@ public class ApplicationEntity implements HightAuditFields, DeleteAuditFields {
     private Integer deleteIdUser;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "application")
     private Set<ApplicationLanguageEntity> applicationLanguages;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "application")
     private Set<RoleEntity> roles;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "application")
     private Set<PermissionEntity> permissions;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "application", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "application")
     private Set<AttributeEntity> attributes;
 }
