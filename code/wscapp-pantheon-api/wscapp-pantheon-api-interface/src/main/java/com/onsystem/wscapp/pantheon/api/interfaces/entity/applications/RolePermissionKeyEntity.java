@@ -3,9 +3,7 @@ package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
