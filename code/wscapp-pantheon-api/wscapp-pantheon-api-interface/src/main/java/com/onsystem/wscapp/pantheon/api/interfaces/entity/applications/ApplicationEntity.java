@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
@@ -47,17 +48,17 @@ public class ApplicationEntity implements HightAuditFields, DeleteAuditFields {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<ApplicationLanguageEntity> applicationLanguages;
+    private Set<ApplicationLanguageEntity> applicationLanguages = new HashSet<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<RoleEntity> roles;
+    private Set<RoleEntity> roles = new HashSet<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<PermissionEntity> permissions;
+    private Set<PermissionEntity> permissions = new HashSet<>();
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<AttributeEntity> attributes;
+    private Set<AttributeEntity> attributes = new HashSet<>();
 }

@@ -6,12 +6,13 @@ import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateAppli
 import com.onsystem.wscapp.pantheon.api.dto.applications.application.CreateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.mapper.applications.MapperApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateApplicationService;
 import com.onsystem.wscapp.pantheon.model.Constants;
 import jakarta.validation.constraints.Positive;
@@ -37,21 +38,21 @@ public class CreateApplicationService implements ICreateApplicationService {
     private MapperApplicationLanguageEntity mapperApplicationLanguageEntity;
 
     @Autowired
-    private PermissionRepository permissionRepository;
+    private RoleRepository roleRepository;
 
     @Transactional
     @Override
     public ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
         final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createToEntity(createApplication);
+
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
-        final PermissionEntity authorizedPermission = PermissionEntity.builder()
+        roleRepository.save(RoleEntity.builder()
+                .name(Constants.AUTORIZED_ROLE_NAME)
                 .application(applicationInserted)
-                .name(Constants.AUTORIZED_PERMISSION_NAME)
-                .description(Constants.AUTORIZED_PERMISSION_DESCRIPTION)
-                .build();
+                .description(Constants.AUTORIZED_ROLE_DESCRIPTION)
+                .build());
 
-        permissionRepository.save(authorizedPermission);
 
         return mapperApplicationEntity.entityToDTO(applicationInserted);
     }

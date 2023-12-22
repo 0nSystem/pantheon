@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
@@ -19,7 +20,7 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
             "WHERE idRole = :#{#dto.idRole}")
     void update(final @Param("dto") UpdateRoleDTO updateRole);
 
-    @Query(" SELECT application.idApplication FROM RoleEntity WHERE idRole IN (:roleIds)")
-    List<Integer> findIdsApplicationByIdRoleIn(List<Integer> roleIds);
+    @Query(" SELECT DISTINCT application.idApplication FROM RoleEntity WHERE idRole IN (:roleIds)")
+    Set<Integer> findIdsApplicationByIdRoleIn(Set<Integer> roleIds);
 
 }

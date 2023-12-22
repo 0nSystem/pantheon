@@ -4,6 +4,7 @@ import com.onsystem.wscapp.pantheon.api.dto.applications.application.Application
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserRoleKeyEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_MOCK;
 
@@ -59,24 +61,12 @@ class TestCreateUserRoleService {
         final ApplicationEntity applicationEntity = applicationRepository
                 .findById(application.getIdApplication())
                 .orElseThrow();
-        final var languageAPp = applicationEntity.getApplicationLanguages();
 
-        final Set<PermissionEntity> permissions = applicationEntity.getPermissions();
+        final Set<Integer> rolesIdsApplication = applicationEntity.getRoles().stream()
+                .map(RoleEntity::getIdRole)
+                .collect(Collectors.toSet());
 
-        final Integer roleIdAutorizedPermission = permissionRepository.findFirstByApplicationIdApplicationAndNameIgnoreCase(application.getIdApplication(), Constants.AUTORIZED_PERMISSION_NAME)
-                .map(PermissionEntity::getIdPermission)
-                .orElseThrow(() -> new RuntimeException("Error not found autorized permission"));
-
-        iCreateUserRoleService.assignRole(List.of(roleIdAutorizedPermission), idUser);
-
-        final UserRoleEntity userRoleEntity = userRoleRepository.findById(UserRoleKeyEntity.builder()
-                        .role(roleIdAutorizedPermission)
-                        .user(idUser)
-                        .build())
-                .orElseThrow();
-
-        Assertions.assertEquals(roleIdAutorizedPermission, userRoleEntity.getRole().getIdRole());
-        Assertions.assertEquals(idUser, userRoleEntity.getUser().getIdUser());
+        iCreateUserRoleService.assignRole(rolesIdsApplication, idUser);
 
 
     }

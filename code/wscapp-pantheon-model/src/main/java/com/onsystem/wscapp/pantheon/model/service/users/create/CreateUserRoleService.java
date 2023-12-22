@@ -4,18 +4,16 @@ import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntit
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRoleRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.users.create.ICreateUserRoleService;
 import com.onsystem.wscapp.pantheon.model.Constants;
-import com.onsystem.wscapp.pantheon.model.Utils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CreateUserRoleService implements ICreateUserRoleService {
@@ -28,8 +26,7 @@ public class CreateUserRoleService implements ICreateUserRoleService {
 
 
     @Override
-    public void assignRole(List<Integer> roleIds, int userId) {
-        validateNotRepeatedArguments(roleIds);
+    public void assignRole(Set<Integer> roleIds, int userId) {
         validateUserBelongsApplicationToAssingRoles(roleIds, userId);
         validateUserNotContainsRolesInDataBase(roleIds, userId);
 
@@ -45,30 +42,22 @@ public class CreateUserRoleService implements ICreateUserRoleService {
 
     }
 
-    private void validateUserNotContainsRolesInDataBase(List<Integer> roleIds, int userId) {
-        final int countUserWithRoles = userRoleRepository.countUserRoleEntitiesByIdRoleInAndIdUser(roleIds, userId);
+    private void validateUserNotContainsRolesInDataBase(Set<Integer> roleIds, int userId) {
+        final Set<RoleEntity> roleAssignedInUser = userRoleRepository.findByUserRoleEntitiesByIdRoleInAndIdUser(roleIds, userId);
 
-        if (countUserWithRoles > 0) {
-            //FIXME
+        if (CollectionUtils.isNotEmpty(roleAssignedInUser)) {
+            //FIXME send roles assigned to client
             throw new InfoException("");
         }
 
     }
 
-    private void validateNotRepeatedArguments(final List<Integer> roleIds) {
-        boolean argumetsRolesIdsIsRepeated = Utils.elementsRepeatedInList(roleIds, null);
 
-        if (argumetsRolesIdsIsRepeated) {
-            //FIXME
-            throw new InfoException("");
-        }
-    }
-
-    private void validateUserBelongsApplicationToAssingRoles(final List<Integer> roleIds, final int userId) {
-        final List<Integer> applicationIdsInRoles = roleRepository.findIdsApplicationByIdRoleIn(roleIds);
+    private void validateUserBelongsApplicationToAssingRoles(final Set<Integer> roleIds, final int userId) {
+        final Set<Integer> applicationIdsInRoles = roleRepository.findIdsApplicationByIdRoleIn(roleIds);
 
 
-        final List<Integer> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(userId, Constants.AUTORIZED_PERMISSION_NAME);
+        final Set<Integer> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(userId, Constants.AUTORIZED_ROLE_NAME);
 
         boolean notEqualsApplicationRolesAndUserInApplication = false;
 
