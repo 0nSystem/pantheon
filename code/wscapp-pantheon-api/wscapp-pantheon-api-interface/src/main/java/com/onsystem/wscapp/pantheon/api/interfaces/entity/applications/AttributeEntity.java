@@ -16,7 +16,6 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.*;
 @Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttributeEntity {

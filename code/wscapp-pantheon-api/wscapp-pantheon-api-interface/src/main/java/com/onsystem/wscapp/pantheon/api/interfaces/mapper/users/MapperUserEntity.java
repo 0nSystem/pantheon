@@ -22,7 +22,7 @@ public abstract class MapperUserEntity {
 
     @Mappings({
             @Mapping(target = "highDate", expression = "java(ITimeHelper.now())"),
-            @Mapping(target = "attribute", ignore = true),
+            @Mapping(target = "userAttribute", ignore = true),
             @Mapping(target = "deleteDate", ignore = true),
             @Mapping(target = "deleteIdUser", ignore = true),
             @Mapping(target = "idUser", ignore = true),
