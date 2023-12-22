@@ -87,10 +87,6 @@ public class UserEntity implements HightAuditFields, DeleteAuditFields {
     private Set<RoleEntity> role;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = TABLE_USER_ATTRIBUTE, schema = SCHEME_USERS,
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_attribute")
-    )
-    private List<AttributeEntity> attribute;
+    @OneToMany(mappedBy = "user")
+    private List<UserAttributeEntity> userAttribute;
 }

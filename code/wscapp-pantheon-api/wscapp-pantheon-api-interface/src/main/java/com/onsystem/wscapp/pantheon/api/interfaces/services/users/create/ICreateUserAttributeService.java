@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ICreateUserAttributeService {
 
-    CreateUserAttributeDTO assignAttribute(CreateUserAttributeDTO createUserAttribute);
 
     List<CreateUserAttributeDTO> assignAttribute(List<CreateUserAttributeDTO> createUserAttribute);
 }

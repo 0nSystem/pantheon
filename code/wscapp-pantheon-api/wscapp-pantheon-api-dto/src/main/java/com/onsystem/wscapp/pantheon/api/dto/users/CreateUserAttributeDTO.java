@@ -19,6 +19,8 @@ public class CreateUserAttributeDTO {
 
     @Positive
     private int attributeId;
+    @NotNull
+    private int userId;
 
     @NotNull
     @NotEmpty

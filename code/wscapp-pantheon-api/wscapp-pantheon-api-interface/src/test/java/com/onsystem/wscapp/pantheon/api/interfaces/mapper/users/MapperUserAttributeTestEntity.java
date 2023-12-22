@@ -27,12 +27,12 @@ public class MapperUserAttributeTestEntity {
     private MapperUserAttributeEntity mapperUserAttributeEntity;
 
 
-    private static ThrowingConsumer<UserAttributeEntity> caseDefaultCorrectCreateUserAttributeToEntity(final CreateUserAttributeDTO createUserAttribute, int userId) {
+    private static ThrowingConsumer<UserAttributeEntity> caseDefaultCorrectCreateUserAttributeToEntity(final CreateUserAttributeDTO createUserAttribute) {
         return userAttributeEntity -> {
             Assertions.assertNotNull(userAttributeEntity.getAttribute().getIdAttribute());
             Assertions.assertEquals(createUserAttribute.getAttributeId(), userAttributeEntity.getAttribute().getIdAttribute());
             Assertions.assertNotNull(userAttributeEntity.getUser());
-            Assertions.assertEquals(userId, userAttributeEntity.getUser().getIdUser());
+            Assertions.assertEquals(createUserAttribute.getUserId(), userAttributeEntity.getUser().getIdUser());
             Assertions.assertTrue(createUserAttribute.getValue().contains(userAttributeEntity.getAttribute_value()));
 
         };
@@ -42,9 +42,9 @@ public class MapperUserAttributeTestEntity {
     @TestFactory
     Stream<DynamicTest> testCaseCorrectCase() {
         final CreateUserAttributeDTO createUserAttribute = CREATE_USER_ATTRIBUTE_MOCK;
-        final int userId = 1;
+        createUserAttribute.setUserId(1);
 
-        final List<UserAttributeEntity> userAttributeEntity = mapperUserAttributeEntity.createToEntity(createUserAttribute, userId);
+        final List<UserAttributeEntity> userAttributeEntity = mapperUserAttributeEntity.createToEntity(createUserAttribute);
 
         return DynamicTest.stream(
                 userAttributeEntity.stream(),
@@ -54,7 +54,7 @@ public class MapperUserAttributeTestEntity {
                         uae.getAttribute().getIdAttribute(),
                         uae.getAttribute_value()
                 ),
-                caseDefaultCorrectCreateUserAttributeToEntity(createUserAttribute, userId)
+                caseDefaultCorrectCreateUserAttributeToEntity(createUserAttribute)
         );
 
     }

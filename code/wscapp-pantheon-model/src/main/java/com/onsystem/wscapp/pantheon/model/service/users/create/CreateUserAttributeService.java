@@ -1,30 +1,115 @@
 package com.onsystem.wscapp.pantheon.model.service.users.create;
 
-import com.onsystem.wscapp.pantheon.api.dto.applications.attribute.*;
-import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateAttributeService;
+import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
+import com.onsystem.wscapp.pantheon.api.interfaces.mapper.users.MapperUserAttributeEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.AttributeRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserAttributeRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.services.users.create.ICreateUserAttributeService;
+import com.onsystem.wscapp.pantheon.model.helpers.BelongApplicationsHelper;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class CreateUserAttributeService implements ICreateAttributeService {
+public class CreateUserAttributeService implements ICreateUserAttributeService {
+
+    @Autowired
+    private UserAttributeRepository userAttributeRepository;
+    @Autowired
+    private MapperUserAttributeEntity mapperUserAttributeEntity;
+    @Autowired
+    private AttributeRepository attributeRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private BelongApplicationsHelper belongApplicationsHelper;
 
 
+    @Transactional
     @Override
-    public Set<AttributeDTO> createAttributes(int applicationId, Set<CreateAttributeDTO> createAttribute) {
-        return null;
+    public List<CreateUserAttributeDTO> assignAttribute(List<CreateUserAttributeDTO> createUserAttributes) {
+        validationUserInApplicationThisIdsAttributes(createUserAttributes);
+
+        final List<UserAttributeEntity> attributeEntities = createUserAttributes.stream().map(mapperUserAttributeEntity::createToEntity)
+                .flatMap(Collection::stream)
+                .toList();
+
+        userAttributeRepository.saveAll(attributeEntities);
+
+        return createUserAttributes;
     }
 
-    @Override
-    public Set<AttributeWithLanguagesDTO> createAttributesWithLanguages(int applicationId, Set<CreateAttributeWithLanguageDTO> createAttribute) {
-        return null;
+    private void validationUserInApplicationThisIdsAttributes(List<CreateUserAttributeDTO> createUserAttribute) {
+        final Map<Integer, List<Integer>> mapIdUserIdsAttributes = createUserAttribute.stream()
+                .collect(Collectors.groupingBy(CreateUserAttributeDTO::getUserId,
+                        Collectors.mapping(CreateUserAttributeDTO::getAttributeId, Collectors.toList())));
+
+        final Map<Integer, List<Integer>> mapIdUserIdsApplications = belongApplicationsHelper.getUserBelongApplication(mapIdUserIdsAttributes.keySet());
+
+        final Set<Integer> idsAllAttributes = mapIdUserIdsAttributes.values().stream()
+                .flatMap(Collection::stream).collect(Collectors.toSet());
+        final Map<Integer, List<Integer>> mapIdApplicationIdsAttributes = belongApplicationsHelper.getAttributeBelongApplication(idsAllAttributes);
+
+        final List<String> errors = validateUsersAttributes(
+                mapIdUserIdsApplications, mapIdApplicationIdsAttributes, mapIdUserIdsAttributes
+        );
+        if (CollectionUtils.isNotEmpty(errors)) {
+            //TODO peding
+            throw new InfoException("");
+        }
+
+
     }
 
-    @Override
-    public Set<AttributeLanguageDTO> createAttributesLanguages(int attributeId, Set<CreateAttributeLanguageDTO> createAttribute) {
-        return null;
+    //TODO
+    private List<String> validateUsersAttributes(Map<Integer, List<Integer>> mapIdUserIdsApplications,
+                                                 Map<Integer, List<Integer>> mapIdApplicationIdsAttributes,
+                                                 Map<Integer, List<Integer>> mapIdUserIdsAttributes) {
+
+        final List<String> errors = new ArrayList<>();
+
+        for (Map.Entry<Integer, List<Integer>> entryUserIdApplicationIds : mapIdUserIdsApplications.entrySet()) {
+            int userId = entryUserIdApplicationIds.getKey();
+            List<Integer> applicationIds = entryUserIdApplicationIds.getValue();
+
+            // Iterate over the applicationIds associated with the current userId
+            for (int applicationId : applicationIds) {
+                // Check if the applicationId exists in mapIdApplicationIdsAttributes
+                final List<Integer> attributeIdsForApplication = mapIdApplicationIdsAttributes.get(applicationId);
+                if (attributeIdsForApplication != null) {
+
+                    // Check if the userId has attributes that belong to the current applicationId
+                    final List<Integer> attributeIdsForUser = mapIdUserIdsAttributes.get(userId);
+                    if (attributeIdsForUser != null) {
+
+                        // Check if there are attributeIds for the user that do not belong to the application
+                        List<Integer> invalidAttributeIds = attributeIdsForUser.stream()
+                                .filter(attributeId -> !attributeIdsForApplication.contains(attributeId))
+                                .collect(Collectors.toList());
+
+                        if (!invalidAttributeIds.isEmpty()) {
+                            //TODO
+                            errors.add("User with ID " + userId + " has invalid attributes for Application ID " + applicationId
+                                    + ": " + invalidAttributeIds);
+                        }
+                    }
+                } else {
+                    //TODO
+                    errors.add("Invalid Application ID " + applicationId + " for User ID " + userId);
+                }
+            }
+        }
+
+        return errors;
     }
-
-
-
 }

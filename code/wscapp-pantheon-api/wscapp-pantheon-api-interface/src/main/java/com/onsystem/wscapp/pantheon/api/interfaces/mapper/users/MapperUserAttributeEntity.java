@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public abstract class MapperUserAttributeEntity {
 
 
-    public List<UserAttributeEntity> createToEntity(CreateUserAttributeDTO createUserAttributeDTO, int userId) {
+    public List<UserAttributeEntity> createToEntity(CreateUserAttributeDTO createUserAttributeDTO) {
         return createUserAttributeDTO.getValue().stream()
                 .map(value ->
                         UserAttributeEntity
                                 .builder()
                                 .attribute(AttributeEntity.builder().idAttribute(createUserAttributeDTO.getAttributeId()).build())
-                                .user(UserEntity.builder().idUser(userId).build())
+                                .user(UserEntity.builder().idUser(createUserAttributeDTO.getUserId()).build())
                                 .attribute_value(value)
                                 .build()
                 )

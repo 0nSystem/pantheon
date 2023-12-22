@@ -1,5 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserAttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -43,12 +44,8 @@ public class AttributeEntity {
     @OneToMany(mappedBy = "attribute", fetch = FetchType.LAZY)
     private Set<AttributeLanguageEntity> attributeLanguages;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = TABLE_USER_ATTRIBUTE, schema = SCHEME_USERS,
-            joinColumns = @JoinColumn(name = "id_attribute"),
-            inverseJoinColumns = @JoinColumn(name = "id_user")
-    )
-    private Set<UserEntity> user;
+    @OneToMany(mappedBy = "attribute")
+    private Set<UserAttributeEntity> userAttribute;
 
 
 }
