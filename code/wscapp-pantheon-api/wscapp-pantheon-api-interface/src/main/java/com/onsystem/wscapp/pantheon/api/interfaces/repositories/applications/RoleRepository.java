@@ -1,6 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications;
 
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleDTO;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,5 +23,8 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
 
     @Query(" SELECT DISTINCT application.idApplication FROM RoleEntity WHERE idRole IN (:roleIds)")
     Set<Integer> findIdsApplicationByIdRoleIn(Set<Integer> roleIds);
+
+    @Query
+    Set<RoleEntity> findByApplicationIdApplication(final int applicationId);
 
 }

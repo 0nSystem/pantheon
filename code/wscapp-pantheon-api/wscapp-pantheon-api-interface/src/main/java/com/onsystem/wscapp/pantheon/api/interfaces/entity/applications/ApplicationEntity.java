@@ -48,17 +48,17 @@ public class ApplicationEntity implements HightAuditFields, DeleteAuditFields {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<ApplicationLanguageEntity> applicationLanguages = new HashSet<>();
+    private Set<ApplicationLanguageEntity> applicationLanguages;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<RoleEntity> roles = new HashSet<>();
+    private Set<RoleEntity> roles;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<PermissionEntity> permissions = new HashSet<>();
+    private Set<PermissionEntity> permissions;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "application")
-    private Set<AttributeEntity> attributes = new HashSet<>();
+    private Set<AttributeEntity> attributes;
 }
