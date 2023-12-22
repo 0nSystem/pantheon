@@ -19,7 +19,6 @@ public interface PermissionRepository extends JpaRepository<PermissionEntity,Int
             "WHERE idPermission = :#{#dto.idPermission}")
     void update(final @Param("dto") UpdatePermissionDTO updatePermission);
 
-    List<PermissionEntity> findByApplicationIdApplication(final Integer idApplication);
 
     Optional<PermissionEntity> findFirstByApplicationIdApplicationAndNameIgnoreCase(final int applicationId, final String permissionName);
 }

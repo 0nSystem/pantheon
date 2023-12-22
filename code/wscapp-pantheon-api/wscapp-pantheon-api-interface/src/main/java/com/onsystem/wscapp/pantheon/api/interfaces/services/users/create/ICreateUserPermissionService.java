@@ -1,11 +1,11 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.services.users.create;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ICreateUserPermissionService {
 
 
-    void assignPermissionInUser(final List<Integer> permissionIds, final int permissionId);
+    void assignPermissionInUser(final Set<Integer> permissionIds, final int userId);
 
 
 

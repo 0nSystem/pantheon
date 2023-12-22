@@ -36,7 +36,7 @@ public class PermissionEntity {
 
 
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_application")
     private ApplicationEntity application;
 

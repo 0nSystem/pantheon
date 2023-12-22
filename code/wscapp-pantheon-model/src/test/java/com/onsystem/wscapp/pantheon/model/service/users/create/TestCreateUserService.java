@@ -1,4 +1,4 @@
-package com.onsystem.wscapp.pantheon.model.service.users;
+package com.onsystem.wscapp.pantheon.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserDTO;

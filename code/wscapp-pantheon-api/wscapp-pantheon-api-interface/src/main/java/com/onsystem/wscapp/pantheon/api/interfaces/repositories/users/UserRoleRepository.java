@@ -22,4 +22,10 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, UserRo
     Set<Integer> findIdsApplicationByUser(final Integer userId, final String authorizedPermission);
 
 
+    @Query(" SELECT role FROM UserRoleEntity WHERE user.idUser = :userId AND role.application.idApplication = :applicationId")
+    Set<RoleEntity> findRoleEntitiesByIdUserAndIdApplication(
+            final int userId,
+            final int applicationId
+    );
+
 }
