@@ -11,6 +11,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserReposi
 import com.onsystem.wscapp.pantheon.api.interfaces.services.users.create.ICreateUserAttributeService;
 import com.onsystem.wscapp.pantheon.model.helpers.BelongApplicationsHelper;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,10 +79,17 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
         final List<String> errors = new ArrayList<>();
 
+        if(MapUtils.isEmpty(mapIdUserIdsApplications)){
+            errors.add("");//TODO
+        }
+
         for (Map.Entry<Integer, List<Integer>> entryUserIdApplicationIds : mapIdUserIdsApplications.entrySet()) {
             int userId = entryUserIdApplicationIds.getKey();
-            List<Integer> applicationIds = entryUserIdApplicationIds.getValue();
+            final List<Integer> applicationIds = entryUserIdApplicationIds.getValue();
 
+            if (CollectionUtils.isEmpty(applicationIds)) {
+                errors.add("User not permission to applications");
+            }
             // Iterate over the applicationIds associated with the current userId
             for (int applicationId : applicationIds) {
                 // Check if the applicationId exists in mapIdApplicationIdsAttributes

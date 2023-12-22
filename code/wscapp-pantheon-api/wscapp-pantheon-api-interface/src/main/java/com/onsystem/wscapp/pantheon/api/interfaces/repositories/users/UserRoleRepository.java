@@ -18,9 +18,15 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, UserRo
     @Query("SELECT DISTINCT role FROM UserRoleEntity WHERE role.idRole IN (:roleIds) AND user.idUser IN (:userId)")
     Set<RoleEntity> findByUserRoleEntitiesByIdRoleInAndIdUser(Set<Integer> roleIds, int userId);
 
-    @Query(" SELECT DISTINCT role.application.idApplication,user.idUser " +
-            " FROM UserRoleEntity WHERE user.idUser IN (:userId) AND role.name = :authorizedPermission")
-    Set<UserBelongApplication> findIdsApplicationByUser(final Set<Integer> userId, final String authorizedPermission);
+    @Query(" SELECT DISTINCT " +
+            " user.idUser AS idUser," +
+            " role.application.idApplication AS idApplication " +
+            " FROM UserRoleEntity " +
+            " WHERE role.application IS NOT NULL " +
+            " AND user.idUser IN (:userId) " +
+            " AND role.name = :authorizedPermission")
+    Set<UserBelongApplication> findIdsApplicationByUser(
+            final Set<Integer> userId, final String authorizedPermission);
 
 
     @Query(" SELECT role FROM UserRoleEntity WHERE user.idUser = :userId AND role.application.idApplication = :applicationId")

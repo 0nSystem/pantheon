@@ -24,7 +24,9 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
     @Query(" SELECT DISTINCT application.idApplication FROM RoleEntity WHERE idRole IN (:roleIds)")
     Set<Integer> findIdsApplicationByIdRoleIn(Set<Integer> roleIds);
 
-    @Query
     Set<RoleEntity> findByApplicationIdApplication(final int applicationId);
+
+
+    Optional<RoleEntity> findByApplicationIdApplicationAndName(final int applicationId,final String roleName);
 
 }

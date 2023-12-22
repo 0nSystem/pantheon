@@ -29,7 +29,6 @@ public class BelongApplicationsHelper {
      */
     public Map<Integer, List<Integer>> getUserBelongApplication(final Set<Integer> userId) {
         final Set<UserBelongApplication> userBelongApplications = userRoleRepository.findIdsApplicationByUser(userId, Constants.AUTORIZED_ROLE_NAME);
-
         return userBelongApplications.stream()
                 .collect(Collectors.groupingBy(UserBelongApplication::getIdUser,
                         Collectors.mapping(UserBelongApplication::getIdApplication, Collectors.toList())));
