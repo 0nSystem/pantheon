@@ -41,8 +41,8 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
     public List<CreateUserAttributeDTO> assignAttribute(List<CreateUserAttributeDTO> createUserAttributes) {
         validationUserInApplicationThisIdsAttributes(createUserAttributes);
 
-        final List<UserAttributeEntity> attributeEntities = createUserAttributes.stream().map(mapperUserAttributeEntity::createToEntity)
-                .flatMap(Collection::stream)
+        final List<UserAttributeEntity> attributeEntities = createUserAttributes.stream()
+                .flatMap(createAttributeEntity -> mapperUserAttributeEntity.createToEntity(createAttributeEntity).stream())
                 .toList();
 
         userAttributeRepository.saveAll(attributeEntities);
@@ -69,7 +69,6 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
             throw new InfoException("");
         }
 
-
     }
 
     //TODO
@@ -79,7 +78,7 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
         final List<String> errors = new ArrayList<>();
 
-        if(MapUtils.isEmpty(mapIdUserIdsApplications)){
+        if (MapUtils.isEmpty(mapIdUserIdsApplications)) {
             errors.add("");//TODO
         }
 

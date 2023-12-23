@@ -29,4 +29,5 @@ public abstract class MapperUserAttributeEntity {
                 )
                 .collect(Collectors.toList());
     }
+
 }
