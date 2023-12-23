@@ -11,5 +11,7 @@ public interface UserAttributeRepository extends JpaRepository<UserAttributeEnti
 
     Set<UserAttributeEntity> findByUserIdUserAndAndAttributeIdAttribute(final Integer userId, final Integer attributeId);
 
-    
+    Set<UserAttributeEntity> findByUserIdUserInAndAndAttributeIdAttributeIn(final Set<Integer> userId, final Set<Integer> attributeId);
+
+
 }

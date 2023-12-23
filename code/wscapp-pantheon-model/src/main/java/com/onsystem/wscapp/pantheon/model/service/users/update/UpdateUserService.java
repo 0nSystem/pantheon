@@ -23,7 +23,7 @@ public class UpdateUserService implements IUpdateUserService {
 
     @Override
     public void updateUser(Set<UpdateUserDTO> updateUser) {
-        //TODO
+        //TODO applicationId
         final Map<Integer, UpdateUserDTO> mapIdUserUpdateUserDto = updateUser.stream()
                 .collect(Collectors.toMap(
                         UpdateUserDTO::getIdUser,
@@ -31,11 +31,12 @@ public class UpdateUserService implements IUpdateUserService {
                         (o, o2) -> o2
                 ));
 
-        final List<UserEntity> userEntities = userRepository.findAllById(mapIdUserUpdateUserDto.keySet()).stream()
-                .map(userEntity -> mapperUserEntity.entityToUpdate(mapIdUserUpdateUserDto.get(userEntity), userEntity))
+        final List<UserEntity> userEntities = userRepository.findAllById(mapIdUserUpdateUserDto.keySet());
+        final List<UserEntity> userEntitiesMappedToUpdate = userEntities.stream()
+                .map(userEntity -> mapperUserEntity.entityToUpdate(mapIdUserUpdateUserDto.get(userEntity.getIdUser()), userEntity))
                 .toList();
 
-        userRepository.saveAll(userEntities);
+        userRepository.saveAll(userEntitiesMappedToUpdate);
 
     }
 }

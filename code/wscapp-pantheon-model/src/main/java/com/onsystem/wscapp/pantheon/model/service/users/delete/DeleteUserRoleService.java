@@ -21,7 +21,7 @@ public class DeleteUserRoleService implements IDeleteUserRoleService {
 
     @Override
     public void deleteRoles(Set<DeleteUserRolesDTO> deleteUserRoles) {
-        //TODO
+        //TODO applicationId?
         final List<UserRoleKeyEntity> userKeyRoleEntitiesToDelete = deleteUserRoles.stream()
                 .flatMap(deleteUserRole -> mapperUserRoleEntity.deleteToEntity(deleteUserRole).stream())
                 .toList();
