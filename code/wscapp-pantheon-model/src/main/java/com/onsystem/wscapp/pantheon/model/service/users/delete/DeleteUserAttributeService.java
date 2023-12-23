@@ -29,8 +29,8 @@ public class DeleteUserAttributeService implements IDeleteUserAttributeService {
 
         final Map<Integer, Set<Integer>> mapIdUserIdsAttributesToDelete = deleteUserAttributes.stream()
                 .collect(Collectors.toMap(
-                        deleteUserAttributeDTO -> deleteUserAttributeDTO.getIdUser(),
-                        deleteUserAttributeDTO -> deleteUserAttributeDTO.getIdAttribute(),
+                        DeleteUserAttributeDTO::getIdUser,
+                        DeleteUserAttributeDTO::getIdAttribute,
                         (o, o2) -> o2
                 ));
 
