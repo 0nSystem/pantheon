@@ -52,6 +52,7 @@ class TestUpdateUserService {
 
     private ThrowingConsumer<UserEntity> consumerCaseCorrectUpdateUserEntity(UpdateUserDTO updateUserDTO) {
         return userEntity -> {
+            Assertions.assertNotNull(userEntity.getPassword());
             Assertions.assertEquals(updateUserDTO.getIdUser(), userEntity.getIdUser());
             Assertions.assertEquals(updateUserDTO.getEmail(), userEntity.getEmail());
             Assertions.assertEquals(updateUserDTO.getLogin(), userEntity.getLogin());

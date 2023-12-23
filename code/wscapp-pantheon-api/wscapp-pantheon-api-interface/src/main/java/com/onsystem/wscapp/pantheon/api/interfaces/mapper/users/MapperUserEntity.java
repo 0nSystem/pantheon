@@ -33,23 +33,23 @@ public abstract class MapperUserEntity {
     public abstract UserEntity createToEntity(CreateUserDTO createUser);
 
 
-    public abstract CreateAfterUserDTO entityToCreateAfter(UserEntity user);
-
     @Mappings({
             @Mapping(target = "highDate", source = "userEntity.highDate"),
             @Mapping(target = "highIdUser", source = "userEntity.highIdUser"),
             @Mapping(target = "deleteDate", source = "userEntity.deleteDate"),
             @Mapping(target = "deleteIdUser", source = "userEntity.deleteIdUser"),
-            @Mapping(target = "idUser",source = "updateUserDTO.idUser"),
-            @Mapping(target = "email",source = "updateUserDTO.email"),
-            @Mapping(target = "login",source = "updateUserDTO.login"),
-            @Mapping(target = "name",source = "updateUserDTO.name"),
-            @Mapping(target = "surname",source = "updateUserDTO.surname"),
+            @Mapping(target = "idUser", source = "updateUserDTO.idUser"),
+            @Mapping(target = "email", source = "updateUserDTO.email"),
+            @Mapping(target = "login", source = "updateUserDTO.login"),
+            @Mapping(target = "name", source = "updateUserDTO.name"),
+            @Mapping(target = "surname", source = "updateUserDTO.surname"),
+            @Mapping(target = "password", source = "userEntity.password"), //TODO create update custom to user entity ...
             @Mapping(target = "userAttribute", ignore = true),
             @Mapping(target = "role", ignore = true),
             @Mapping(target = "permission", ignore = true),
-            @Mapping(target = "password", ignore = true)
     })
     public abstract UserEntity entityToUpdate(UpdateUserDTO updateUserDTO, UserEntity userEntity);
+
+    public abstract CreateAfterUserDTO entityToCreateAfter(UserEntity user);
 
 }
