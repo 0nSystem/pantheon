@@ -12,8 +12,17 @@ spring:
     defer-datasource-initialization: false
     generate-ddl: true
     hibernate:
+
       globally_quoted_identifiers: true
       ddl-auto: create
       dialect: org.hibernate.dialect.H2Dialect
       enable_lazy_load_no_trans: true
     show-sql: true
+
+  logging:
+    level:
+      org:
+        springframework:
+          validation: TRACE
+        hibernate:
+          validator: TRACE

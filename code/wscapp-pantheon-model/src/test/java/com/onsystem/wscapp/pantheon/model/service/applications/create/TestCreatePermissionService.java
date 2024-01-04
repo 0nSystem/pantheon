@@ -9,6 +9,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.Rol
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreatePermissionService;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerDTO;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerEntity;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.TestInstance;
@@ -31,6 +32,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
+@Transactional
 class TestCreatePermissionService {
     @Autowired
     private Integer idApplication;
@@ -40,7 +42,6 @@ class TestCreatePermissionService {
     private Integer idPermission;
     @Autowired
     private Integer idRole;
-
 
 
     @Autowired
@@ -65,13 +66,14 @@ class TestCreatePermissionService {
                             )
                     );
 
-                    final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
-                                    .idPermission(permission.getIdPermission())
-                                    .idRole(idRole).build())
+                    final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(
+                                    RolePermissionKeyEntity.builder()
+                                            .permission(permission.getIdPermission())
+                                            .role(idRole).build())
                             .orElseThrow();
                     dynamicTests.add(
                             DynamicTest.dynamicTest(
-                                    String.format("permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                                    String.format("permission id: %s , role id: %s", rolePermissionEntity.getPermission().getIdPermission(), rolePermissionEntity.getRole().getIdRole()),
                                     () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(idRole, permission.getIdPermission()).accept(rolePermissionEntity)
                             )
                     );
@@ -89,6 +91,7 @@ class TestCreatePermissionService {
                                 .idLanguage(idLanguage).build())
         );
     }
+
     @ParameterizedTest
     @MethodSource({"argumentsCreatePermissionLanguage"})
     void createPermissionLanguage(final int permissionId, final CreatePermissionLanguageDTO createPermissionLanguage) throws Throwable {
@@ -131,12 +134,12 @@ class TestCreatePermissionService {
 
 
             final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
-                            .idPermission(permissionWithLanguage.getPermission().getIdPermission())
-                            .idRole(idRole).build())
+                            .permission(permissionWithLanguage.getPermission().getIdPermission())
+                            .role(idRole).build())
                     .orElseThrow();
             dynamicTests.add(
                     DynamicTest.dynamicTest(
-                            String.format("belong permission role  permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                            String.format("belong permission role  permission id: %s , role id: %s", rolePermissionEntity.getPermission().getIdPermission(), rolePermissionEntity.getRole().getIdRole()),
                             () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(
                                     idRole, permissionWithLanguage.getPermission().getIdPermission()
                             ).accept(rolePermissionEntity)

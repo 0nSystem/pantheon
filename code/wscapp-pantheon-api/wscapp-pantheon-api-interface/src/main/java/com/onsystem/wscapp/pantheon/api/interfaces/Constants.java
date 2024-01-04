@@ -19,4 +19,7 @@ public class Constants {
     public static final String TABLE_ATTRIBUTE = "attribute";
     public static final String TABLE_ATTRIBUTE_LANGUAGE = "attribute_language";
     public static final String TABLE_USER = "\"user\"";
+    public static final String TABLE_USER_PERMISSION = "user_permission";
+    public static final String TABLE_USER_ROLE = "user_role";
+    public static final String TABLE_USER_ATTRIBUTE = "user_attribute";
 }

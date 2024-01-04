@@ -1,16 +1,15 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.users;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_USERS;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_USER_PERMISSION;
 
 @Entity
-@Table(schema = SCHEME_USERS, name = "user_permission")
+@Table(schema = SCHEME_USERS, name = TABLE_USER_PERMISSION)
 @Builder
 @Getter
 @Setter
@@ -20,7 +19,11 @@ import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_USERS
 @IdClass(UserPermissionKeyEntity.class)
 public class UserPermissionEntity {
     @Id
-    private Integer idUser;
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private UserEntity user;
     @Id
-    private Integer idPermission;
+    @OneToOne
+    @JoinColumn(name = "id_permission")
+    private PermissionEntity permission;
 }

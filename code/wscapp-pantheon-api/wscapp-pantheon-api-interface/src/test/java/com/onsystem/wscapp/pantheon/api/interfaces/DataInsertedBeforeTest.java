@@ -4,14 +4,18 @@ import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.Applicati
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.AttributeEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.AttributeRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.spublic.LanguageRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+
+import static com.onsystem.wscapp.pantheon.api.interfaces.MockData.DataEntityMockSchemeUserDTO.USER_ENTITY_CREATE_MOCK;
 
 @TestConfiguration
 public class DataInsertedBeforeTest {
@@ -19,6 +23,11 @@ public class DataInsertedBeforeTest {
     @Bean
     public Integer idLanguage(@Autowired LanguageRepository languageRepository) {
         return languageRepository.save(MockData.DataMockSchemeApplicationEntities.LANGUAGE_MOCK).getIdLanguage();
+    }
+
+    @Bean
+    public Integer idUser(@Autowired UserRepository userRepository) {
+        return userRepository.save(USER_ENTITY_CREATE_MOCK).getIdUser();
     }
 
     @Bean

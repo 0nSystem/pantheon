@@ -14,7 +14,9 @@ import com.onsystem.wscapp.pantheon.api.dto.applications.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.RoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.*;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;
@@ -156,7 +158,7 @@ public class ThrowingConsumerDTO {
 
     public static ThrowingConsumer<AttributeEntity> caseDefaultCorrectUpdateAttribute(
             final @NotNull UpdateAttributeDTO updateAttributeDTO
-    ){
+    ) {
         return attributeEntity -> {
             Assertions.assertNotNull(attributeEntity);
             Assertions.assertEquals(updateAttributeDTO.getIdAttribute(), attributeEntity.getIdAttribute());
@@ -167,13 +169,14 @@ public class ThrowingConsumerDTO {
 
     public static ThrowingConsumer<AttributeLanguageEntity> caseDefaultCorrectUpdateAttributeLanguage(
             final @NotNull UpdateAttributeLanguageDTO updateAttributeLanguageDTO
-    ){
+    ) {
         return attributeLanguageEntity -> {
             Assertions.assertNotNull(attributeLanguageEntity);
             Assertions.assertEquals(updateAttributeLanguageDTO.getIdAttribute(), attributeLanguageEntity.getAttribute().getIdAttribute());
-            Assertions.assertEquals(updateAttributeLanguageDTO.getIdLanguage(),attributeLanguageEntity.getLanguage().getIdLanguage());
+            Assertions.assertEquals(updateAttributeLanguageDTO.getIdLanguage(), attributeLanguageEntity.getLanguage().getIdLanguage());
             Assertions.assertEquals(updateAttributeLanguageDTO.getName(), attributeLanguageEntity.getName());
             Assertions.assertEquals(updateAttributeLanguageDTO.getDescription(), attributeLanguageEntity.getDescription());
         };
     }
+
 }

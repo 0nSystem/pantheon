@@ -5,9 +5,7 @@ import lombok.*;
 
 
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttributeLanguageKeyEntity {

@@ -1,6 +1,7 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
 
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -8,8 +9,7 @@ import lombok.*;
 
 import java.util.Set;
 
-import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.SCHEME_APPLICATION;
-import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.TABLE_ROLE;
+import static com.onsystem.wscapp.pantheon.api.interfaces.Constants.*;
 
 @Entity
 @Table(schema = SCHEME_APPLICATION, name = TABLE_ROLE)
@@ -47,6 +47,14 @@ public class RoleEntity {
     @ToString.Exclude
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<PermissionEntity> permissions;
+
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = TABLE_USER_ROLE, schema = SCHEME_USERS,
+            joinColumns = @JoinColumn(name = "id_role"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
+    )
+    private Set<UserEntity> user;
 
 
 }

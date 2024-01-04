@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.model.service.applications.create;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;
+import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateApplicationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ class TestCreateApplicationService {
     @Autowired
     private ICreateApplicationService iCreateApplicationService;
     @Autowired
-    private PermissionRepository permissionRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private Integer idLanguage;
@@ -34,7 +34,7 @@ class TestCreateApplicationService {
         final var applicationCreateDTO = iCreateApplicationService.createApplication(createApplicationModel);
 
         //Is list but require initialize with "authorized-permission" by default to add users
-        final var permissionApplication = permissionRepository.findByApplicationIdApplication(applicationCreateDTO.getIdApplication());
+        final var permissionApplication = roleRepository.findByApplicationIdApplication(applicationCreateDTO.getIdApplication());
 
         Assertions.assertAll(() -> {
             Assertions.assertNotNull(applicationCreateDTO);
@@ -67,7 +67,7 @@ class TestCreateApplicationService {
                 ).stream()
                 .findFirst().orElseThrow();
 
-        final var permissionApplication = permissionRepository.findByApplicationIdApplication(idApplication);
+        final var permissionApplication = roleRepository.findByApplicationIdApplication(idApplication);
 
         Assertions.assertEquals(idApplication, applicationLanguage.getIdApplication());
         Assertions.assertEquals(idLanguage, applicationLanguage.getIdLanguage());

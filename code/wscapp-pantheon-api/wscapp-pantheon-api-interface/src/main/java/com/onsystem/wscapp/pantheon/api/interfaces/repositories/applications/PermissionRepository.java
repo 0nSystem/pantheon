@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PermissionRepository extends JpaRepository<PermissionEntity,Integer> {
@@ -18,5 +19,6 @@ public interface PermissionRepository extends JpaRepository<PermissionEntity,Int
             "WHERE idPermission = :#{#dto.idPermission}")
     void update(final @Param("dto") UpdatePermissionDTO updatePermission);
 
-    List<PermissionEntity> findByApplicationIdApplication(final Integer idApplication);
+
+    Optional<PermissionEntity> findFirstByApplicationIdApplicationAndNameIgnoreCase(final int applicationId, final String permissionName);
 }

@@ -3,14 +3,12 @@ package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class RolePermissionKeyEntity {
-    private Integer idRole;
-    private Integer idPermission;
+    private Integer role;
+    private Integer permission;
 
 }

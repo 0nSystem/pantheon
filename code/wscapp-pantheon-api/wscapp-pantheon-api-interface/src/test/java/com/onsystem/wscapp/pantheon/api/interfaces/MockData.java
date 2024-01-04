@@ -16,11 +16,19 @@ import com.onsystem.wscapp.pantheon.api.dto.applications.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleDTO;
 import com.onsystem.wscapp.pantheon.api.dto.applications.role.UpdateRoleLanguageDTO;
+import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserAttributeDTO;
+import com.onsystem.wscapp.pantheon.api.dto.users.CreateUserDTO;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.api.interfaces.entity.spublic.LanguageEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.PermissionEntity;
 import com.onsystem.wscapp.pantheon.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.api.interfaces.entity.users.UserEntity;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 
 public class MockData {
@@ -121,5 +129,36 @@ public class MockData {
         public static AttributeEntity.AttributeEntityBuilder ATTRIBUTE_MOCK_BUILDER = AttributeEntity.builder()
                 .name("name attribute")
                 .description("description attribute");
+    }
+
+    public static class DataCreateMockSchemeUserDTO {
+
+        public static CreateUserDTO CREATE_USER_MOCK = CreateUserDTO.builder()
+                .email("email")
+                .login("login")
+                .password("1234")
+                .name("name")
+                .surname("surname")
+                .highIdUser(1)
+                .build();
+
+        public static CreateUserAttributeDTO CREATE_USER_ATTRIBUTE_MOCK = CreateUserAttributeDTO.builder()
+                .attributeId(1)
+                .value(Stream.of(1, 2, 3, 4, 5).map(String::valueOf).toList())
+                .build();
+
+    }
+
+    public static class DataEntityMockSchemeUserDTO {
+        public static UserEntity USER_ENTITY_CREATE_MOCK = UserEntity.builder()
+                .email("email")
+                .login("login")
+                .password("1234")
+                .name("name")
+                .surname("surname")
+                .highIdUser(1)
+                .highDate(Timestamp.valueOf(LocalDateTime.now()))
+                .build();
+
     }
 }
