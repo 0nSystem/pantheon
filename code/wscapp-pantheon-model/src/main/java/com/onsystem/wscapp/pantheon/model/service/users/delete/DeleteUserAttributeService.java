@@ -53,17 +53,19 @@ public class DeleteUserAttributeService implements IDeleteUserAttributeService {
 
         final Set<UserAttributeEntity> userAttributeToRemove = new HashSet<>();
 
-        for (final Map.Entry<Integer,Set<Integer>> entryIdUserIdsAttributes: mapIdUserIdsAttributesToDelete.entrySet()){
+        for (final Map.Entry<Integer, Set<Integer>> entryIdUserIdsAttributes : mapIdUserIdsAttributesToDelete.entrySet()) {
             final Integer idUser = entryIdUserIdsAttributes.getKey();
             final Set<Integer> idsAttributes = entryIdUserIdsAttributes.getValue();
 
             final Set<UserAttributeEntity> userAttributeEntities = mapIdUserAttributesEntities.get(idUser);
 
-            final Set<UserAttributeEntity> filteredContainsInUser = userAttributeEntities.stream()
-                    .filter(uae -> idsAttributes.contains(uae.getAttribute().getIdAttribute()))
-                    .collect(Collectors.toSet());
+            if (userAttributeEntities != null) {
+                final Set<UserAttributeEntity> filteredContainsInUser = userAttributeEntities.stream()
+                        .filter(uae -> idsAttributes.contains(uae.getAttribute().getIdAttribute()))
+                        .collect(Collectors.toSet());
 
-            userAttributeToRemove.addAll(filteredContainsInUser);
+                userAttributeToRemove.addAll(filteredContainsInUser);
+            }
         }
 
 
