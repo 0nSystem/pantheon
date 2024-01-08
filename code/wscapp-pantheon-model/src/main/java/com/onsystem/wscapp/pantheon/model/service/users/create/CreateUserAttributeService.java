@@ -72,43 +72,46 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
     }
 
-    //TODO
     private List<String> validateUsersAttributes(Map<Integer, List<Integer>> mapIdUserBelongIdsApplications,
                                                  Map<Integer, List<Integer>> mapIdApplicationIdsAttributes,
                                                  Map<Integer, List<Integer>> mapIdUserIdsAttributesToCreate) {
 
         final List<String> errors = new ArrayList<>();
 
-        if (MapUtils.isEmpty(mapIdUserBelongIdsApplications)) {
-            errors.add("empty");//TODO
+        if (MapUtils.isEmpty(mapIdUserIdsAttributesToCreate)) {
+            errors.add("Empty mapIdUserIdsAttributesToCreate");
         }
 
-        for (Map.Entry<Integer, List<Integer>> entryUserIdApplicationIds : mapIdUserBelongIdsApplications.entrySet()) {
-            int userId = entryUserIdApplicationIds.getKey();
-            final List<Integer> applicationIds = entryUserIdApplicationIds.getValue();
+        for (Map.Entry<Integer, List<Integer>> entryUserIdAttributesToCreate : mapIdUserIdsAttributesToCreate.entrySet()) {
+            int userId = entryUserIdAttributesToCreate.getKey();
+            final List<Integer> attributeIdsForUser = entryUserIdAttributesToCreate.getValue();
 
-            if (CollectionUtils.isEmpty(applicationIds)) {
-                errors.add("User not permission to applications");
-            }
-            // Iterate over the applicationIds associated with the current userId
-            for (int applicationId : applicationIds) {
-                // Check if the applicationId exists in mapIdApplicationIdsAttributes
-                final List<Integer> attributeIdsForApplication = mapIdApplicationIdsAttributes.get(applicationId);
-                if (attributeIdsForApplication != null) {
+            if (CollectionUtils.isEmpty(attributeIdsForUser)) {
+                errors.add("User with ID " + userId + " has no attributes to create");
+            } else {
+                // Check if the userId exists in mapIdUserBelongIdsApplications
+                List<Integer> applicationIdsForUser = mapIdUserBelongIdsApplications.get(userId);
 
-                    // Check if the userId has attributes that belong to the current applicationId
-                    final List<Integer> attributeIdsForUser = mapIdUserIdsAttributesToCreate.get(userId);
-                    if (attributeIdsForUser != null) {
+                if (CollectionUtils.isEmpty(applicationIdsForUser)) {
+                    errors.add("User with ID " + userId + " has no associated applications");
+                } else {
+                    // Iterate over the applicationIds associated with the current userId
+                    for (int applicationId : applicationIdsForUser) {
+                        // Check if the applicationId exists in mapIdApplicationIdsAttributes
+                        final List<Integer> attributeIdsForApplication = mapIdApplicationIdsAttributes.get(applicationId);
 
-                        // Check if there are attributeIds for the user that do not belong to the application
-                        List<Integer> invalidAttributeIds = attributeIdsForUser.stream()
-                                .filter(attributeId -> !attributeIdsForApplication.contains(attributeId))
-                                .toList();
+                        if (attributeIdsForApplication != null) {
+                            // Check if there are attributeIds for the user that do not belong to the application
+                            List<Integer> invalidAttributeIds = attributeIdsForUser.stream()
+                                    .filter(attributeId -> !attributeIdsForApplication.contains(attributeId))
+                                    .toList();
 
-                        if (!invalidAttributeIds.isEmpty()) {
-                            //TODO
-                            errors.add("User with ID " + userId + " has invalid attributes for Application ID " + applicationId
-                                    + ": " + invalidAttributeIds);
+                            if (!invalidAttributeIds.isEmpty()) {
+                                errors.add("User with ID " + userId + " has invalid attributes for Application ID "
+                                        + applicationId + ": " + invalidAttributeIds);
+                            }
+                        } else {
+                            errors.add("Application ID " + applicationId + " not found in mapIdApplicationIdsAttributes");
                         }
                     }
                 }
