@@ -35,14 +35,17 @@ public class BelongApplicationsHelper {
 
     /**
      * @param attributesIds
-     * @return map (key = IdApplication, value = IdsAttributes)
+     * @return map (key = IdAttribute, value = IdApplication)
      */
-    public Map<Integer, List<Integer>> getAttributesBelongApplication(final Set<Integer> attributesIds) {
+    public Map<Integer, Integer> getAttributeBelongApplication(final Set<Integer> attributesIds) {
         final Set<AttributeBelongApplication> attributeBelongApplications = attributeRepository.findAttributesBelongApplicationByIdAttributeIn(attributesIds);
 
         return attributeBelongApplications.stream()
-                .collect(Collectors.groupingBy(AttributeBelongApplication::getIdApplication,
-                        Collectors.mapping(AttributeBelongApplication::getIdAttribute, Collectors.toList())));
+                .collect(Collectors.toMap(
+                        AttributeBelongApplication::getIdAttribute,
+                        AttributeBelongApplication::getIdApplication,
+                        (integers, integers2) -> integers
+                ));
 
     }
 

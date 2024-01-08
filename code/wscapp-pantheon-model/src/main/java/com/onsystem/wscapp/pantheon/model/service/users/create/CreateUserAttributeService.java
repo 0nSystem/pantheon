@@ -59,10 +59,10 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
         final Set<Integer> idsAllAttributes = mapIdUserIdsAttributesToCreate.values().stream()
                 .flatMap(Collection::stream).collect(Collectors.toSet());
-        final Map<Integer, List<Integer>> mapIdApplicationIdsAttributes = belongApplicationsHelper.getAttributesBelongApplication(idsAllAttributes);
+        final Map<Integer, Integer> mapIdAttributeBelongApplication = belongApplicationsHelper.getAttributeBelongApplication(idsAllAttributes);
 
         final List<String> errors = validateUsersAttributes(
-                mapIdUserBelongIdsApplications, mapIdApplicationIdsAttributes, mapIdUserIdsAttributesToCreate
+                mapIdUserIdsAttributesToCreate, mapIdUserBelongIdsApplications, mapIdAttributeBelongApplication
         );
         if (CollectionUtils.isNotEmpty(errors)) {
             //TODO peding
@@ -72,51 +72,45 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
     }
 
-    private List<String> validateUsersAttributes(Map<Integer, List<Integer>> mapIdUserBelongIdsApplications,
-                                                 Map<Integer, List<Integer>> mapIdApplicationIdsAttributes,
-                                                 Map<Integer, List<Integer>> mapIdUserIdsAttributesToCreate) {
+    private List<String> validateUsersAttributes(
+            final Map<Integer, List<Integer>> mapIdUserIdsAttributesToCreate,
+            final Map<Integer, List<Integer>> mapIdUserBelongIdsApplications,
+            final Map<Integer, Integer> mapIdAttributeBelongApplication
+    ) {
 
         final List<String> errors = new ArrayList<>();
 
         if (MapUtils.isEmpty(mapIdUserIdsAttributesToCreate)) {
+            //TODO
             errors.add("Empty mapIdUserIdsAttributesToCreate");
         }
 
-        for (Map.Entry<Integer, List<Integer>> entryUserIdAttributesToCreate : mapIdUserIdsAttributesToCreate.entrySet()) {
-            int userId = entryUserIdAttributesToCreate.getKey();
-            final List<Integer> attributeIdsForUser = entryUserIdAttributesToCreate.getValue();
 
-            if (CollectionUtils.isEmpty(attributeIdsForUser)) {
-                errors.add("User with ID " + userId + " has no attributes to create");
-            } else {
-                // Check if the userId exists in mapIdUserBelongIdsApplications
-                List<Integer> applicationIdsForUser = mapIdUserBelongIdsApplications.get(userId);
+        for (final Map.Entry<Integer, List<Integer>> entryIdUserIdsAttributesToCreate : mapIdUserIdsAttributesToCreate.entrySet()) {
+            final Integer idUser = entryIdUserIdsAttributesToCreate.getKey();
+            final List<Integer> idsAttributes = entryIdUserIdsAttributesToCreate.getValue();
 
-                if (CollectionUtils.isEmpty(applicationIdsForUser)) {
-                    errors.add("User with ID " + userId + " has no associated applications");
-                } else {
-                    // Iterate over the applicationIds associated with the current userId
-                    for (int applicationId : applicationIdsForUser) {
-                        // Check if the applicationId exists in mapIdApplicationIdsAttributes
-                        final List<Integer> attributeIdsForApplication = mapIdApplicationIdsAttributes.get(applicationId);
+            for (final Integer idAttributes : idsAttributes) {
+                final Integer attributeBelongIdApplication = mapIdAttributeBelongApplication.get(idAttributes);
+                if (attributeBelongIdApplication != null) {
+                    final List<Integer> userBelongApplications = mapIdUserBelongIdsApplications.get(idUser);
+                    if (CollectionUtils.isEmpty(userBelongApplications)
+                            || !userBelongApplications.contains(attributeBelongIdApplication)) {
+                        //TODO
 
-                        if (attributeIdsForApplication != null) {
-                            // Check if there are attributeIds for the user that do not belong to the application
-                            List<Integer> invalidAttributeIds = attributeIdsForUser.stream()
-                                    .filter(attributeId -> !attributeIdsForApplication.contains(attributeId))
-                                    .toList();
-
-                            if (!invalidAttributeIds.isEmpty()) {
-                                errors.add("User with ID " + userId + " has invalid attributes for Application ID "
-                                        + applicationId + ": " + invalidAttributeIds);
-                            }
-                        } else {
-                            errors.add("Application ID " + applicationId + " not found in mapIdApplicationIdsAttributes");
-                        }
+                        errors.add(String.format("User: %s not belong applications", idUser));
                     }
+
+                } else {
+                    //TODO
+
+                    errors.add(String.format("Error attribute id %s not belong applications", idAttributes));
                 }
+
             }
+
         }
+
 
         return errors;
     }
