@@ -13,6 +13,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.Rol
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.ICreateRoleService;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerDTO;
 import com.onsystem.wscapp.pantheon.model.service.applications.ThrowingConsumerEntity;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +31,7 @@ import java.util.stream.Stream;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Import({DataInsertedBeforeTest.class})
+@Transactional
 class TestCreateRoleService {
 
     @Autowired
@@ -123,13 +125,13 @@ class TestCreateRoleService {
                                         );
 
                                         final RolePermissionEntity rolePermissionEntity = rolePermissionRepository.findById(RolePermissionKeyEntity.builder()
-                                                        .idPermission(permissionsLanguages.getPermission().getIdPermission())
-                                                        .idRole(roleWithLanguagesAndPermissionWithLanguages.getRole().getIdRole()).build())
+                                                        .permission(permissionsLanguages.getPermission().getIdPermission())
+                                                        .role(roleWithLanguagesAndPermissionWithLanguages.getRole().getIdRole()).build())
 
                                                 .orElseThrow();
                                         dynamicTests.add(
                                                 DynamicTest.dynamicTest(
-                                                        String.format("belong permission role permission id: %s , role id: %s", rolePermissionEntity.getIdPermission(), rolePermissionEntity.getIdRole()),
+                                                        String.format("belong permission role permission id: %s , role id: %s", rolePermissionEntity.getPermission().getIdPermission(), rolePermissionEntity.getRole().getIdRole()),
                                                         () -> ThrowingConsumerEntity.caseDefaultCorrectPermissionAddingRole(
                                                                 roleWithLanguagesAndPermissionWithLanguages.getRole().getIdRole(), permissionsLanguages.getPermission().getIdPermission()
                                                         ).accept(rolePermissionEntity)

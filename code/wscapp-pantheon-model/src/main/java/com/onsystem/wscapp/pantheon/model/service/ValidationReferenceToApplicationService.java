@@ -1,4 +1,4 @@
-package com.onsystem.wscapp.pantheon.model.service.applications;
+package com.onsystem.wscapp.pantheon.model.service;
 
 import com.onsystem.wscapp.pantheon.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.api.interfaces.repositories.applications.PermissionRepository;

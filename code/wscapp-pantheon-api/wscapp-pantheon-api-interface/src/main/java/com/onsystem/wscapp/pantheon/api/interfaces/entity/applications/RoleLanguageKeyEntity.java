@@ -1,17 +1,17 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Embeddable
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class RoleLanguageKeyEntity {
 
     @NotNull

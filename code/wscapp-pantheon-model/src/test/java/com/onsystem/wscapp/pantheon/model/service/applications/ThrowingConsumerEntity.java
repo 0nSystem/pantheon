@@ -12,8 +12,8 @@ public class ThrowingConsumerEntity {
             final int permissionId
     ) {
         return rolePermissionEntity -> {
-            Assertions.assertEquals(permissionId, rolePermissionEntity.getIdPermission());
-            Assertions.assertEquals(roleId, rolePermissionEntity.getIdRole());
+            Assertions.assertEquals(permissionId, rolePermissionEntity.getPermission().getIdPermission());
+            Assertions.assertEquals(roleId, rolePermissionEntity.getRole().getIdRole());
         };
     }
 }

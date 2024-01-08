@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRoleKeyEntity {
     @NotNull
-    private Integer idRole;
+    private Integer role;
     @NotNull
-    private Integer idUser;
+    private Integer user;
 }

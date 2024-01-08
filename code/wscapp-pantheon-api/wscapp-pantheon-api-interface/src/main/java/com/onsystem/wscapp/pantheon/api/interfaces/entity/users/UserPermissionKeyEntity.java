@@ -3,12 +3,10 @@ package com.onsystem.wscapp.pantheon.api.interfaces.entity.users;
 import lombok.*;
 
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserPermissionKeyEntity {
-    private Integer idUser;
-    private Integer idPermission;
+    private Integer user;
+    private Integer permission;
 }

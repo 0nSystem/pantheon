@@ -1,13 +1,13 @@
 package com.onsystem.wscapp.pantheon.api.interfaces.entity.applications;
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Embeddable
+@Data
 @Builder
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationLanguageKeyEntity {

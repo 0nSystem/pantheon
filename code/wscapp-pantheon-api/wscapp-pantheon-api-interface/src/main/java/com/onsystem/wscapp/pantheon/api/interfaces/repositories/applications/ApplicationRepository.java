@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -38,4 +39,5 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
     @Query("UPDATE ApplicationEntity SET name = :#{#dto.name}, description = :#{#dto.description} " +
             "WHERE idApplication = :#{#dto.idApplication}")
     void update(final @Param("dto") UpdateApplicationDTO updateApplicationDTO);
+
 }

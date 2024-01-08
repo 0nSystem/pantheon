@@ -108,9 +108,10 @@ CREATE TABLE IF NOT EXISTS applications.role_permission
 
 CREATE TABLE IF NOT EXISTS users.user_attribute
 (
-    id_user      integer references users."user" (id_user)                NOT NULL,
-    id_attribute integer references applications.attribute (id_attribute) NOT NULL,
-    value        character varying(255) COLLATE pg_catalog."default"      NOT NULL
+    id_user_attribute SERIAL PRIMARY KEY,
+    id_user           integer references users."user" (id_user)                NOT NULL,
+    id_attribute      integer references applications.attribute (id_attribute) NOT NULL,
+    attribute_value   character varying(255) COLLATE pg_catalog."default"      NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users.user_permission
