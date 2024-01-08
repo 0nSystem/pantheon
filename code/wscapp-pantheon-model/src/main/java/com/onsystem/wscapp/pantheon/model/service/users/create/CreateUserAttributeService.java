@@ -51,38 +51,39 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
     }
 
     private void validationUserInApplicationThisIdsAttributes(List<CreateUserAttributeDTO> createUserAttribute) {
-        final Map<Integer, List<Integer>> mapIdUserIdsAttributes = createUserAttribute.stream()
+        final Map<Integer, List<Integer>> mapIdUserIdsAttributesToCreate = createUserAttribute.stream()
                 .collect(Collectors.groupingBy(CreateUserAttributeDTO::getUserId,
                         Collectors.mapping(CreateUserAttributeDTO::getAttributeId, Collectors.toList())));
 
-        final Map<Integer, List<Integer>> mapIdUserIdsApplications = belongApplicationsHelper.getUserBelongApplication(mapIdUserIdsAttributes.keySet());
+        final Map<Integer, List<Integer>> mapIdUserBelongIdsApplications = belongApplicationsHelper.getUserBelongApplication(mapIdUserIdsAttributesToCreate.keySet());
 
-        final Set<Integer> idsAllAttributes = mapIdUserIdsAttributes.values().stream()
+        final Set<Integer> idsAllAttributes = mapIdUserIdsAttributesToCreate.values().stream()
                 .flatMap(Collection::stream).collect(Collectors.toSet());
         final Map<Integer, List<Integer>> mapIdApplicationIdsAttributes = belongApplicationsHelper.getAttributeBelongApplication(idsAllAttributes);
 
         final List<String> errors = validateUsersAttributes(
-                mapIdUserIdsApplications, mapIdApplicationIdsAttributes, mapIdUserIdsAttributes
+                mapIdUserBelongIdsApplications, mapIdApplicationIdsAttributes, mapIdUserIdsAttributesToCreate
         );
         if (CollectionUtils.isNotEmpty(errors)) {
             //TODO peding
+            System.out.println(errors);
             throw new InfoException("");
         }
 
     }
 
     //TODO
-    private List<String> validateUsersAttributes(Map<Integer, List<Integer>> mapIdUserIdsApplications,
+    private List<String> validateUsersAttributes(Map<Integer, List<Integer>> mapIdUserBelongIdsApplications,
                                                  Map<Integer, List<Integer>> mapIdApplicationIdsAttributes,
-                                                 Map<Integer, List<Integer>> mapIdUserIdsAttributes) {
+                                                 Map<Integer, List<Integer>> mapIdUserIdsAttributesToCreate) {
 
         final List<String> errors = new ArrayList<>();
 
-        if (MapUtils.isEmpty(mapIdUserIdsApplications)) {
-            errors.add("");//TODO
+        if (MapUtils.isEmpty(mapIdUserBelongIdsApplications)) {
+            errors.add("empty");//TODO
         }
 
-        for (Map.Entry<Integer, List<Integer>> entryUserIdApplicationIds : mapIdUserIdsApplications.entrySet()) {
+        for (Map.Entry<Integer, List<Integer>> entryUserIdApplicationIds : mapIdUserBelongIdsApplications.entrySet()) {
             int userId = entryUserIdApplicationIds.getKey();
             final List<Integer> applicationIds = entryUserIdApplicationIds.getValue();
 
@@ -96,13 +97,13 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
                 if (attributeIdsForApplication != null) {
 
                     // Check if the userId has attributes that belong to the current applicationId
-                    final List<Integer> attributeIdsForUser = mapIdUserIdsAttributes.get(userId);
+                    final List<Integer> attributeIdsForUser = mapIdUserIdsAttributesToCreate.get(userId);
                     if (attributeIdsForUser != null) {
 
                         // Check if there are attributeIds for the user that do not belong to the application
                         List<Integer> invalidAttributeIds = attributeIdsForUser.stream()
                                 .filter(attributeId -> !attributeIdsForApplication.contains(attributeId))
-                                .collect(Collectors.toList());
+                                .toList();
 
                         if (!invalidAttributeIds.isEmpty()) {
                             //TODO
