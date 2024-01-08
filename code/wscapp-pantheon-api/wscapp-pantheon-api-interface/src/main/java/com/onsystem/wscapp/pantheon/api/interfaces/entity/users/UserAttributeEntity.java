@@ -12,6 +12,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(schema = Constants.SCHEME_USERS, name = Constants.TABLE_USER_ATTRIBUTE)
 public class UserAttributeEntity {

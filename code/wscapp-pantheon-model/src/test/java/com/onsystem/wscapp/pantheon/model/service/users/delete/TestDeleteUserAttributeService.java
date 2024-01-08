@@ -42,7 +42,11 @@ class TestDeleteUserAttributeService {
                 .build();
         userAttributeRepository.save(userAttributeEntity);
 
+        System.out.println(String.format("saved: %s", userAttributeEntity));
+
         final long countBeforeDelete = userAttributeRepository.count();
+
+        System.out.println(String.format("idUser: %s , idAttribute: %s", idUser, idAttribute));
 
         final DeleteUserAttributeDTO deleteUserAttributeDTO = DeleteUserAttributeDTO.builder()
                 .idAttribute(Set.of(idAttribute))

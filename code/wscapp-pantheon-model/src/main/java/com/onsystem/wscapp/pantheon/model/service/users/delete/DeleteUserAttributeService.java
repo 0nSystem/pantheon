@@ -39,10 +39,10 @@ public class DeleteUserAttributeService implements IDeleteUserAttributeService {
         final Set<UserAttributeEntity> userAttributeEntities = userAttributeRepository.findByUserIdUserInAndAndAttributeIdAttributeIn(
                 mapIdUserIdsAttributesToDelete.keySet(), idsAllAttributes
         );
-        final Map<Integer, Set<UserAttributeEntity>> mapIdUserAttributesEntities = userAttributeEntities.stream()
-                .collect(Collectors.groupingBy(UserAttributeEntity::getIdUserAttribute, Collectors.toSet()));
+        final Map<Integer, Set<UserAttributeEntity>> mapIdUserAttributesEntitiesInDatabase = userAttributeEntities.stream()
+                .collect(Collectors.groupingBy(a->a.getUser().getIdUser(), Collectors.toSet()));
 
-        return discardAttributesNotRequireDeleteAndGetUserAttributeId(mapIdUserIdsAttributesToDelete, mapIdUserAttributesEntities);
+        return discardAttributesNotRequireDeleteAndGetUserAttributeId(mapIdUserIdsAttributesToDelete, mapIdUserAttributesEntitiesInDatabase);
     }
 
 
@@ -54,16 +54,15 @@ public class DeleteUserAttributeService implements IDeleteUserAttributeService {
         final Set<UserAttributeEntity> userAttributeToRemove = new HashSet<>();
 
         for (final Map.Entry<Integer, Set<Integer>> entryIdUserIdsAttributes : mapIdUserIdsAttributesToDelete.entrySet()) {
+
             final Integer idUser = entryIdUserIdsAttributes.getKey();
             final Set<Integer> idsAttributes = entryIdUserIdsAttributes.getValue();
 
             final Set<UserAttributeEntity> userAttributeEntities = mapIdUserAttributesEntities.get(idUser);
-
             if (userAttributeEntities != null) {
                 final Set<UserAttributeEntity> filteredContainsInUser = userAttributeEntities.stream()
                         .filter(uae -> idsAttributes.contains(uae.getAttribute().getIdAttribute()))
                         .collect(Collectors.toSet());
-
                 userAttributeToRemove.addAll(filteredContainsInUser);
             }
         }
