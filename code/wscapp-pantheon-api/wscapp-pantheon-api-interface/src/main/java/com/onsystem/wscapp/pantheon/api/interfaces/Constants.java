@@ -22,4 +22,8 @@ public class Constants {
     public static final String TABLE_USER_PERMISSION = "user_permission";
     public static final String TABLE_USER_ROLE = "user_role";
     public static final String TABLE_USER_ATTRIBUTE = "user_attribute";
+
+
+    public static final String ENDPOINT_APPLICATION_ROOT_CONTROLLER = "/application";
+    public static final String ENDPOINT_TO_LANGUAGE = "/language";
 }
