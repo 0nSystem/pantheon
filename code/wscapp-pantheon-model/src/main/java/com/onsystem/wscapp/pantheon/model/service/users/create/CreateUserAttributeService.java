@@ -59,7 +59,7 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
 
         final Set<Integer> idsAllAttributes = mapIdUserIdsAttributesToCreate.values().stream()
                 .flatMap(Collection::stream).collect(Collectors.toSet());
-        final Map<Integer, List<Integer>> mapIdApplicationIdsAttributes = belongApplicationsHelper.getAttributeBelongApplication(idsAllAttributes);
+        final Map<Integer, List<Integer>> mapIdApplicationIdsAttributes = belongApplicationsHelper.getAttributesBelongApplication(idsAllAttributes);
 
         final List<String> errors = validateUsersAttributes(
                 mapIdUserBelongIdsApplications, mapIdApplicationIdsAttributes, mapIdUserIdsAttributesToCreate
@@ -111,9 +111,6 @@ public class CreateUserAttributeService implements ICreateUserAttributeService {
                                     + ": " + invalidAttributeIds);
                         }
                     }
-                } else {
-                    //TODO
-                    errors.add("Invalid Application ID " + applicationId + " for User ID " + userId);
                 }
             }
         }

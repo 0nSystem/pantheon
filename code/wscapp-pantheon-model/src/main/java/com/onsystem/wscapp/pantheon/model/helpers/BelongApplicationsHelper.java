@@ -8,7 +8,6 @@ import com.onsystem.wscapp.pantheon.model.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.management.Attribute;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,10 +37,8 @@ public class BelongApplicationsHelper {
      * @param attributesIds
      * @return map (key = IdApplication, value = IdsAttributes)
      */
-    public Map<Integer, List<Integer>> getAttributeBelongApplication(final Set<Integer> attributesIds) {
+    public Map<Integer, List<Integer>> getAttributesBelongApplication(final Set<Integer> attributesIds) {
         final Set<AttributeBelongApplication> attributeBelongApplications = attributeRepository.findAttributesBelongApplicationByIdAttributeIn(attributesIds);
-
-        attributeBelongApplications.stream().findFirst().get().getIdApplication();
 
         return attributeBelongApplications.stream()
                 .collect(Collectors.groupingBy(AttributeBelongApplication::getIdApplication,
