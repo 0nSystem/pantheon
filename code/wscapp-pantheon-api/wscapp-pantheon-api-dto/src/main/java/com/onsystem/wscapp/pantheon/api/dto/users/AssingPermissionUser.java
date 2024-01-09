@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.api.dto.users;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,17 +9,16 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
-public class DeleteUserRolesDTO {
-
-    @NotNull
+@AllArgsConstructor
+@NoArgsConstructor
+public class AssingPermissionUser {
     @Positive
     private Integer userId;
     @NotEmpty
     @Positive
-    private Set<Integer> roleIds;
+    private Set<Integer> permissionIds;
+
 
 }
