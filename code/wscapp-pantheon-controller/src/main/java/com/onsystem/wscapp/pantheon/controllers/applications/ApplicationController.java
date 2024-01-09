@@ -6,6 +6,7 @@ import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.create.
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.delete.IDeleteApplicationService;
 import com.onsystem.wscapp.pantheon.api.interfaces.services.applications.update.IUpdateApplicationService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,8 @@ public class ApplicationController {
     @PostMapping(ENDPOINT_TO_LANGUAGE)
     @ResponseStatus(HttpStatus.OK)
     public GenericView<Set<ApplicationLanguageDTO>> createLanguageApplication(
-            @RequestParam @Positive Integer applicationId,
-            @RequestBody @Valid Set<CreateApplicationLanguageDTO> createApplicationLanguage) {
+            @RequestParam @Valid @Positive Integer applicationId,
+            @RequestBody @Valid @NotEmpty Set<CreateApplicationLanguageDTO> createApplicationLanguage) {
 
         return GenericView.<Set<ApplicationLanguageDTO>>builder()
                 .response(iCreateApplicationService.createApplicationLanguages(applicationId, createApplicationLanguage))
@@ -65,7 +66,8 @@ public class ApplicationController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteApplication(final @RequestParam @Valid @Positive Integer applicationId) {
+    public void deleteApplication(
+            final @RequestParam @Valid @Positive Integer applicationId) {
         iDeleteApplicationService.deleteApplication(1, Set.of(applicationId));
     }
 

@@ -72,7 +72,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteRoleLanguage(
             final @RequestParam @Valid @Positive Integer roleId,
-            final @RequestBody @Valid @Positive List<Integer> languagesIds) {
+            final @RequestParam @Valid @Positive List<Integer> languagesIds) {
         iDeleteRoleService.deleteRoleLanguage(roleId, languagesIds);
     }
 
