@@ -31,16 +31,6 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public GenericView<CreateAfterUserDTO> createUser(
-            final @RequestBody @Valid CreateUserDTO createUser
-    ) {
-        return GenericView.<CreateAfterUserDTO>builder()
-                .response(iCreateUserService.createUser(createUser))
-                .build();
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
     public GenericView<List<CreateAfterUserDTO>> createUsers(
             final @RequestBody @Valid List<CreateUserDTO> createUser
     ) {
