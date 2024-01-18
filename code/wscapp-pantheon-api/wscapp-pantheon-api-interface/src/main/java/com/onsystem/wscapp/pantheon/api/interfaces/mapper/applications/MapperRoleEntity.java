@@ -20,7 +20,8 @@ public abstract class MapperRoleEntity {
             @Mapping(source = "applicationId", target = "application.idApplication"),
             @Mapping(target = "idRole", ignore = true),
             @Mapping(target = "roleLanguages", ignore = true),
-            @Mapping(target = "permissions", ignore = true)
+            @Mapping(target = "permissions", ignore = true),
+            @Mapping(target = "user", ignore = true)
     })
     public abstract RoleEntity createToEntity(CreateRoleDTO createRoleDTO, final @NotNull Integer applicationId);
 

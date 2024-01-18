@@ -1,16 +1,7 @@
 # Configuración para PostgreSQL
 spring:
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/management
-    username: postgres
-    password: postgres
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: true
-    database: postgresql
+  profiles:
+    active: db-h2
 
   logging:
     level:

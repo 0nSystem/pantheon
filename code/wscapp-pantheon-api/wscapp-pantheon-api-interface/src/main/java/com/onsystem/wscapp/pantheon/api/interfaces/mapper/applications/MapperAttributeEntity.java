@@ -19,7 +19,8 @@ public abstract class MapperAttributeEntity {
     @Mappings({
             @Mapping(target = "application.idApplication", source = "applicationId"),
             @Mapping(target = "idAttribute", ignore = true),
-            @Mapping(target = "attributeLanguages", ignore = true)
+            @Mapping(target = "attributeLanguages", ignore = true),
+            @Mapping(target = "userAttribute", ignore = true)
     })
     public abstract AttributeEntity createToEntity(final CreateAttributeDTO createAttributeDTO,
                                                    final @NotNull Integer applicationId);
