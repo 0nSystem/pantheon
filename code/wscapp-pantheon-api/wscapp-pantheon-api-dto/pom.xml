@@ -6,7 +6,7 @@
     <artifactId>wscapp-pantheon-api-dto</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>Archetype - wscapp-pantheon-api-request</name>
+    <name>Archetype - wscapp-pantheon-api-dto</name>
     <url>http://maven.apache.org</url>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
