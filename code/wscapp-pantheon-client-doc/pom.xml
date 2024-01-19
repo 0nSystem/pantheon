@@ -14,7 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
-
+        <outputDir>./src/main/resources</outputDir>
+        <outputFileName>openapi.json</outputFileName>
     </properties>
 
     <build>
@@ -33,8 +34,8 @@
                 </executions>
                 <configuration>
                     <apiDocsUrl>${apiDocsUrl}</apiDocsUrl>
-                    <outputDir>${project.build.directory}/resources</outputDir>
-                    <outputFileName>openapi.json</outputFileName>
+                    <outputDir>${outputDir}</outputDir>
+                    <outputFileName>${outputFileName}</outputFileName>
                 </configuration>
             </plugin>
         </plugins>
