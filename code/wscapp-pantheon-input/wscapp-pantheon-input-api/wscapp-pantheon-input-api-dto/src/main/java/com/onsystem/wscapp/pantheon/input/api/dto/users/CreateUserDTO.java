@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -35,8 +37,6 @@ public class CreateUserDTO {
     private String password;
 
     //FIXME remove createUserDTO
-    @Positive
-    @NotNull
-    private Integer highIdUser;
+    private Optional<Integer> highIdUser;
 
 }

@@ -69,14 +69,14 @@ public class UserEntity implements HightAuditFields, DeleteAuditFields {
     @Nullable
     private Integer deleteIdUser;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(schema = SCHEME_USERS, name = Constants.TABLE_USER_PERMISSION,
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_permission")
     )
     private Set<PermissionEntity> permission;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinTable(name = TABLE_USER_ROLE, schema = SCHEME_USERS,
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_role")

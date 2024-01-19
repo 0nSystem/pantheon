@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class CreateApplicationDTO {
     @Size(max = 255, message = Constants.ErrorValidationMessages.MAX)
     private String description;
 
-    //TODO
+
     @Positive
-    private Integer highIdUser;
+    private Optional<Integer> highIdUser;
 }

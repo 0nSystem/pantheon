@@ -3,6 +3,7 @@ package com.onsystem.wscapp.pantheon.model.service.applications.create;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
+import com.onsystem.wscapp.pantheon.input.api.interfaces.services.ISessionManager;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.create.ICreateApplicationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ class TestCreateApplicationService {
     private ICreateApplicationService iCreateApplicationService;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private ISessionManager iSessionManager;
 
     @Autowired
     private Integer idLanguage;
@@ -36,22 +39,21 @@ class TestCreateApplicationService {
         //Is list but require initialize with "authorized-permission" by default to add users
         final var permissionApplication = roleRepository.findByApplicationIdApplication(applicationCreateDTO.getIdApplication());
 
-        Assertions.assertAll(() -> {
-            Assertions.assertNotNull(applicationCreateDTO);
-            Assertions.assertTrue(applicationCreateDTO.getIdApplication() > 0);
+        Assertions.assertNotNull(applicationCreateDTO);
+        Assertions.assertTrue(applicationCreateDTO.getIdApplication() > 0);
 
-            Assertions.assertEquals(createApplicationModel.getName(), applicationCreateDTO.getName());
-            Assertions.assertEquals(createApplicationModel.getDescription(), applicationCreateDTO.getDescription());
+        Assertions.assertEquals(createApplicationModel.getName(), applicationCreateDTO.getName());
+        Assertions.assertEquals(createApplicationModel.getDescription(), applicationCreateDTO.getDescription());
 
-            Assertions.assertNull(applicationCreateDTO.getDeleteIdUser());
-            Assertions.assertNull(applicationCreateDTO.getDeleteDate());
+        Assertions.assertNull(applicationCreateDTO.getDeleteIdUser());
+        Assertions.assertNull(applicationCreateDTO.getDeleteDate());
 
-            Assertions.assertNotNull(applicationCreateDTO.getHighDate());
-            Assertions.assertEquals(createApplicationModel.getHighIdUser(), applicationCreateDTO.getHighIdUser());
+        Assertions.assertNotNull(applicationCreateDTO.getHighDate());
+        createApplicationModel.getHighIdUser()
+                .ifPresentOrElse(integer -> Assertions.assertEquals(integer, applicationCreateDTO.getHighIdUser()),
+                        () -> Assertions.assertEquals(iSessionManager.currentIdUser(), applicationCreateDTO.getHighIdUser()));
 
-            Assertions.assertEquals(1,permissionApplication.size());
-
-        });
+        Assertions.assertEquals(1, permissionApplication.size());
     }
 
 
@@ -73,7 +75,7 @@ class TestCreateApplicationService {
         Assertions.assertEquals(idLanguage, applicationLanguage.getIdLanguage());
         Assertions.assertEquals(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getName(), applicationLanguage.getName());
         Assertions.assertEquals(MockData.DataCreateMockSchemeApplicationDTO.CREATE_APPLICATION_LANGUAGE_MOCK.build().getDescription(), applicationLanguage.getDescription());
-        Assertions.assertEquals(1,permissionApplication.size());
+        Assertions.assertEquals(1, permissionApplication.size());
 
 
     }

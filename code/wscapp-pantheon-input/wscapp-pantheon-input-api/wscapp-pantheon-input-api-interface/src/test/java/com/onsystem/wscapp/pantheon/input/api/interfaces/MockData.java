@@ -27,6 +27,7 @@ import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 
@@ -36,7 +37,7 @@ public class MockData {
         public static CreateApplicationDTO CREATE_APPLICATION_MOCK = CreateApplicationDTO.builder()
                 .name("name")
                 .description("description")
-                .highIdUser(1)
+                .highIdUser(Optional.of(1))
                 .build();
         public static CreateApplicationLanguageDTO.CreateApplicationLanguageDTOBuilder CREATE_APPLICATION_LANGUAGE_MOCK = CreateApplicationLanguageDTO.builder()
                 .name("name language")
@@ -138,7 +139,7 @@ public class MockData {
                 .password("1234")
                 .name("name")
                 .surname("surname")
-                .highIdUser(1)
+                .highIdUser(Optional.of(1))
                 .build();
 
         public static CreateUserAttributeDTO CREATE_USER_ATTRIBUTE_MOCK = CreateUserAttributeDTO.builder()

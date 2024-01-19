@@ -27,9 +27,6 @@ public class CreateUserService implements ICreateUserService {
     @Transactional
     public CreateAfterUserDTO createUser(CreateUserDTO createUser) {
         validationNotExistEmailOrLogin(List.of(createUser));
-
-        //FIXME remove createUserDTO
-        //FIXME LOWER CASE?
         final UserEntity userEntity = mapperUserEntity.createToEntity(createUser);
         final UserEntity userSaved = userRepository.save(userEntity);
         return mapperUserEntity.entityToCreateAfter(userSaved);

@@ -6,6 +6,7 @@ import com.onsystem.wscapp.pantheon.input.api.interfaces.MockData;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.helpers.ITimeHelper;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperApplicationEntity;
+import com.onsystem.wscapp.pantheon.input.api.interfaces.services.ISessionManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +22,8 @@ class MapperApplicationEntityTest {
     private MapperApplicationEntity mapper;
     @Autowired
     private ITimeHelper ITimeHelper;
+    @Autowired
+    private ISessionManager iSessionManager;
 
 
     @Test
@@ -34,12 +37,16 @@ class MapperApplicationEntityTest {
         Assertions.assertNotNull(applicationEntity);
         Assertions.assertEquals(createApplicationDTO.getName(), applicationEntity.getName());
         Assertions.assertEquals(createApplicationDTO.getDescription(), applicationEntity.getDescription());
-        Assertions.assertEquals(createApplicationDTO.getHighIdUser(), applicationEntity.getHighIdUser());
+        createApplicationDTO.getHighIdUser()
+                .ifPresentOrElse(integer -> Assertions.assertEquals(integer, applicationEntity.getHighIdUser()),
+                        () -> Assertions.assertEquals(iSessionManager.currentIdUser(), applicationEntity.getHighIdUser()));
+
         Assertions.assertNotNull(applicationEntity.getHighDate());
 
     }
+
     @Test
-    void testCreateEntityToEntityReturnNull(){
+    void testCreateEntityToEntityReturnNull() {
         final ApplicationEntity applicationEntity = mapper
                 .createToEntity(null);
 
@@ -73,14 +80,14 @@ class MapperApplicationEntityTest {
 
 
     }
+
     @Test
-    void testEntityToDTOReturnNull(){
+    void testEntityToDTOReturnNull() {
         final ApplicationDTO applicationDTO = mapper
                 .entityToDTO(null);
 
         Assertions.assertNull(applicationDTO);
     }
-
 
 
 }

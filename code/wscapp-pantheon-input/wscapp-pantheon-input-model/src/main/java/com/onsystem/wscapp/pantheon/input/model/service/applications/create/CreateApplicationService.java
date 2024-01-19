@@ -12,6 +12,7 @@ import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.Map
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
+import com.onsystem.wscapp.pantheon.input.api.interfaces.services.ISessionManager;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.create.ICreateApplicationService;
 import com.onsystem.wscapp.pantheon.input.model.Constants;
 import jakarta.validation.constraints.Positive;
@@ -38,11 +39,14 @@ public class CreateApplicationService implements ICreateApplicationService {
 
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private ISessionManager iSessionManager;
 
     @Transactional
     @Override
     public ApplicationDTO createApplication(final CreateApplicationDTO createApplication) {
         final ApplicationEntity applicationEntityMapped = mapperApplicationEntity.createToEntity(createApplication);
+
 
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 

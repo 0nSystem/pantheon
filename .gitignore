@@ -145,4 +145,4 @@ replay_pid*
 
 # java
 **/target
-**.iml
+*.iml

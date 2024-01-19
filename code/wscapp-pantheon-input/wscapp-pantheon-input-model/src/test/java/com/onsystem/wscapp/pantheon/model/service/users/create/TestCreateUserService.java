@@ -4,6 +4,7 @@ import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserDTO;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRepository;
+import com.onsystem.wscapp.pantheon.input.api.interfaces.services.ISessionManager;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.create.ICreateUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,8 @@ class TestCreateUserService {
     private ICreateUserService iCreateUserService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ISessionManager iSessionManager;
 
     private Stream<Arguments> argumentsCorrectCreateUser() {
         final var a = CREATE_USER_MOCK;
@@ -49,7 +52,9 @@ class TestCreateUserService {
             Assertions.assertEquals(createUser.getSurname(), createAfterUserDTO.getSurname());
             Assertions.assertEquals(createUser.getEmail(), createAfterUserDTO.getEmail());
             Assertions.assertEquals(createUser.getLogin(), createAfterUserDTO.getLogin());
-            Assertions.assertEquals(createUser.getHighIdUser(), createAfterUserDTO.getHighIdUser());
+            createUser.getHighIdUser()
+                    .ifPresentOrElse(integer -> Assertions.assertEquals(integer, createAfterUserDTO.getHighIdUser()),
+                            () -> Assertions.assertEquals(iSessionManager.currentIdUser(), createAfterUserDTO.getHighIdUser()));
 
         };
     }
