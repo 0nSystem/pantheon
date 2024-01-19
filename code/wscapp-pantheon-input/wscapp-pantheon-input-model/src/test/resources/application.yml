@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:management;INIT=CREATE SCHEMA IF NOT EXISTS public\;CREATE SCHEMA IF NOT EXISTS applications\;CREATE SCHEMA IF NOT EXISTS users\;CREATE SCHEMA IF NOT EXISTS enterprise
+    driverClassName: org.h2.Driver
+    username: postgres
+    password: postgres
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: false
+    generate-ddl: true
+    hibernate:
+      globally_quoted_identifiers: true
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
+      enable_lazy_load_no_trans: true
+    show-sql: true
