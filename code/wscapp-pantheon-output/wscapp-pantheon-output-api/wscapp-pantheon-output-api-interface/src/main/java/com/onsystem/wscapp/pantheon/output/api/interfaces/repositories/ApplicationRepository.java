@@ -19,7 +19,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             " app.idApplication," +
             " CASE WHEN perml.name IS NOT NULL THEN perml.name ELSE perm.name END AS NAME," +
             " CASE WHEN perml.description IS NOT NULL THEN perml.description ELSE perm.description END AS DESCRIPTION" +
-            " FROM ApplicationEntity app" +
+            " FROM ApplicationEntity app" + //Can from directly permission
             " INNER JOIN app.permissions perm" +
             " LEFT JOIN perm.permissionLanguages perml ON perml.language.idLanguage = :idIdioma" +
             " WHERE app.idApplication IN (:applicationsIds)"
@@ -29,10 +29,34 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             final Collection<Integer> applicationsIds);
 
 
-    List<RoleInfoProjection> findRoleInfoProjectionByIdApplicationIn(final Collection<Integer> applicationsIds);
+    @Query(" SELECT" +
+            " app.idApplication," +
+            " CASE WHEN rolesl.name IS NOT NULL THEN rolesl.name ELSE roles.name END AS NAME," +
+            " CASE WHEN rolesl.description IS NOT NULL THEN rolesl.description ELSE roles.description END AS DESCRIPTION" +
+            " FROM ApplicationEntity app" + //Can from directly roles
+            " INNER JOIN app.roles roles" +
+            " LEFT JOIN roles.roleLanguages rolesl ON rolesl.language.idLanguage = :idIdioma" +
+            " WHERE app.idApplication IN (:applicationsIds)"
+    )
+    List<RoleInfoProjection> findRoleInfoProjectionByIdApplicationIn(
+            final int idIdioma,
+            final Collection<Integer> applicationsIds
+    );
 
 
-    List<AttributeInfoProjection> findAttributeInfoProjectionByIdApplicationIn(final Collection<Integer> applicationsIds);
+    @Query(" SELECT" +
+            " app.idApplication," +
+            " CASE WHEN attrl.name IS NOT NULL THEN attrl.name ELSE attr.name END AS NAME," +
+            " CASE WHEN attrl.description IS NOT NULL THEN attrl.description ELSE attr.description END AS DESCRIPTION" +
+            " FROM ApplicationEntity app" + //Can from directly attributes
+            " INNER JOIN app.attributes attr" +
+            " LEFT JOIN attr.attributeLanguages attrl ON attrl.language.idLanguage = :idIdioma" +
+            " WHERE app.idApplication IN (:applicationsIds)"
+    )
+    List<AttributeInfoProjection> findAttributeInfoProjectionByIdApplicationIn(
+            final int idIdioma,
+            final Collection<Integer> applicationsIds
+    );
 
 
 }
