@@ -3,8 +3,6 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces;
 public class Constants {
 
 
-
-
     public static final String ENDPOINT_APPLICATION_ROOT_CONTROLLER = "/application";
     public static final String ENDPOINT_ROLE_ROOT_CONTROLLER = "/role";
     public static final String ENDPOINT_PERMISSION_ROOT_CONTROLLER = "/permission";

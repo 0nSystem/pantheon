@@ -22,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
+import static com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_DESCRIPTION;
+import static com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
@@ -48,8 +51,8 @@ class TestCreateUserAttributeService {
         final RoleEntity roleAuthorization = roleRepository.save(
                 RoleEntity.builder()
                         .application(ApplicationEntity.builder().idApplication(idApplication).build())
-                        .name(Constants.AUTORIZED_ROLE_NAME)
-                        .description(Constants.AUTORIZED_ROLE_DESCRIPTION)
+                        .name(AUTORIZED_ROLE_NAME)
+                        .description(AUTORIZED_ROLE_DESCRIPTION)
                         .build());
         userRoleRepository.save(
                 UserRoleEntity.builder()

@@ -59,7 +59,7 @@ public class CreateUserPermissionService implements ICreateUserPermissionService
                 .map(permissionEntity -> permissionEntity.getApplication().getIdApplication())
                 .collect(Collectors.toSet());
 
-        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), Constants.AUTORIZED_ROLE_NAME);
+        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME);
 
         boolean notEqualsApplicationPermissionAndUserInApplication = false;
 

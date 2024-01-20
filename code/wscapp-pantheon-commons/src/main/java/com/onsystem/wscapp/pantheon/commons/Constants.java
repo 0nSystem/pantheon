@@ -1,6 +1,10 @@
 package com.onsystem.wscapp.pantheon.commons;
 
 public class Constants {
+
+    public static String AUTORIZED_ROLE_NAME = "authorized";
+    public static String AUTORIZED_ROLE_DESCRIPTION = "authorized";
+
     public static final String DB_NAME_MANAGEMENT = "management";
     public static final String SCHEME_APPLICATION = "applications";
     public static final String SCHEME_PUBLIC = "public";

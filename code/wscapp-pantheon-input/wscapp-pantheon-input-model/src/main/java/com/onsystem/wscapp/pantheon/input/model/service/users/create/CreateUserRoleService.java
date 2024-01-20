@@ -58,7 +58,7 @@ public class CreateUserRoleService implements ICreateUserRoleService {
         final Set<Integer> applicationIdsInRoles = roleRepository.findIdsApplicationByIdRoleIn(roleIds);
 
 
-        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), Constants.AUTORIZED_ROLE_NAME);
+        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME);
 
         boolean notEqualsApplicationRolesAndUserInApplication = false;
 

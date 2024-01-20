@@ -51,9 +51,9 @@ public class CreateApplicationService implements ICreateApplicationService {
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
         roleRepository.save(RoleEntity.builder()
-                .name(Constants.AUTORIZED_ROLE_NAME)
+                .name(com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME)
                 .application(applicationInserted)
-                .description(Constants.AUTORIZED_ROLE_DESCRIPTION)
+                .description(com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_DESCRIPTION)
                 .build());
 
 
