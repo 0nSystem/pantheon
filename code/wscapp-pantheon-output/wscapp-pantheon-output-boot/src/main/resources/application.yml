@@ -1,0 +1,12 @@
+# Configuración para PostgreSQL
+spring:
+  profiles:
+    active: db-h2
+
+  logging:
+    level:
+      org:
+        springframework:
+          validation: DEBUG
+        hibernate:
+          validator: DEBUG

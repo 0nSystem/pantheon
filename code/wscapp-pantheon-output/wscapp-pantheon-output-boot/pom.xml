@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.onsystem</groupId>
-            <artifactId>wscapp-pantheon-input-controller</artifactId>
+            <artifactId>wscapp-pantheon-output-controller</artifactId>
             <version>1.0-SNAPSHOT</version>
 
         </dependency>

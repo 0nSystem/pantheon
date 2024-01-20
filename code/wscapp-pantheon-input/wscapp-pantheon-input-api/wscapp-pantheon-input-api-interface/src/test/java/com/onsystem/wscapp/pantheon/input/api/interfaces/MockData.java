@@ -105,7 +105,6 @@ public class MockData {
     }
 
     public static class DataMockSchemeApplicationEntities {
-
         public static final LanguageEntity LANGUAGE_MOCK = LanguageEntity.builder()
                 .name("es")
                 .languageFamily("es")

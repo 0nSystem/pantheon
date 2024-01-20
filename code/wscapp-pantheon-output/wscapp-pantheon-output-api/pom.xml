@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.onsystem</groupId>
-            <artifactId>wscapp-pantheon-input-api-dto</artifactId>
+            <artifactId>wscapp-pantheon-output-api-dto</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
