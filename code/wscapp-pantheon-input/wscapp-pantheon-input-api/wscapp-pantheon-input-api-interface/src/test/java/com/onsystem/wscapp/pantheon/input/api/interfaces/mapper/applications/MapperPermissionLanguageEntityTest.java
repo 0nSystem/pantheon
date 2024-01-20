@@ -2,9 +2,8 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.CreatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.PermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperPermissionLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionLanguageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

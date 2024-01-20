@@ -1,9 +1,9 @@
 package com.onsystem.wscapp.pantheon.model.service.users.delete;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.DeleteUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserAttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.delete.IDeleteUserAttributeService;
 import org.junit.jupiter.api.Assertions;

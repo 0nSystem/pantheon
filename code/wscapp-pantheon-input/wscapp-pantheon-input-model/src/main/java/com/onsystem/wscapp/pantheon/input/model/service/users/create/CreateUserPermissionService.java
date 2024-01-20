@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.create;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserPermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserPermissionEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.UserBelongApplication;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionRepository;

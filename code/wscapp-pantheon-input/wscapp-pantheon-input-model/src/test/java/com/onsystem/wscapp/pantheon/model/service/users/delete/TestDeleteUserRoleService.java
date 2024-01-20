@@ -1,9 +1,9 @@
 package com.onsystem.wscapp.pantheon.model.service.users.delete;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.DeleteUserRolesDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRoleRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.delete.IDeleteUserRoleService;
 import org.junit.jupiter.api.Assertions;

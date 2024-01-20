@@ -1,11 +1,11 @@
 package com.onsystem.wscapp.pantheon.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserAttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRoleRepository;

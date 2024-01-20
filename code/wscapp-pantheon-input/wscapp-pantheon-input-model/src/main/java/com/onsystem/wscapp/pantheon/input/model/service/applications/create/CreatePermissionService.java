@@ -1,10 +1,10 @@
 package com.onsystem.wscapp.pantheon.input.model.service.applications.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.*;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RolePermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RolePermissionEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperPermissionEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperPermissionLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionLanguageRepository;

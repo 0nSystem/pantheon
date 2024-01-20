@@ -1,5 +1,6 @@
 package com.onsystem.wscapp.pantheon.model.service.applications;
 
+import com.onsystem.wscapp.pantheon.commons.entity.applications.*;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.UpdateApplicationDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.UpdateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.AttributeDTO;
@@ -14,9 +15,7 @@ import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.RoleDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.RoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.*;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+
 import jakarta.validation.constraints.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;

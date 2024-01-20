@@ -3,7 +3,7 @@ package com.onsystem.wscapp.pantheon.model.service.applications.delete;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.CreateApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.create.ICreateApplicationService;

@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserPermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserPermissionKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserPermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserPermissionKeyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package com.onsystem.wscapp.pantheon.model.service.applications;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RolePermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RolePermissionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.ThrowingConsumer;
 

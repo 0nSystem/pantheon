@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.CreateAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
 import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

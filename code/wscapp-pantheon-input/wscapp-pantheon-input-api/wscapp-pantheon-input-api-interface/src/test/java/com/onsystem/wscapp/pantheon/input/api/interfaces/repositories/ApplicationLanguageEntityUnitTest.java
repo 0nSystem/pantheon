@@ -1,9 +1,9 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories;
 
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.spublic.LanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationLanguageRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.spublic.LanguageRepository;

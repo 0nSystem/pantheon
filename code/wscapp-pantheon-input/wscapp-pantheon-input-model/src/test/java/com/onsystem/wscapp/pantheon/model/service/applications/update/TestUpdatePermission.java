@@ -5,9 +5,9 @@ import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.Update
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.UpdatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionLanguageKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionLanguageKeyEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionLanguageRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.create.ICreatePermissionService;

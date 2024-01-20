@@ -2,10 +2,9 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.CreateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.RoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.spublic.LanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperRoleLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

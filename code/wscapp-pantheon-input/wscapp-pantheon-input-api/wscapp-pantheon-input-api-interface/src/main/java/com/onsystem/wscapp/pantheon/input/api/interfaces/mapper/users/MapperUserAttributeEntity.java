@@ -2,9 +2,9 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users;
 
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.stereotype.Component;

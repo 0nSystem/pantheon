@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.CreatePermissionLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.PermissionLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionLanguageEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

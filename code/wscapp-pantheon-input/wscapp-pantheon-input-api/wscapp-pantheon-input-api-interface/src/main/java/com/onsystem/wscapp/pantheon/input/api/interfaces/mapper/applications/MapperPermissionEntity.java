@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.CreatePermissionDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.permission.PermissionDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
 import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

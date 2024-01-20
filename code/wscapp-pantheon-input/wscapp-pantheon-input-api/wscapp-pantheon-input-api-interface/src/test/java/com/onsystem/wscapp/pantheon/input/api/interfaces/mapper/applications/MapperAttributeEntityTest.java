@@ -3,9 +3,8 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.AttributeDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.CreateAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

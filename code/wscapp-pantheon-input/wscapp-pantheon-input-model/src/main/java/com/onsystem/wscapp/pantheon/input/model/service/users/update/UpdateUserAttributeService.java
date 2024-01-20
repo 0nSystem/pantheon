@@ -1,9 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.update;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.UpdateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.AttributeLanguageRepository;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.AttributeRepository;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserAttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.update.IUpdateUserAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.update;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.UpdateUserDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users.MapperUserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.update.IUpdateUserService;

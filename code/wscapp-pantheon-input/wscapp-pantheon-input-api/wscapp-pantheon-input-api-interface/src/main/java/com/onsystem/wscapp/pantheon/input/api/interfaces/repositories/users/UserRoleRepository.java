@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleKeyEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.UserBelongApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.CreateRoleDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.RoleDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
 import jakarta.validation.constraints.NotNull;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

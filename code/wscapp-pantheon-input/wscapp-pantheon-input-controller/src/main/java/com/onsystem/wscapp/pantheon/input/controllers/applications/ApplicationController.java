@@ -20,6 +20,7 @@ import java.util.Set;
 import static com.onsystem.wscapp.pantheon.input.api.interfaces.Constants.ENDPOINT_APPLICATION_ROOT_CONTROLLER;
 import static com.onsystem.wscapp.pantheon.input.api.interfaces.Constants.ENDPOINT_TO_LANGUAGE;
 
+
 @RestController
 @RequestMapping(ENDPOINT_APPLICATION_ROOT_CONTROLLER)
 @Validated

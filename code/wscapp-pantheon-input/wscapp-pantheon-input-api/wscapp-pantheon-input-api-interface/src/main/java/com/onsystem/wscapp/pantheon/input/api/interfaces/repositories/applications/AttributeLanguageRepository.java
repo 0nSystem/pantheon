@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.UpdateAttributeLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeLanguageKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeLanguageKeyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
