@@ -1,17 +1,13 @@
 package com.onsystem.wscapp.pantheon.output.api.interfaces.repositories;
 
 import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.ApplicationInfoProjection;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.AttributeInfoProjection;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.PermissionInfoProjection;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.RoleInfoProjection;
+import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<ApplicationEntity, Integer> {
@@ -77,5 +73,33 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             final Collection<Integer> applicationsIds
     );
 
+
+    @Query(
+            "SELECT DISTINCT userWithRole " +
+                    " FROM ApplicationEntity app " +
+                    " INNER JOIN app.roles role ON role.idRole IN (:idRoles) " +
+                    " INNER JOIN role.user userWithRole ON userWithRole.deleteDate IS NOT NULL" +
+                    " WHERE app.idApplication = :applicationId " +
+                    " AND userWithRole.deleteDate IS NOT NULL "
+    )
+    List<UserInfoProjection> findUserByIdApplicationAndIdRoleInAndDeleteDateIsNull(
+            final int applicationId,
+            final List<Integer> idRoles
+    );
+
+
+
+    @Query(
+            "SELECT DISTINCT userWithPermission " +
+                    " FROM ApplicationEntity app " +
+                    " INNER JOIN app.permissions perm ON perm.idPermission IN (:idRoles) " +
+                    " INNER JOIN perm.user userWithPermission ON userWithPermission.deleteDate IS NOT NULL" +
+                    " WHERE app.idApplication = :applicationId " +
+                    " AND userWithPermission.deleteDate IS NOT NULL "
+    )
+    List<UserInfoProjection> findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(
+            final int applicationId,
+            final List<Integer> idRoles
+    );
 
 }

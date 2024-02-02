@@ -1,10 +1,8 @@
 package com.onsystem.wscapp.pantheon.output.model.services;
 
 import com.onsystem.wscapp.pantheon.output.api.dto.applications.AllInfoApplicationDTO;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperApplication;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperAttribute;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperPermission;
-import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperRole;
+import com.onsystem.wscapp.pantheon.output.api.dto.users.UserInfoDTO;
+import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.*;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.ApplicationInfoProjection;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.AttributeInfoProjection;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.PermissionInfoProjection;
@@ -31,6 +29,8 @@ public class ApplicationService implements IApplicationService {
     private IMapperAttribute iMapperAttribute;
     @Autowired
     private IMapperRole iMapperRole;
+    @Autowired
+    private IMapperUser iMapperUser;
 
 
     @Override
@@ -86,20 +86,51 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public AllInfoApplicationDTO findByIdApplicationWithValidationPermission(int applicationId, int languageId) {
+    public AllInfoApplicationDTO findByIdApplicationWithValidationIfCanShowThisInfo(int applicationId, int languageId) {
 
-        return findByIdsApplicationsWithValidationPermission(List.of(applicationId), languageId)
+        return findByIdsApplicationsWithValidationIfCanShowThisInfo(List.of(applicationId), languageId)
                 .stream().findFirst()
                 .orElseThrow(() -> new RuntimeException(String.format("Error not found application %s", applicationId)));
     }
 
     @Override
-    public Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationPermission(List<Integer> applicationIds, int languageId) {
+    public Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationIfCanShowThisInfo(List<Integer> applicationIds, int languageId) {
         validationShowApplicationInfo(applicationIds);
         return findByIdsApplications(applicationIds, languageId);
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndRole(int applicationId, List<Integer> roleIds) {
+        return applicationRepository.findUserByIdApplicationAndIdRoleInAndDeleteDateIsNull(applicationId, roleIds)
+                .stream()
+                .map(iMapperUser::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndRoleWithValidationIfCanShowThisInfo(int applicationId, List<Integer> roleIds) {
+        validationShowApplicationInfo(List.of(applicationId));
+        return findUsersByIdApplicationAndRole(applicationId, roleIds);
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndPermissions(int applicationId, List<Integer> permissionIds) {
+
+        return applicationRepository.findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(applicationId,permissionIds)
+                .stream()
+                .map(iMapperUser::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndPermissionsWithValidationIfCanShowThisInfo(int applicationId, List<Integer> permissionIds) {
+        validationShowApplicationInfo(List.of(applicationId));
+        return findUsersByIdApplicationAndPermissions(applicationId, permissionIds);
     }
 
     private void validationShowApplicationInfo(List<Integer> applicationIds) {
         //TODO
     }
+
+
 }
