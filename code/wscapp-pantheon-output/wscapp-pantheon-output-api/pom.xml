@@ -19,11 +19,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.onsystem</groupId>
-            <artifactId>wscapp-pantheon-output-api-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
     </dependencies>
 
 </project>

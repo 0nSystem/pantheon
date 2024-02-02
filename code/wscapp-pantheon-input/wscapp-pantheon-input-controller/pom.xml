@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>wscapp-pantheon-input-controller</artifactId>
-    <name>wscapp-pantheon-controller</name>
+    <name>wscapp-pantheon-input-controller</name>
     <url>http://maven.apache.org</url>
 
 

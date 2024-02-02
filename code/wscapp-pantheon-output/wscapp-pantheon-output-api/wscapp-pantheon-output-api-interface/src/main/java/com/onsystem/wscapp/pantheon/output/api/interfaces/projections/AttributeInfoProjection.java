@@ -4,6 +4,8 @@ public interface AttributeInfoProjection {
 
     Integer getIdApplication();
 
+    Integer getIdAttribute();
+
     String getName();
 
     String getDescription();

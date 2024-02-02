@@ -1,10 +1,7 @@
 package com.onsystem.wscapp.pantheon.output.api.interfaces.projections;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
 import java.sql.Timestamp;
+import java.util.List;
 
 public interface ApplicationInfoProjection {
 
@@ -17,6 +14,5 @@ public interface ApplicationInfoProjection {
     Timestamp getHighDate();
 
     Integer getHighIdUser();
-
 
 }

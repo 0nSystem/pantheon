@@ -4,8 +4,12 @@ public interface RoleInfoProjection {
 
     Integer getIdApplication();
 
+    Integer getIdRole();
+
     String getName();
 
     String getDescription();
+
+    //TODO Permission
 
 }

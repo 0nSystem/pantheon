@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"com.onsystem.wscapp.pantheon.output.api.interfaces.repositories"})
-@ComponentScan(basePackages = {"com.onsystem.wscapp.pantheon.ouput"})
+@ComponentScan(basePackages = {"com.onsystem.wscapp.pantheon.output"})
 @EntityScan(basePackages = {"com.onsystem.wscapp.pantheon.commons"})
 //@EnableWebMvc
 public class Application {

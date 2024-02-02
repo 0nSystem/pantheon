@@ -1,15 +1,15 @@
 package com.onsystem.wscapp.pantheon.output.api.interfaces.mappers;
 
-import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
 import com.onsystem.wscapp.pantheon.output.api.dto.applications.AttributeInfoDTO;
+import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.AttributeInfoProjection;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 @Component
-public interface MapperAttribute {
+public interface IMapperAttribute {
 
 
-    AttributeInfoDTO toDto(final AttributeEntity attributeEntity);
+    AttributeInfoDTO toDto(final AttributeInfoProjection attributeInfoProjection);
 }
