@@ -12,5 +12,9 @@ public interface IApplicationService {
 
     Set<AllInfoApplicationDTO> findByIdsApplications(final List<Integer> applicationIds, int languageId);
 
+    AllInfoApplicationDTO findByIdApplicationWithValidationPermission(final int applicationId, int languageId);
+
+    Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationPermission(final List<Integer> applicationIds, int languageId);
+
 
 }

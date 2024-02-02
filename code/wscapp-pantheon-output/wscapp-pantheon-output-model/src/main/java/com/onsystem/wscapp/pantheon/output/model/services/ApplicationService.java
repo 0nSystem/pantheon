@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.output.model.services;
 
 import com.onsystem.wscapp.pantheon.output.api.dto.applications.AllInfoApplicationDTO;
-import com.onsystem.wscapp.pantheon.output.api.dto.applications.ApplicationInfoDTO;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperApplication;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperAttribute;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.IMapperPermission;
@@ -13,7 +12,6 @@ import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.RoleInfoPr
 import com.onsystem.wscapp.pantheon.output.api.interfaces.repositories.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.services.IApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,7 +44,6 @@ public class ApplicationService implements IApplicationService {
 
     @Override
     public Set<AllInfoApplicationDTO> findByIdsApplications(List<Integer> applicationIds, int languageId) {
-        validationShowApplicationInfo(applicationIds);
         final var mapIdApplicationApplicationProjectionInfo = applicationRepository
                 .findApplicationInfoById(languageId, applicationIds)
                 .stream()
@@ -86,6 +83,20 @@ public class ApplicationService implements IApplicationService {
                         .attributesInfo(mapIdApplicationAttributesApplications.get(entryIdApplicationApplicationProjectInfo.getKey()))
                         .build())
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public AllInfoApplicationDTO findByIdApplicationWithValidationPermission(int applicationId, int languageId) {
+
+        return findByIdsApplicationsWithValidationPermission(List.of(applicationId), languageId)
+                .stream().findFirst()
+                .orElseThrow(() -> new RuntimeException(String.format("Error not found application %s", applicationId)));
+    }
+
+    @Override
+    public Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationPermission(List<Integer> applicationIds, int languageId) {
+        validationShowApplicationInfo(applicationIds);
+        return findByIdsApplications(applicationIds, languageId);
     }
 
     private void validationShowApplicationInfo(List<Integer> applicationIds) {
