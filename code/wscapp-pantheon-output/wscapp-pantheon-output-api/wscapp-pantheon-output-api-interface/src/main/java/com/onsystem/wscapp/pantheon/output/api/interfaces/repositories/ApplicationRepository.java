@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.List;
 
+//TODO revision permisison authorization...
+
 @Repository
 public interface ApplicationRepository extends JpaRepository<ApplicationEntity, Integer> {
 
@@ -20,7 +22,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             " app.highDate AS highDate, app.highIdUser AS highIdUser " +
             " FROM ApplicationEntity app " +
             " LEFT JOIN app.applicationLanguages appl ON appl.language.idLanguage = :languageId " +
-            " WHERE app.idApplication IN (:applicationIds)")
+            " WHERE app.idApplication IN (:applicationIds) AND app.deleteDate IS NULL")
         //TODO DEleteDate?
     List<ApplicationInfoProjection> findApplicationInfoById(
             final int languageId,
@@ -80,13 +82,12 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
                     " INNER JOIN app.roles role ON role.idRole IN (:idRoles) " +
                     " INNER JOIN role.user userWithRole ON userWithRole.deleteDate IS NOT NULL" +
                     " WHERE app.idApplication = :applicationId " +
-                    " AND userWithRole.deleteDate IS NOT NULL "
+                    " AND userWithRole.deleteDate IS NULL "
     )
     List<UserInfoProjection> findUserByIdApplicationAndIdRoleInAndDeleteDateIsNull(
             final int applicationId,
             final List<Integer> idRoles
     );
-
 
 
     @Query(
@@ -101,5 +102,20 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             final int applicationId,
             final List<Integer> idRoles
     );
+
+    @Query(
+            "SELECT uattr.user " +
+                    " FROM ApplicationEntity app " +
+                    " INNER JOIN app.attributes attr ON attr.idAttribute = :attributeId " +
+                    " INNER JOIN attr.userAttribute uattr ON uattr.attribute_value = :attributeValue " +
+                    " WHERE app.deleteDate IS NULL " +
+                    " AND app.idApplication = :applicationId "
+    )
+    List<UserInfoProjection> findUserByIdApplicationAndIdAttributeAndValue(
+            final int applicationId,
+            final Integer attributeId,
+            final String attributeValue
+    );
+
 
 }

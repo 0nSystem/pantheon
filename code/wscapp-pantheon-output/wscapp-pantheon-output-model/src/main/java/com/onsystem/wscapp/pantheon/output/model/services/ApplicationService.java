@@ -89,7 +89,8 @@ public class ApplicationService implements IApplicationService {
     public AllInfoApplicationDTO findByIdApplicationWithValidationIfCanShowThisInfo(int applicationId, int languageId) {
 
         return findByIdsApplicationsWithValidationIfCanShowThisInfo(List.of(applicationId), languageId)
-                .stream().findFirst()
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException(String.format("Error not found application %s", applicationId)));
     }
 
@@ -116,7 +117,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public Set<UserInfoDTO> findUsersByIdApplicationAndPermissions(int applicationId, List<Integer> permissionIds) {
 
-        return applicationRepository.findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(applicationId,permissionIds)
+        return applicationRepository.findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(applicationId, permissionIds)
                 .stream()
                 .map(iMapperUser::toDto)
                 .collect(Collectors.toSet());
@@ -126,6 +127,21 @@ public class ApplicationService implements IApplicationService {
     public Set<UserInfoDTO> findUsersByIdApplicationAndPermissionsWithValidationIfCanShowThisInfo(int applicationId, List<Integer> permissionIds) {
         validationShowApplicationInfo(List.of(applicationId));
         return findUsersByIdApplicationAndPermissions(applicationId, permissionIds);
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValue(int applicationId, int attributeId, String value) {
+        return applicationRepository
+                .findUserByIdApplicationAndIdAttributeAndValue(applicationId, attributeId, value)
+                .stream()
+                .map(iMapperUser::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValueWithValidationIfCanShowThisInfo(int applicationId, int attributeId, String value) {
+        validationShowApplicationInfo(List.of(applicationId));
+        return findUsersByIdApplicationAndIdAttributeAndAttributeValue(applicationId, attributeId, value);
     }
 
     private void validationShowApplicationInfo(List<Integer> applicationIds) {

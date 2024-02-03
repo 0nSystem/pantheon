@@ -50,4 +50,15 @@ public interface IApplicationService {
             final List<Integer> permissionIds
     );
 
+    Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValue(
+        final int applicationId,
+        final int attributeId,
+        final String value
+    );
+    Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValueWithValidationIfCanShowThisInfo(
+            final int applicationId,
+            final int attributeId,
+            final String value
+    );
+
 }
