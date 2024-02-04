@@ -23,7 +23,6 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             " FROM ApplicationEntity app " +
             " LEFT JOIN app.applicationLanguages appl ON appl.language.idLanguage = :languageId " +
             " WHERE app.idApplication IN (:applicationIds) AND app.deleteDate IS NULL")
-        //TODO DEleteDate?
     List<ApplicationInfoProjection> findApplicationInfoById(
             final int languageId,
             final List<Integer> applicationIds
@@ -65,7 +64,7 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             " attr.idAttribute," +
             " CASE WHEN attrl.name IS NOT NULL THEN attrl.name ELSE attr.name END AS NAME," +
             " CASE WHEN attrl.description IS NOT NULL THEN attrl.description ELSE attr.description END AS DESCRIPTION" +
-            " FROM ApplicationEntity app" + //Can from directly attributes
+            " FROM ApplicationEntity app" +
             " INNER JOIN app.attributes attr" +
             " LEFT JOIN attr.attributeLanguages attrl ON attrl.language.idLanguage = :idIdioma" +
             " WHERE app.idApplication IN (:applicationsIds)"
@@ -77,45 +76,57 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
 
 
     @Query(
-            "SELECT DISTINCT userWithRole " +
+            "SELECT DISTINCT user " +
                     " FROM ApplicationEntity app " +
-                    " INNER JOIN app.roles role ON role.idRole IN (:idRoles) " +
-                    " INNER JOIN role.user userWithRole ON userWithRole.deleteDate IS NOT NULL" +
+                    " INNER JOIN app.roles role ON role.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
+                    " INNER JOIN role.user user ON user.deleteDate IS NOT NULL" +
                     " WHERE app.idApplication = :applicationId " +
-                    " AND userWithRole.deleteDate IS NULL "
+                    " AND user.deleteDate IS NULL " +
+                    "AND role.idRole IN (:idRoles) "
     )
-    List<UserInfoProjection> findUserByIdApplicationAndIdRoleInAndDeleteDateIsNull(
+    List<UserInfoProjection> findUserInApplicationByIdApplicationAndIdRoleInAndDeleteDateIsNull(
             final int applicationId,
             final List<Integer> idRoles
     );
 
 
     @Query(
-            "SELECT DISTINCT userWithPermission " +
+            "SELECT DISTINCT user " +
                     " FROM ApplicationEntity app " +
-                    " INNER JOIN app.permissions perm ON perm.idPermission IN (:idRoles) " +
-                    " INNER JOIN perm.user userWithPermission ON userWithPermission.deleteDate IS NOT NULL" +
-                    " WHERE app.idApplication = :applicationId " +
-                    " AND userWithPermission.deleteDate IS NOT NULL "
+                    " INNER JOIN app.roles role ON role.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
+                    " INNER JOIN app.permissions perm " +
+                    " INNER JOIN perm.user user ON user.deleteDate IS NOT NULL" +
+                    " WHERE app.idApplication = :applicationId AND perm.idPermission IN (:idPermission) "
     )
-    List<UserInfoProjection> findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(
+    List<UserInfoProjection> findUserInApplicationByIdApplicationAndIdPermissionInAndDeleteDateIsNull(
             final int applicationId,
-            final List<Integer> idRoles
+            final List<Integer> idPermission
     );
 
     @Query(
             "SELECT uattr.user " +
                     " FROM ApplicationEntity app " +
-                    " INNER JOIN app.attributes attr ON attr.idAttribute = :attributeId " +
-                    " INNER JOIN attr.userAttribute uattr ON uattr.attribute_value = :attributeValue " +
-                    " WHERE app.deleteDate IS NULL " +
-                    " AND app.idApplication = :applicationId "
+                    " INNER JOIN app.roles r ON r.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
+                    " INNER JOIN r.user u ON u.deleteDate IS NULL " +
+                    " INNER JOIN u.userAttribute uattr ON uattr.attribute.idAttribute = :attributeId AND uattr.attribute_value = :attributeValue " +
+                    " WHERE app.deleteDate IS NULL AND app.idApplication = :applicationId "
     )
-    List<UserInfoProjection> findUserByIdApplicationAndIdAttributeAndValue(
+    List<UserInfoProjection> findUserInApplicationByIdApplicationAndIdAttributeAndValue(
             final int applicationId,
             final Integer attributeId,
             final String attributeValue
     );
 
 
+    @Query(
+            "SELECT u " +
+                    " FROM ApplicationEntity app " +
+                    " INNER JOIN app.roles r ON r.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
+                    " INNER JOIN r.user u " +
+                    " WHERE app.idApplication = :applicationId " +
+                    " AND app.deleteDate IS NULL "
+    )
+    List<UserInfoProjection> findUserByIdApplication(
+            final int applicationId
+    );
 }

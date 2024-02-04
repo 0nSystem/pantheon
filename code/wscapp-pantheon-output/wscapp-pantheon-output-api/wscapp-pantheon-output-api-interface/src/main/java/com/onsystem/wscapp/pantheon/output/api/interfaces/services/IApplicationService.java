@@ -29,6 +29,9 @@ public interface IApplicationService {
             int languageId
     );
 
+    Set<UserInfoDTO> findUsersByIdApplication(
+            final int applicationId
+    );
 
     Set<UserInfoDTO> findUsersByIdApplicationAndRole(
             final int applicationId,

@@ -102,7 +102,7 @@ public class ApplicationService implements IApplicationService {
 
     @Override
     public Set<UserInfoDTO> findUsersByIdApplicationAndRole(int applicationId, List<Integer> roleIds) {
-        return applicationRepository.findUserByIdApplicationAndIdRoleInAndDeleteDateIsNull(applicationId, roleIds)
+        return applicationRepository.findUserInApplicationByIdApplicationAndIdRoleInAndDeleteDateIsNull(applicationId, roleIds)
                 .stream()
                 .map(iMapperUser::toDto)
                 .collect(Collectors.toSet());
@@ -117,7 +117,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public Set<UserInfoDTO> findUsersByIdApplicationAndPermissions(int applicationId, List<Integer> permissionIds) {
 
-        return applicationRepository.findUserByIdApplicationAndIdPermissionInAndDeleteDateIsNull(applicationId, permissionIds)
+        return applicationRepository.findUserInApplicationByIdApplicationAndIdPermissionInAndDeleteDateIsNull(applicationId, permissionIds)
                 .stream()
                 .map(iMapperUser::toDto)
                 .collect(Collectors.toSet());
@@ -132,7 +132,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValue(int applicationId, int attributeId, String value) {
         return applicationRepository
-                .findUserByIdApplicationAndIdAttributeAndValue(applicationId, attributeId, value)
+                .findUserInApplicationByIdApplicationAndIdAttributeAndValue(applicationId, attributeId, value)
                 .stream()
                 .map(iMapperUser::toDto)
                 .collect(Collectors.toSet());
@@ -142,6 +142,11 @@ public class ApplicationService implements IApplicationService {
     public Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValueWithValidationIfCanShowThisInfo(int applicationId, int attributeId, String value) {
         validationShowApplicationInfo(List.of(applicationId));
         return findUsersByIdApplicationAndIdAttributeAndAttributeValue(applicationId, attributeId, value);
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplication(int applicationId) {
+        return null;
     }
 
     private void validationShowApplicationInfo(List<Integer> applicationIds) {
