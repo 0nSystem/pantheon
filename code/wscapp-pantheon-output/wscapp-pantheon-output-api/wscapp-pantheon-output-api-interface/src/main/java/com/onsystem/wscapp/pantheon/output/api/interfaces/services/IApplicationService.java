@@ -33,6 +33,10 @@ public interface IApplicationService {
             final int applicationId
     );
 
+    Set<UserInfoDTO> findUsersByIdApplicationWithValidationIfCanShowThisInfo(
+            final int applicationId
+    );
+
     Set<UserInfoDTO> findUsersByIdApplicationAndRole(
             final int applicationId,
             final List<Integer> roleIds

@@ -146,7 +146,16 @@ public class ApplicationService implements IApplicationService {
 
     @Override
     public Set<UserInfoDTO> findUsersByIdApplication(int applicationId) {
-        return null;
+        return applicationRepository.findUserInApplicationByIdApplication(applicationId)
+                .stream()
+                .map(iMapperUser::toDto)
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<UserInfoDTO> findUsersByIdApplicationWithValidationIfCanShowThisInfo(int applicationId) {
+        validationShowApplicationInfo(List.of(applicationId));
+        return findUsersByIdApplication(applicationId);
     }
 
     private void validationShowApplicationInfo(List<Integer> applicationIds) {

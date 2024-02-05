@@ -81,6 +81,19 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
                     " INNER JOIN app.roles role ON role.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
                     " INNER JOIN role.user user ON user.deleteDate IS NOT NULL" +
                     " WHERE app.idApplication = :applicationId " +
+                    " AND user.deleteDate IS NULL "
+    )
+    List<UserInfoProjection> findUserInApplicationByIdApplication(
+            final int applicationId
+    );
+
+
+    @Query(
+            "SELECT DISTINCT user " +
+                    " FROM ApplicationEntity app " +
+                    " INNER JOIN app.roles role ON role.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME " +
+                    " INNER JOIN role.user user ON user.deleteDate IS NOT NULL" +
+                    " WHERE app.idApplication = :applicationId " +
                     " AND user.deleteDate IS NULL " +
                     "AND role.idRole IN (:idRoles) "
     )
