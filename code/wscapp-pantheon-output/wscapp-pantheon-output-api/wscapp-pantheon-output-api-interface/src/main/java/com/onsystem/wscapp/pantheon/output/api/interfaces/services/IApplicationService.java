@@ -29,43 +29,6 @@ public interface IApplicationService {
             int languageId
     );
 
-    Set<UserInfoDTO> findUsersByIdApplication(
-            final int applicationId
-    );
 
-    Set<UserInfoDTO> findUsersByIdApplicationWithValidationIfCanShowThisInfo(
-            final int applicationId
-    );
-
-    Set<UserInfoDTO> findUsersByIdApplicationAndRole(
-            final int applicationId,
-            final List<Integer> roleIds
-    );
-
-    Set<UserInfoDTO> findUsersByIdApplicationAndRoleWithValidationIfCanShowThisInfo(
-            final int applicationId,
-            final List<Integer> roleIds
-    );
-
-
-    Set<UserInfoDTO> findUsersByIdApplicationAndPermissions(
-            final int applicationId,
-            final List<Integer> permissionIds
-    );
-    Set<UserInfoDTO> findUsersByIdApplicationAndPermissionsWithValidationIfCanShowThisInfo(
-            final int applicationId,
-            final List<Integer> permissionIds
-    );
-
-    Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValue(
-        final int applicationId,
-        final int attributeId,
-        final String value
-    );
-    Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeAndAttributeValueWithValidationIfCanShowThisInfo(
-            final int applicationId,
-            final int attributeId,
-            final String value
-    );
 
 }

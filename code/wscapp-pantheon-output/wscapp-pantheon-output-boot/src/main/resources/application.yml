@@ -5,7 +5,7 @@ spring:
     livereload:
       enabled: true
   profiles:
-    active: db-h2
+    active: db-postgres
 
   logging:
     level:
