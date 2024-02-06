@@ -2,6 +2,7 @@ package com.onsystem.wscapp.pantheon.output.api.interfaces.repositories;
 
 import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.*;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -28,26 +29,27 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
             final List<Integer> applicationIds
     );
 
-    @Query(" SELECT" +
-            " app.idApplication," +
-            " perm.idPermission," +
-            " CASE WHEN perml.name IS NOT NULL THEN perml.name ELSE perm.name END AS NAME," +
-            " CASE WHEN perml.description IS NOT NULL THEN perml.description ELSE perm.description END AS DESCRIPTION" +
-            " FROM ApplicationEntity app" + //Can from directly permission
-            " INNER JOIN app.permissions perm" +
-            " LEFT JOIN perm.permissionLanguages perml ON perml.language.idLanguage = :idIdioma" +
-            " WHERE app.idApplication IN (:applicationsIds)"
+    @Query(
+            " SELECT " +
+            " app.idApplication AS idApplication, " +
+            " perm.idPermission AS idPermission, " +
+            " CASE WHEN perml.name IS NOT NULL THEN perml.name ELSE perm.name END AS name, " +
+            " CASE WHEN perml.description IS NOT NULL THEN perml.description ELSE perm.description END AS description " +
+            " FROM ApplicationEntity app " + //Can from directly permission
+            " INNER JOIN app.permissions perm " +
+            " LEFT JOIN perm.permissionLanguages perml ON perml.language.idLanguage = :idIdioma " +
+            " WHERE app.idApplication IN (:applicationsIds) "
     )
     List<PermissionInfoProjection> findPermissionInfoProjectionByIdApplicationIn(
-            final int idIdioma,
+            final Integer idIdioma,
             final Collection<Integer> applicationsIds);
 
 
     @Query(" SELECT" +
-            " app.idApplication," +
-            " roles.idRole," +
-            " CASE WHEN rolesl.name IS NOT NULL THEN rolesl.name ELSE roles.name END AS NAME," +
-            " CASE WHEN rolesl.description IS NOT NULL THEN rolesl.description ELSE roles.description END AS DESCRIPTION" +
+            " app.idApplication AS idApplication," +
+            " roles.idRole AS idRole, " +
+            " CASE WHEN rolesl.name IS NOT NULL THEN rolesl.name ELSE roles.name END AS name," +
+            " CASE WHEN rolesl.description IS NOT NULL THEN rolesl.description ELSE roles.description END AS description" +
             " FROM ApplicationEntity app" + //Can from directly roles
             " INNER JOIN app.roles roles" +
             " LEFT JOIN roles.roleLanguages rolesl ON rolesl.language.idLanguage = :idIdioma" +
@@ -60,10 +62,10 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
 
 
     @Query(" SELECT" +
-            " app.idApplication," +
-            " attr.idAttribute," +
-            " CASE WHEN attrl.name IS NOT NULL THEN attrl.name ELSE attr.name END AS NAME," +
-            " CASE WHEN attrl.description IS NOT NULL THEN attrl.description ELSE attr.description END AS DESCRIPTION" +
+            " app.idApplication AS idApplication, " +
+            " attr.idAttribute AS idAttribute, " +
+            " CASE WHEN attrl.name IS NOT NULL THEN attrl.name ELSE attr.name END AS name," +
+            " CASE WHEN attrl.description IS NOT NULL THEN attrl.description ELSE attr.description END AS description" +
             " FROM ApplicationEntity app" +
             " INNER JOIN app.attributes attr" +
             " LEFT JOIN attr.attributeLanguages attrl ON attrl.language.idLanguage = :idIdioma" +

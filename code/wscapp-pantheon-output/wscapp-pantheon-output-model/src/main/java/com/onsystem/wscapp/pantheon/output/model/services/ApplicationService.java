@@ -52,23 +52,26 @@ public class ApplicationService implements IApplicationService {
                         o -> iMapperApplication.toDto(o),
                         (t, t2) -> t));
 
-        final var mapIdApplicationPermissionProjectionApplications = applicationRepository
-                .findPermissionInfoProjectionByIdApplicationIn(languageId, applicationIds)
+        final var permissions = applicationRepository
+                .findPermissionInfoProjectionByIdApplicationIn(languageId, applicationIds);
+        final var mapIdApplicationPermissionProjectionApplications = permissions
                 .stream()
                 .collect(Collectors.groupingBy(
                         PermissionInfoProjection::getIdApplication,
                         Collectors.mapping(iMapperPermission::toDto, Collectors.toList())
                 ));
 
-        final var mapIdApplicationRolesProjectionApplications = applicationRepository
-                .findRoleInfoProjectionByIdApplicationIn(languageId, applicationIds)
+        final var roles = applicationRepository
+                .findRoleInfoProjectionByIdApplicationIn(languageId, applicationIds);
+        final var mapIdApplicationRolesProjectionApplications = roles
                 .stream()
                 .collect(Collectors.groupingBy(
                         RoleInfoProjection::getIdApplication,
                         Collectors.mapping(iMapperRole::toDto, Collectors.toList())));
 
-        final var mapIdApplicationAttributesApplications = applicationRepository
-                .findAttributeInfoProjectionByIdApplicationIn(languageId, applicationIds)
+        final var attributes = applicationRepository
+                .findAttributeInfoProjectionByIdApplicationIn(languageId, applicationIds);
+        final var mapIdApplicationAttributesApplications = attributes
                 .stream()
                 .collect(Collectors.groupingBy(AttributeInfoProjection::getIdApplication,
                         Collectors.mapping(iMapperAttribute::toDto, Collectors.toList())));
