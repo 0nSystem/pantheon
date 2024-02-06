@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.List;
 
-//TODO revision permisison authorization...
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<ApplicationEntity, Integer> {

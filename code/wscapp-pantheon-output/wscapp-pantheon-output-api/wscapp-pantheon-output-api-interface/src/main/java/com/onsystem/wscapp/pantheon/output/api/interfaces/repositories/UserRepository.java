@@ -4,10 +4,15 @@ import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.UserInfoProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+
+
+
 
     @Query(
             "SELECT DISTINCT user " +
