@@ -22,8 +22,6 @@ class ApplicationRepositoryTest {
         applicationRepository.findPermissionInfoProjectionByIdApplicationIn(1, List.of(1));
         applicationRepository.findRoleInfoProjectionByIdApplicationIn(1, List.of(1));
         applicationRepository.findAttributeInfoProjectionByIdApplicationIn(1, List.of(1));
-        applicationRepository.findUserInApplicationByIdApplicationAndIdRoleInAndDeleteDateIsNull(1, List.of(1));
-        applicationRepository.findUserInApplicationByIdApplicationAndIdPermissionInAndDeleteDateIsNull(1, List.of(1));
     }
 
 
