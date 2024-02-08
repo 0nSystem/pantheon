@@ -10,6 +10,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class RoleInfoDTO {
 
+    private Integer idRole;
+
     @NotEmpty
     @Size(max = 100)
     private String name;

@@ -14,4 +14,5 @@ public interface IMapperPermission {
 
     PermissionInfoDTO toDto(PermissionInfoProjection permissionInfoProjection);
 
+
 }

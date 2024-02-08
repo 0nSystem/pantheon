@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.output.api.interfaces.services;
 
-import com.onsystem.wscapp.pantheon.output.api.dto.applications.AllInfoApplicationDTO;
-import com.onsystem.wscapp.pantheon.output.api.dto.users.UserInfoDTO;
+import com.onsystem.wscapp.pantheon.output.api.dto.applications.ApplicationDataDTO;
 
 import java.util.List;
 import java.util.Set;
@@ -9,22 +8,22 @@ import java.util.Set;
 public interface IApplicationService {
 
 
-    AllInfoApplicationDTO findByIdApplication(
+    ApplicationDataDTO findByIdApplication(
             final int applicationId,
             int languageId
     );
 
-    Set<AllInfoApplicationDTO> findByIdsApplications(
+    Set<ApplicationDataDTO> findByIdsApplications(
             final List<Integer> applicationIds,
             int languageId
     );
 
-    AllInfoApplicationDTO findByIdApplicationWithValidationIfCanShowThisInfo(
+    ApplicationDataDTO findByIdApplicationWithValidationIfCanShowThisInfo(
             final int applicationId,
             int languageId
     );
 
-    Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationIfCanShowThisInfo(
+    Set<ApplicationDataDTO> findByIdsApplicationsWithValidationIfCanShowThisInfo(
             final List<Integer> applicationIds,
             int languageId
     );

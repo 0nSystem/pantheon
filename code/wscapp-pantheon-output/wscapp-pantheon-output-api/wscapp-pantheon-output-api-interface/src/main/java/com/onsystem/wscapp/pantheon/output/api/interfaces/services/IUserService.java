@@ -1,11 +1,19 @@
 package com.onsystem.wscapp.pantheon.output.api.interfaces.services;
 
+import com.onsystem.wscapp.pantheon.output.api.dto.users.ApplicationWithUsersData;
 import com.onsystem.wscapp.pantheon.output.api.dto.users.UserInfoDTO;
 
 import java.util.List;
 import java.util.Set;
 
 public interface IUserService {
+
+
+    Set<ApplicationWithUsersData> findApplicationWithUserData(
+            final List<Integer> applicationId,
+            final int languageId);
+
+
     Set<UserInfoDTO> findUsersByIdApplication(
             final int applicationId
     );
@@ -29,6 +37,7 @@ public interface IUserService {
             final int applicationId,
             final List<Integer> permissionIds
     );
+
     Set<UserInfoDTO> findUsersByIdApplicationAndPermissionsWithValidationIfCanShowThisInfo(
             final int applicationId,
             final List<Integer> permissionIds
@@ -38,6 +47,7 @@ public interface IUserService {
             final int applicationId,
             final int attributeId
     );
+
     Set<UserInfoDTO> findUsersByIdApplicationAndIdAttributeWithValidationIfCanShowThisInfo(
             final int applicationId,
             final int attributeId

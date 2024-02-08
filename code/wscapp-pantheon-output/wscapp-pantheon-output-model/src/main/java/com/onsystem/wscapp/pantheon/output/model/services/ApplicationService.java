@@ -1,7 +1,6 @@
 package com.onsystem.wscapp.pantheon.output.model.services;
 
-import com.onsystem.wscapp.pantheon.output.api.dto.applications.AllInfoApplicationDTO;
-import com.onsystem.wscapp.pantheon.output.api.dto.users.UserInfoDTO;
+import com.onsystem.wscapp.pantheon.output.api.dto.applications.ApplicationDataDTO;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.mappers.*;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.ApplicationInfoProjection;
 import com.onsystem.wscapp.pantheon.output.api.interfaces.projections.AttributeInfoProjection;
@@ -34,7 +33,7 @@ public class ApplicationService implements IApplicationService {
 
 
     @Override
-    public AllInfoApplicationDTO findByIdApplication(int applicationId, int languageId) {
+    public ApplicationDataDTO findByIdApplication(int applicationId, int languageId) {
 
         return findByIdsApplications(List.of(applicationId), languageId)
                 .stream()
@@ -43,7 +42,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public Set<AllInfoApplicationDTO> findByIdsApplications(List<Integer> applicationIds, int languageId) {
+    public Set<ApplicationDataDTO> findByIdsApplications(List<Integer> applicationIds, int languageId) {
         final var mapIdApplicationApplicationProjectionInfo = applicationRepository
                 .findApplicationInfoById(languageId, applicationIds)
                 .stream()
@@ -79,7 +78,7 @@ public class ApplicationService implements IApplicationService {
 
         return mapIdApplicationApplicationProjectionInfo.entrySet()
                 .stream()
-                .map(entryIdApplicationApplicationProjectInfo -> AllInfoApplicationDTO.builder()
+                .map(entryIdApplicationApplicationProjectInfo -> ApplicationDataDTO.builder()
                         .applicationInfo(entryIdApplicationApplicationProjectInfo.getValue())
                         .rolesInfo(mapIdApplicationRolesProjectionApplications.get(entryIdApplicationApplicationProjectInfo.getKey()))
                         .permissionsInfo(mapIdApplicationPermissionProjectionApplications.get(entryIdApplicationApplicationProjectInfo.getKey()))
@@ -89,7 +88,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public AllInfoApplicationDTO findByIdApplicationWithValidationIfCanShowThisInfo(int applicationId, int languageId) {
+    public ApplicationDataDTO findByIdApplicationWithValidationIfCanShowThisInfo(int applicationId, int languageId) {
 
         return findByIdsApplicationsWithValidationIfCanShowThisInfo(List.of(applicationId), languageId)
                 .stream()
@@ -98,7 +97,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public Set<AllInfoApplicationDTO> findByIdsApplicationsWithValidationIfCanShowThisInfo(List<Integer> applicationIds, int languageId) {
+    public Set<ApplicationDataDTO> findByIdsApplicationsWithValidationIfCanShowThisInfo(List<Integer> applicationIds, int languageId) {
         validationShowApplicationInfo(applicationIds);
         return findByIdsApplications(applicationIds, languageId);
     }

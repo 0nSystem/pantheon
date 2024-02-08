@@ -18,7 +18,6 @@ public class UserInfoDTO {
     private String surname;
     private String email;
     private String login;
-    private String password;
 
     private Timestamp highDate;
     private Integer highIdUser;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class AllInfoApplicationDTO {
+public class ApplicationDataDTO {
 
 
     @NotNull
