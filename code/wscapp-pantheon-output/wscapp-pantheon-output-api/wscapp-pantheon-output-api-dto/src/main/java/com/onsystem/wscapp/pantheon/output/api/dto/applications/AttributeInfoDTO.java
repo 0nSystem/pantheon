@@ -10,6 +10,7 @@ import lombok.Data;
 @Builder
 public class AttributeInfoDTO {
 
+    private Integer idAttribute;
 
     @NotEmpty
     @Size(max = 100)
