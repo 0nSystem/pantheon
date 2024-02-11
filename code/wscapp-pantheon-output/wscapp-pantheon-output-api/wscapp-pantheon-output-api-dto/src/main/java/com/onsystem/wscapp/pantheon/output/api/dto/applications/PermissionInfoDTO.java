@@ -10,6 +10,8 @@ import lombok.Data;
 @Builder
 public class PermissionInfoDTO {
 
+    private Integer idPermission;
+
     @NotEmpty
     @Size(max = 100)
     private String name;
