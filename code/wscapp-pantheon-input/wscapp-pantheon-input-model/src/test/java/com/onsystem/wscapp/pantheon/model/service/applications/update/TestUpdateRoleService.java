@@ -6,9 +6,9 @@ import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleDT
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.MockData;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageKeyEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleLanguageRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.create.ICreateRoleService;

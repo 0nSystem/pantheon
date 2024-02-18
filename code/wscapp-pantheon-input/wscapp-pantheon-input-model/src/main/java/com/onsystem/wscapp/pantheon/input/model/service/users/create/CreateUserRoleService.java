@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.create;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.UserBelongApplication;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
@@ -58,7 +58,7 @@ public class CreateUserRoleService implements ICreateUserRoleService {
         final Set<Integer> applicationIdsInRoles = roleRepository.findIdsApplicationByIdRoleIn(roleIds);
 
 
-        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), Constants.AUTORIZED_ROLE_NAME);
+        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId));
 
         boolean notEqualsApplicationRolesAndUserInApplication = false;
 

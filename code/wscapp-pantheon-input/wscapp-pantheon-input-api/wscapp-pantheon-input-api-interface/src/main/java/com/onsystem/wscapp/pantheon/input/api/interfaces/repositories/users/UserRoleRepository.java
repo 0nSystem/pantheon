@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleKeyEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.UserBelongApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,9 +23,9 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, UserRo
             " FROM UserRoleEntity " +
             " WHERE role.application IS NOT NULL " +
             " AND user.idUser IN (:userId) " +
-            " AND role.name = :authorizedPermission")
+            " AND role.name = com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME ")
     Set<UserBelongApplication> findIdsApplicationByUser(
-            final Set<Integer> userId, final String authorizedPermission);
+            final Set<Integer> userId);
 
 
     @Query(" SELECT role FROM UserRoleEntity WHERE user.idUser = :userId AND role.application.idApplication = :applicationId")

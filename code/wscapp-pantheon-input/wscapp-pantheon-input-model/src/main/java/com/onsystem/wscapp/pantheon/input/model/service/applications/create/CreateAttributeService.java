@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.model.service.applications.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.*;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperAttributeEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperAttributeLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.AttributeLanguageRepository;

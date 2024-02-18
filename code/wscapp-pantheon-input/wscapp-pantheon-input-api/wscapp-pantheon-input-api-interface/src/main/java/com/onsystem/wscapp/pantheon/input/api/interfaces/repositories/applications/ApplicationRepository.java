@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.UpdateApplicationDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

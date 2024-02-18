@@ -4,9 +4,9 @@ import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.Appli
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.CreateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperApplicationEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperApplicationLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationLanguageRepository;
@@ -51,9 +51,9 @@ public class CreateApplicationService implements ICreateApplicationService {
         final ApplicationEntity applicationInserted = applicationRepository.save(applicationEntityMapped);
 
         roleRepository.save(RoleEntity.builder()
-                .name(Constants.AUTORIZED_ROLE_NAME)
+                .name(com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME)
                 .application(applicationInserted)
-                .description(Constants.AUTORIZED_ROLE_DESCRIPTION)
+                .description(com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_DESCRIPTION)
                 .build());
 
 

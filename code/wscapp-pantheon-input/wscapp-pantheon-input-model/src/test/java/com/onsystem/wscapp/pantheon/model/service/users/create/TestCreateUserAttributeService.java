@@ -1,11 +1,11 @@
 package com.onsystem.wscapp.pantheon.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserAttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRoleRepository;
@@ -21,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
+
+import static com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_DESCRIPTION;
+import static com.onsystem.wscapp.pantheon.commons.Constants.AUTORIZED_ROLE_NAME;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -48,8 +51,8 @@ class TestCreateUserAttributeService {
         final RoleEntity roleAuthorization = roleRepository.save(
                 RoleEntity.builder()
                         .application(ApplicationEntity.builder().idApplication(idApplication).build())
-                        .name(Constants.AUTORIZED_ROLE_NAME)
-                        .description(Constants.AUTORIZED_ROLE_DESCRIPTION)
+                        .name(AUTORIZED_ROLE_NAME)
+                        .description(AUTORIZED_ROLE_DESCRIPTION)
                         .build());
         userRoleRepository.save(
                 UserRoleEntity.builder()

@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.model.service.applications.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.*;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperRoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperRoleLanguageEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleLanguageRepository;

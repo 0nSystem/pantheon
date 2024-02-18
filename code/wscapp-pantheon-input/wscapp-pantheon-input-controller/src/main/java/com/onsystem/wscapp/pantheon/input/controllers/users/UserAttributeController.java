@@ -18,6 +18,7 @@ import java.util.Set;
 
 import static com.onsystem.wscapp.pantheon.input.api.interfaces.Constants.ENDPOINT_USER_ATTRIBUTE_ROOT_CONTROLLER;
 
+
 @RestController
 @RequestMapping(ENDPOINT_USER_ATTRIBUTE_ROOT_CONTROLLER)
 @Valid

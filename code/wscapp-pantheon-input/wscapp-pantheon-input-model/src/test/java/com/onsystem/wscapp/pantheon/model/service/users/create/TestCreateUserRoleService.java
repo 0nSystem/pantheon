@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.ApplicationDTO;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.RoleRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRoleRepository;
@@ -10,7 +10,6 @@ import com.onsystem.wscapp.pantheon.input.api.interfaces.services.applications.c
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.create.ICreateUserRoleService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

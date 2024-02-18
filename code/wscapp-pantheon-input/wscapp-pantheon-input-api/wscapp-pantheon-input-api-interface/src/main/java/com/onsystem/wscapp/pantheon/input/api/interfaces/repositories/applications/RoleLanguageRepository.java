@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleLanguageKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleLanguageKeyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

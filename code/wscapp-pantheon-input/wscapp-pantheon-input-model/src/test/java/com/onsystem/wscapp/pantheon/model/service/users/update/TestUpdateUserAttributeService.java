@@ -1,9 +1,9 @@
 package com.onsystem.wscapp.pantheon.model.service.users.update;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.UpdateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserAttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.update.IUpdateUserAttributeService;
 import org.junit.jupiter.api.Assertions;

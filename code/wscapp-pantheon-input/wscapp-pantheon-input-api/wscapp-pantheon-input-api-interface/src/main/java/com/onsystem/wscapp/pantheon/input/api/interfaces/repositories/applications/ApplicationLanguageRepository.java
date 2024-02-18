@@ -1,8 +1,9 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications;
 
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationLanguageKeyEntity;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.UpdateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationLanguageKeyEntity;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

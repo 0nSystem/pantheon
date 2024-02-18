@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.DeleteUserRolesDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserRoleKeyEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserRoleKeyEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.springframework.stereotype.Component;

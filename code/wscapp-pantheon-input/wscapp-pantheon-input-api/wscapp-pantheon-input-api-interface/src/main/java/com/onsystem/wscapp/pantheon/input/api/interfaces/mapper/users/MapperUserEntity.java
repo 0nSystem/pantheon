@@ -1,12 +1,11 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users;
 
 
-import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.CreateApplicationDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.UpdateUserDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.helpers.ITimeHelper;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.ISessionManager;
 import org.mapstruct.*;

@@ -1,9 +1,9 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.ApplicationRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.AttributeRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.spublic.LanguageRepository;

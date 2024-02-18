@@ -1,0 +1,16 @@
+# Configuración para PostgreSQL
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  profiles:
+    active: db-postgres
+
+  logging:
+    level:
+      org:
+        springframework:
+          validation: DEBUG
+        hibernate:
+          validator: DEBUG

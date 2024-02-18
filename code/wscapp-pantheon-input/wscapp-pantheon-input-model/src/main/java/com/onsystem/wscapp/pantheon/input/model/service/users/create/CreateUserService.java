@@ -2,7 +2,7 @@ package com.onsystem.wscapp.pantheon.input.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateAfterUserDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users.MapperUserEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserRepository;

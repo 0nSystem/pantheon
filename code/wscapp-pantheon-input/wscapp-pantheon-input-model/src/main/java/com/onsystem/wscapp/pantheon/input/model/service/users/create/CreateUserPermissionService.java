@@ -1,8 +1,8 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.create;
 
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserPermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserPermissionEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.UserBelongApplication;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionRepository;
@@ -59,7 +59,7 @@ public class CreateUserPermissionService implements ICreateUserPermissionService
                 .map(permissionEntity -> permissionEntity.getApplication().getIdApplication())
                 .collect(Collectors.toSet());
 
-        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId), Constants.AUTORIZED_ROLE_NAME);
+        final Set<UserBelongApplication> applicationIdsInUser = userRoleRepository.findIdsApplicationByUser(Set.of(userId));
 
         boolean notEqualsApplicationPermissionAndUserInApplication = false;
 

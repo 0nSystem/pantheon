@@ -3,10 +3,9 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.ApplicationLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.application.CreateApplicationLanguageDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationLanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.spublic.LanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.applications.MapperApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationLanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.spublic.LanguageEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

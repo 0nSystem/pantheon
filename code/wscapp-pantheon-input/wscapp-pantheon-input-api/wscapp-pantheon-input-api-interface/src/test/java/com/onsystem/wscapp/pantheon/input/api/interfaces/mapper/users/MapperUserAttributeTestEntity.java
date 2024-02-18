@@ -2,8 +2,7 @@ package com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users;
 
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users.MapperUserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;

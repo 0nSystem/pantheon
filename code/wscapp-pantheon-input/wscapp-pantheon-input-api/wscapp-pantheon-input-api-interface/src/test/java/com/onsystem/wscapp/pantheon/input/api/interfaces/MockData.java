@@ -18,12 +18,12 @@ import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleDT
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.role.UpdateRoleLanguageDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.ApplicationEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.RoleEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.spublic.LanguageEntity;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.ApplicationEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.RoleEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.spublic.LanguageEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserEntity;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -105,7 +105,6 @@ public class MockData {
     }
 
     public static class DataMockSchemeApplicationEntities {
-
         public static final LanguageEntity LANGUAGE_MOCK = LanguageEntity.builder()
                 .name("es")
                 .languageFamily("es")

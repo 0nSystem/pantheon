@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.users.CreateUserAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.users.UserAttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.users.UserAttributeEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.exceptions.InfoException;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.mapper.users.MapperUserAttributeEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.AttributeRepository;

@@ -1,6 +1,6 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.helpers;
 
-import com.onsystem.wscapp.pantheon.input.api.dto.HightAuditFields;
+import com.onsystem.wscapp.pantheon.commons.dto.HightAuditFields;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;

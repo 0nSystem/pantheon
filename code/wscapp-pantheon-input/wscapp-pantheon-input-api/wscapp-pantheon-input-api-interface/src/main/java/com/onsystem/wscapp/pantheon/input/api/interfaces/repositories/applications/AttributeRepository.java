@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications;
 
 import com.onsystem.wscapp.pantheon.input.api.dto.applications.attribute.UpdateAttributeDTO;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.AttributeEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.AttributeEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.projections.AttributeBelongApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

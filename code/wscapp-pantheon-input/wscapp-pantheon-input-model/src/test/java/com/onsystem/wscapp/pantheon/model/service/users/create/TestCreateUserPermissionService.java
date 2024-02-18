@@ -1,7 +1,7 @@
 package com.onsystem.wscapp.pantheon.model.service.users.create;
 
 import com.onsystem.wscapp.pantheon.input.api.interfaces.DataInsertedBeforeTest;
-import com.onsystem.wscapp.pantheon.input.api.interfaces.entity.applications.PermissionEntity;
+import com.onsystem.wscapp.pantheon.commons.entity.applications.PermissionEntity;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.applications.PermissionRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.repositories.users.UserPermissionRepository;
 import com.onsystem.wscapp.pantheon.input.api.interfaces.services.users.create.ICreateUserPermissionService;
@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
