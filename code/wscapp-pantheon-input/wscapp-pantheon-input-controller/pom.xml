@@ -8,7 +8,7 @@
     </parent>
     <artifactId>wscapp-pantheon-input-controller</artifactId>
     <name>wscapp-pantheon-input-controller</name>
-    <url>http://maven.apache.org</url>
+
 
 
     <dependencies>
@@ -36,4 +36,46 @@
         </dependency>
 
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- https://openapi-generator.tech/docs/generators/java/ -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi.json</inputSpec> <!-- Ruta al archivo OpenAPI -->
+                            <generatorName>java</generatorName>
+                            <library>resttemplate</library>
+                            <output>../wscapp-pantheon-input-client-doc/</output> <!-- Directorio de salida -->
+                            <cleanupOutput>true</cleanupOutput>
+                            <generateApiTests>false</generateApiTests>
+                            <configOptions>
+                                <artifactId>wscapp-pantheon-input-client-doc</artifactId>
+                                <groupId>com.onsystem</groupId>
+                                <artifactVersion>1.0.0</artifactVersion>
+                                <invokerPackage>com.onsystem.pantheon.input.client.doc</invokerPackage>
+                                <apiPackage>com.onsystem.pantheon.input.client.doc.api</apiPackage>
+                                <modelPackage>com.onsystem.pantheon.input.client.doc.model</modelPackage>
+
+                                <apiConfigInterface>false</apiConfigInterface>
+                                <openApiNullable>true</openApiNullable>
+                                <generateClientAsBean>false</generateClientAsBean>
+                                <useJakartaEe>true</useJakartaEe>
+                                <dateLibrary>java8</dateLibrary>
+                                <serializationLibrary>jackson</serializationLibrary>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

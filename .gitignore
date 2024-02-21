@@ -146,3 +146,5 @@ replay_pid*
 # java
 **/target
 *.iml
+
+# **/client-doc/*
