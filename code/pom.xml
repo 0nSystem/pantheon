@@ -27,6 +27,7 @@
         <module>wscapp-pantheon-input</module>
         <module>wscapp-pantheon-commons</module>
         <module>wscapp-pantheon-output</module>
+        <module>wscapp-pantheon-auth</module>
     </modules>
 
 
