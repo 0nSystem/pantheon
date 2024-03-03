@@ -38,7 +38,6 @@ import java.util.UUID;
 
 @org.springframework.context.annotation.Configuration
 @EnableWebSecurity
-
 public class AuthorizationServerConfig {
 
     @Bean
@@ -90,14 +89,22 @@ public class AuthorizationServerConfig {
         return new InMemoryUserDetailsManager(userDetails);
     }
 
+    /*
+        - RFC 6749:
+        Define redirect Uri: https://datatracker.ietf.org/doc/html/rfc6749#autoid-25
+
+    */
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}secret")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+
+
                 .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
                 .postLogoutRedirectUri("http://127.0.0.1:8080/")
                 .scope(OidcScopes.OPENID)
@@ -140,6 +147,7 @@ public class AuthorizationServerConfig {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
+        //TODO cambiar
         return AuthorizationServerSettings.builder()
                 .build();
     }

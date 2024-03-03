@@ -28,6 +28,7 @@
         <module>wscapp-pantheon-commons</module>
         <module>wscapp-pantheon-output</module>
         <module>wscapp-pantheon-auth</module>
+        <module>wscapp-pantheon-security</module>
     </modules>
 
 
