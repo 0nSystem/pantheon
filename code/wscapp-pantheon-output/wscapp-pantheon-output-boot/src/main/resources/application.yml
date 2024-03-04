@@ -7,6 +7,26 @@ spring:
   profiles:
     active: db-postgres
 
+  security:
+    oauth2:
+      client:
+        registration:
+          pantheon:
+            clientId: "oidc-client"
+            clientSecret: "secret"
+            authorization-grant-type: "confidential"
+
+        provider:
+          pantheon:
+            authorization-uri: http://localhost:9000/oauth/authorize
+            token-uri: http://localhost:9000/oauth/token
+            user-info-uri: http://localhost:9000/userinfo
+            user-name-attribute: sub
+
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000/login
+
   logging:
     level:
       org:
