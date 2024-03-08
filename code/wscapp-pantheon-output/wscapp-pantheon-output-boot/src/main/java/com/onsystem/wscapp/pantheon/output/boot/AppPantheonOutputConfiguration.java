@@ -13,10 +13,8 @@ public class AppPantheonOutputConfiguration {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login()
-                .and()
+                .anyRequest().authenticated().and()
+                .oauth2Login().and()
                 .build();
     }
 

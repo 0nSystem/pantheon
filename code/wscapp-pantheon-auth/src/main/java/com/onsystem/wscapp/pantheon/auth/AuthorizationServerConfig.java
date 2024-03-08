@@ -99,14 +99,9 @@ public class AuthorizationServerConfig {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}secret")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-
-
-                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
-                .postLogoutRedirectUri("http://127.0.0.1:8080/")
+                .redirectUri("http://localhost:8080/login/oauth2/code/oidc-client")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())

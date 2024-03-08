@@ -29,6 +29,7 @@
         <module>wscapp-pantheon-output</module>
         <module>wscapp-pantheon-auth</module>
         <module>wscapp-pantheon-security</module>
+        <module>wscapp-pantheon-auth-resource-server</module>
     </modules>
 
 
