@@ -1,0 +1,15 @@
+[
+  {
+    "username": "user",
+    "email": "test@gmail.com",
+    "password": "password",
+    "permissions": [
+      "read",
+      "write"
+    ],
+    "roles": [
+    ],
+    "attributes": [
+    ]
+  }
+]

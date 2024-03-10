@@ -5,8 +5,7 @@ spring:
     livereload:
       enabled: true
   profiles:
-    active: db-postgres
-
+    active: db-h2
   logging:
     level:
       org:
@@ -14,3 +13,9 @@ spring:
           validation: DEBUG
         hibernate:
           validator: DEBUG
+
+  pantheon:
+    security:
+      local:
+        path-source: mock-user.json
+        test: true
