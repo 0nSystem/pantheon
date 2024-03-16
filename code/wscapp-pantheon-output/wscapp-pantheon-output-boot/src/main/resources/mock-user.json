@@ -2,7 +2,7 @@
   {
     "username": "user",
     "email": "test@gmail.com",
-    "password": "password",
+    "password": "{noop}password",
     "permissions": [
       "read",
       "write"
