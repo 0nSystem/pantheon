@@ -5,17 +5,12 @@ spring:
     livereload:
       enabled: true
   profiles:
-    active: db-h2
-  logging:
-    level:
-      org:
-        springframework:
-          validation: DEBUG
-        hibernate:
-          validator: DEBUG
-
+    active: db-h2, authorization-oauth2
   pantheon:
     security:
       local:
         path-source: mock-user.json
-        test: true
+        test: false
+logging:
+  level:
+    root: trace
